@@ -1,5 +1,7 @@
 package com.example.lms.Service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,10 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
     @Override
     public CourseRegistration createEnrollment(CourseRegistration courseRegistration) {
         return courseRegistrationRepository.save(courseRegistration);
+    }
+
+    @Override
+    public List<CourseRegistration> getAllRegistrationsByCourseCode(String courseCode) {
+        return courseRegistrationRepository.findAllByCourseCode(courseCode);
     }
 }

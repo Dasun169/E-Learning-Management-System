@@ -3,7 +3,7 @@ package com.example.lms.Model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "courses")
+@Document(collection = "courses")
 public class Course {
 
     @Id
