@@ -40,4 +40,14 @@ public class CourseServiceImpl implements CourseService {
         }
         return null;
     }
+
+    @Override
+    public void deleteCourseByCourseCode(String courseCode) {
+        Course course = courseRepository.findByCourseCode(courseCode);
+        if (course != null) {
+            courseRepository.deleteByCourseCode(courseCode);
+        } else {
+            throw new RuntimeException("Course with code " + courseCode + " not found.");
+        }
+    }
 }

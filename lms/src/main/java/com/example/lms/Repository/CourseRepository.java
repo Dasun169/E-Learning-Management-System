@@ -4,5 +4,6 @@ import com.example.lms.Model.Course;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CourseRepository extends MongoRepository<Course, Long> {
-
+  Course findByCourseCode(String courseCode); 
+  void deleteByCourseCode(String courseCode); 
 }

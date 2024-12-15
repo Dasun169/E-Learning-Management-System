@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,16 @@ public class CourseController {
     public ResponseEntity<Course> updateCourse(@PathVariable long id, @RequestBody Course course) {
         Course updatedCourse = this.courseService.updateCourse(id, course);
         return updatedCourse != null ? ResponseEntity.ok(updatedCourse) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/delete/{courseCode}")
+    public String deleteCourse(@PathVariable String courseCode) {
+        try {
+            courseService.deleteCourseByCourseCode(courseCode);
+            return "Course with code " + courseCode + " has been deleted successfully.";
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
     }
 
 }
