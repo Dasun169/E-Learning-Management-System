@@ -15,10 +15,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private SequenceService sequenceService;
+
     @Override
     public User createUser(User user) {
+        long id = sequenceService.getNextSequenceId("user_sequence");
+        user.setId(id); 
         return userRepository.save(user);
     }
+
 
     @Override
     public List<User> getAllUsers() {
