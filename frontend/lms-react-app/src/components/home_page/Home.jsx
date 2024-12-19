@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./css files/Home.css";
 
@@ -8,13 +8,11 @@ function Home() {
   const [role, setRole] = useState("student");
   const navigate = useNavigate();
 
-  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Check if username and password match "admin" and "admin1234"
     if (username === "admin" && password === "admin1234") {
-      navigate("/Admin"); // Redirect to Admin page
+      navigate("/Admin"); 
     } else {
       alert("Invalid username or password");
     }
@@ -64,7 +62,7 @@ function Home() {
               <select
                 id="role"
                 name="role"
-                className="input"
+                className="input1"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 required
@@ -83,7 +81,7 @@ function Home() {
             </form>
             <div className="signup">
               <p>
-                Don't have an account? <Link to="/Registration">Sign Up</Link>
+                Dont have an account? <Link to="/Registration">Sign Up</Link>
               </p>
             </div>
           </div>
