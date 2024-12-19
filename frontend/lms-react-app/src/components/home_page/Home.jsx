@@ -64,7 +64,7 @@ function Home() {
               <select
                 id="role"
                 name="role"
-                className="input"
+                className="input1"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 required
@@ -83,7 +83,7 @@ function Home() {
             </form>
             <div className="signup">
               <p>
-                Don't have an account? <Link to="/Registration">Sign Up</Link>
+                Dont have an account? <Link to="/Registration">Sign Up</Link>
               </p>
             </div>
           </div>
