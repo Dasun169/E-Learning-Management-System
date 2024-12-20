@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./css files/course.css";
 
 const Course = () => {
@@ -9,7 +11,6 @@ const Course = () => {
   const [description, setDescription] = useState("");
   const [yearLevel, setYearLevel] = useState("");
   const [enrollmentKey, setEnrollmentKey] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,34 +18,57 @@ const Course = () => {
     const courseData = {
       courseName,
       courseCode,
-      lecturerId,
+      lecturerId: parseLong(lecturerId),
       description,
       yearLevel,
       enrollmentKey,
     };
 
+    // Log the data before sending
+    console.log(courseData);
+
     try {
       const response = await axios.post(
         "http://localhost:8080/api/courses",
-        courseData
+        courseData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       if (response.status === 200 || response.status === 201) {
-        setMessage("Course added successfully!");
+        toast.success("Course added successfully!", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+
+        setCourseName("");
+        setCourseCode("");
+        setLecturerId("");
+        setDescription("");
+        setYearLevel("");
+        setEnrollmentKey("");
       } else {
-        setMessage("Failed to add course.");
+        toast.error("Failed to add course.", {
+          position: "top-center",
+          autoClose: 3000,
+        });
       }
     } catch (error) {
       console.error("Error adding course:", error);
-      setMessage("Error: Failed to add course.");
+      toast.error("Error: Failed to add course.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
   return (
     <div className="course-table">
+      <ToastContainer />
       <h2>Course Registration</h2>
-      {message && <p>{message}</p>}
-
       <form onSubmit={handleSubmit}>
         <table>
           <tbody>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./css files/Home.css";
 
 function Home() {
@@ -11,15 +13,35 @@ function Home() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (username === "admin" && password === "admin1234") {
-      navigate("/Admin"); 
+    if (username === "admin" && password === "admin1234" && role === "admin") {
+      toast.success("Login successful!", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => navigate("/Admin"), 2000);
     } else {
-      alert("Invalid username or password");
+      toast.error("Invalid username, password, or role", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <div className="body">
         <div className="image-section">
           <img src="./Images/login/pic4.png" alt="" />
@@ -69,6 +91,7 @@ function Home() {
               >
                 <option value="student">Student</option>
                 <option value="lecturer">Lecturer</option>
+                <option value="admin">Admin</option>
               </select>
 
               <div className="forgot-password">
