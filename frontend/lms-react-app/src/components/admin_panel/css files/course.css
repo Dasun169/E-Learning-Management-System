@@ -44,3 +44,9 @@
 .course-table button:hover {
   background-color: #0056b3;
 }
+
+.custom-toast {
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
+  color: #333;
+}
