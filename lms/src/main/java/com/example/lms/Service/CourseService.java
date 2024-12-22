@@ -9,5 +9,7 @@ public interface CourseService {
     Course getCourseById(long id);
     List<Course> getAllCourses();
     Course updateCourse(long id, Course course);
+    boolean doesCourseExistByCourseCode(String courseCode);
     void deleteCourseByCourseCode(String courseCode);
+    Course getCourseByCourseCode(String courseCode);
 }

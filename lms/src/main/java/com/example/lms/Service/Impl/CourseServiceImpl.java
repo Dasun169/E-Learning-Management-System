@@ -43,6 +43,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public boolean doesCourseExistByCourseCode(String courseCode) {
+        Course course = courseRepository.findByCourseCode(courseCode);
+        return course != null; // Returns true if the course exists
+    }
+
+    @Override
     public void deleteCourseByCourseCode(String courseCode) {
         Course course = courseRepository.findByCourseCode(courseCode);
         if (course != null) {
@@ -50,5 +56,10 @@ public class CourseServiceImpl implements CourseService {
         } else {
             throw new RuntimeException("Course with code " + courseCode + " not found.");
         }
+    }
+
+    @Override
+    public Course getCourseByCourseCode(String courseCode) {
+        return courseRepository.findByCourseCode(courseCode);
     }
 }
