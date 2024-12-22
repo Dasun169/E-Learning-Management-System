@@ -49,3 +49,14 @@
 #submit-button {
   text-align: center;
 }
+
+.custom-toast {
+  background-color: #f8d7da;
+  color: #721c24;
+  font-size: 16px;
+}
+
+.custom-toast-success {
+  background-color: #d4edda;
+  color: #155724;
+}

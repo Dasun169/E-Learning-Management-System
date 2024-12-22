@@ -52,14 +52,24 @@ public class CourseController {
         return updatedCourse != null ? ResponseEntity.ok(updatedCourse) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/delete/{courseCode}")
-    public String deleteCourse(@PathVariable String courseCode) {
-        try {
-            courseService.deleteCourseByCourseCode(courseCode);
-            return "Course with code " + courseCode + " has been deleted successfully.";
-        } catch (RuntimeException e) {
-            return e.getMessage();
+    @GetMapping("/exists/{courseCode}")
+    public ResponseEntity<String> checkIfCourseExists(@PathVariable String courseCode) {
+        boolean exists = courseService.doesCourseExistByCourseCode(courseCode);
+        if (exists) {
+            return ResponseEntity.ok("Course with code " + courseCode + " exists.");
+        } else {
+            return ResponseEntity.status(404).body("Course with code " + courseCode + " not found.");
         }
     }
-    
+
+    // Endpoint to delete a course by courseCode
+    @DeleteMapping("/delete/{courseCode}")
+    public ResponseEntity<String> deleteCourse(@PathVariable String courseCode) {
+        try {
+            courseService.deleteCourseByCourseCode(courseCode);
+            return ResponseEntity.ok("Course with code " + courseCode + " has been deleted successfully.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
 }
