@@ -3,6 +3,7 @@ import Lecturer from "./Lecturer";
 import Course from "./Course";
 import DeleteLecturer from "./DeleteLecturer";
 import DeleteCourse from "./DeleteCourse";
+import LecturerRegistration from "./LecturerRegistration";
 import "./css files/Admin.css";
 import img1 from "./Images/Leanify1.png";
 
@@ -62,6 +63,17 @@ function Admin() {
                   }}
                 >
                   Delete a Course
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#lecturerRegistration"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("lecturerRegistration");
+                  }}
+                >
+                  Lecturer Registration
                 </a>
               </li>
               <li>
@@ -153,6 +165,7 @@ function Admin() {
             {activeForm === "course" && <Course />}
             {activeForm === "deleteLecturer" && <DeleteLecturer />}
             {activeForm === "deleteCourse" && <DeleteCourse />}
+            {activeForm === "lecturerRegistration" && <LecturerRegistration />}
           </div>
         </div>
       </div>

@@ -1,9 +1,10 @@
-.deleteCourse-table {
+/* Lecturer Registration Page Styles */
+.lecturer-registration {
   width: 80%;
   margin: 0 auto;
   background-color: #d4c3c3;
   box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7);
-  border-radius: 1cap;
+  border-radius: 1rem;
 }
 
 .div-table {
@@ -11,18 +12,18 @@
   margin: 0 auto;
 }
 
-.deleteCourse-table h2 {
+.lecturer-registration h2 {
   text-align: center;
   font-family: Arial, sans-serif;
   padding-top: 20px;
 }
 
-.deleteCourse-table table {
+.lecturer-registration table {
   width: 100%;
   margin-left: 30px;
 }
 
-.deleteCourse-table input {
+.lecturer-registration input {
   width: 500px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -30,7 +31,7 @@
   font-size: 14px;
 }
 
-.deleteCourse-table button {
+.lecturer-registration button {
   background-color: #007bff;
   color: white;
   padding: 10px 15px;
@@ -44,7 +45,7 @@
   width: 10%;
 }
 
-.deleteCourse-table button:hover {
+.lecturer-registration button:hover {
   background-color: #0056b3;
 }
 
@@ -53,12 +54,18 @@
 }
 
 .custom-toast {
-  background-color: #f8d7da;
-  color: #721c24;
-  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
+  color: #333;
 }
 
-.custom-toast-success {
-  background-color: #d4edda;
-  color: #155724;
+.lecturer-registration input[type="text"],
+.lecturer-registration input[type="password"],
+.lecturer-registration input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.lecturer-registration input::placeholder {
+  font-style: italic;
+  color: #888;
 }

@@ -4,6 +4,7 @@
   background-color: #d4c3c3;
   box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7);
   border-radius: 1cap;
+  margin-top: -20px;
 }
 
 .div-table {
@@ -26,13 +27,14 @@
   width: 500px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  padding: 6px;
+  font-size: 14px;
 }
 
 .lecturer-table button {
   background-color: #007bff;
   color: white;
   padding: 10px 15px;
-  margin-top: 20px;
   margin-bottom: 20px;
   font-size: 14px;
   border: none;

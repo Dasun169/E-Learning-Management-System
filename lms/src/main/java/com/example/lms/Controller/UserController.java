@@ -53,6 +53,12 @@ public class UserController {
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); // Return 404 if not found
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable long id) {
+        User user = userService.getUserById(id); // Fetch the user by id
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); // Return 404 if not found
+    }
+
     @DeleteMapping("/{userName}")
     public ResponseEntity<String> deleteUserByUserName(@PathVariable String userName) {
         boolean deleted = userService.deleteUserByUserName(userName); // Returns boolean for success or failure
