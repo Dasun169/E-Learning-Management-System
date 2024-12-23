@@ -4,6 +4,8 @@ import Course from "./Course";
 import DeleteLecturer from "./DeleteLecturer";
 import DeleteCourse from "./DeleteCourse";
 import LecturerRegistration from "./LecturerRegistration";
+import GetAllCourses from "./GetAllCourses";
+import GetAllLecturers from "./GetAllLecturers";
 import "./css files/Admin.css";
 import img1 from "./Images/Leanify1.png";
 
@@ -77,10 +79,26 @@ function Admin() {
                 </a>
               </li>
               <li>
-                <a href="">See all courses</a>
+                <a
+                  href="#getAllCourses"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("getAllCourses"); // Set activeForm to "seeAllCourses"
+                  }}
+                >
+                  See all courses
+                </a>
               </li>
               <li>
-                <a href="">See all courses</a>
+                <a
+                  href="#getAllLecturers"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("getAllLecturers"); // Set activeForm to "getAllLecturers"
+                  }}
+                >
+                  See all lecturers
+                </a>
               </li>
             </ul>
           </div>
@@ -166,6 +184,8 @@ function Admin() {
             {activeForm === "deleteLecturer" && <DeleteLecturer />}
             {activeForm === "deleteCourse" && <DeleteCourse />}
             {activeForm === "lecturerRegistration" && <LecturerRegistration />}
+            {activeForm === "getAllCourses" && <GetAllCourses />}
+            {activeForm === "getAllLecturers" && <GetAllLecturers />}
           </div>
         </div>
       </div>

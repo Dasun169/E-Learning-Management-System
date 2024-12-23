@@ -1,13 +1,12 @@
 package com.example.lms.Model;
 
 import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "useres")
+@Document(collection = "users") 
 public class User {
 
     @Id
@@ -16,8 +15,9 @@ public class User {
     private String hashPassword;
     private String fullName;
     private String contactNumber;
-
     private byte[] profileImage;
+
+    private String role; 
 
     @CreatedDate
     private LocalDateTime createdDate;
@@ -71,6 +71,14 @@ public class User {
 
     public void setProfileImage(byte[] profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getRole() {
+        return role; 
+    }
+
+    public void setRole(String role) {
+        this.role = role; 
     }
 
     public LocalDateTime getCreatedDate() {
