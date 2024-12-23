@@ -11,8 +11,38 @@ const Lecturer = () => {
   const [contactNumber, setContactNumber] = useState("");
   const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
 
+  const checkUserNameExists = async (userName) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/users/${userName}`
+      );
+      // If user exists, response status will be 200 and return the user object
+      return response.status === 200;
+    } catch (error) {
+      // If the user doesn't exist, the backend should return a 404
+      return false;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if the userName already exists
+    const isUserNameExist = await checkUserNameExists(userName);
+
+    if (isUserNameExist) {
+      toast.error("The User Name already exists", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return; // Prevent form submission if user name exists
+    }
 
     // Collect user data and manually set the role as "lecturer"
     const userData = {
@@ -142,18 +172,6 @@ const Lecturer = () => {
                     />
                   </td>
                 </tr>
-                {/* <tr>
-                  <td>
-                    <label>Profile Picture:</label>
-                  </td>
-                  <td>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setProfileImage(null)} // Keep profileImage as null
-                    />
-                  </td>
-                </tr> */}
                 <tr>
                   <td colSpan={2} id="submit-button">
                     <button type="submit">Submit</button>
