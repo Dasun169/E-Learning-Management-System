@@ -14,7 +14,7 @@ const Lecturer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Collect user data
+    // Collect user data and manually set the role as "lecturer"
     const userData = {
       userName,
       hashPassword: password,
@@ -23,6 +23,7 @@ const Lecturer = () => {
       profileImage: null, // Always send null for profileImage
       createdDate: new Date(), // Current timestamp for createdDate
       updatedDate: new Date(), // Current timestamp for updatedDate
+      role: "lecturer", // Manually set the role to "lecturer"
     };
 
     try {
@@ -37,7 +38,7 @@ const Lecturer = () => {
       );
 
       if (response.status === 200 || response.status === 201) {
-        toast.success("Lecturer added successful!", {
+        toast.success("Lecturer added successfully!", {
           className: "custom-toast",
           position: "top-center",
           autoClose: 2000,
@@ -98,7 +99,7 @@ const Lecturer = () => {
                       type="text"
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
-                      placeholder="ex:jhond20133"
+                      placeholder="ex: jhond20133"
                     />
                   </td>
                 </tr>
@@ -111,7 +112,7 @@ const Lecturer = () => {
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="ex:ABCabc123!@#"
+                      placeholder="ex: ABCabc123!@#"
                     />
                   </td>
                 </tr>
@@ -124,7 +125,7 @@ const Lecturer = () => {
                       type="text"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder="ex:John Doe"
+                      placeholder="ex: John Doe"
                     />
                   </td>
                 </tr>
@@ -137,11 +138,11 @@ const Lecturer = () => {
                       type="text"
                       value={contactNumber}
                       onChange={(e) => setContactNumber(e.target.value)}
-                      placeholder="ex:07########"
+                      placeholder="ex: 07########"
                     />
                   </td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td>
                     <label>Profile Picture:</label>
                   </td>
@@ -152,7 +153,7 @@ const Lecturer = () => {
                       onChange={(e) => setProfileImage(null)} // Keep profileImage as null
                     />
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td colSpan={2} id="submit-button">
                     <button type="submit">Submit</button>
