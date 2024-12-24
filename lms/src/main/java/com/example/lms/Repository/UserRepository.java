@@ -6,5 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface UserRepository extends MongoRepository<User, Long> {
     void deleteByUserName(String userName);
     boolean existsByUserName(String userName);
-    User findByUserName(String userName); // Add this method to find by userName
+    User findByUserName(String userName); 
+    User findByRoleAndUserName(String role, String userName);
 }
