@@ -49,23 +49,29 @@ public class UserController {
 
     @GetMapping("/{userName}")
     public ResponseEntity<User> getUserByUserName(@PathVariable String userName) {
-        User user = userService.getUserByUserName(userName); // Add this method in your service to fetch the user by username.
-        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); // Return 404 if not found
+        User user = userService.getUserByUserName(userName); 
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); 
     }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<User> getUserById(@PathVariable long id) {
-        User user = userService.getUserById(id); // Fetch the user by id
-        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); // Return 404 if not found
+        User user = userService.getUserById(id); 
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); 
     }
 
     @DeleteMapping("/{userName}")
     public ResponseEntity<String> deleteUserByUserName(@PathVariable String userName) {
-        boolean deleted = userService.deleteUserByUserName(userName); // Returns boolean for success or failure
+        boolean deleted = userService.deleteUserByUserName(userName); 
         if (deleted) {
             return ResponseEntity.status(204).body("Lecturer account deleted successfully.");
         } else {
             return ResponseEntity.status(404).body("Error: Lecturer not found.");
         }
+    }
+
+    @GetMapping("/role/{role}/userName/{userName}")
+    public ResponseEntity<User> getUserByRoleAndUserName(@PathVariable String role, @PathVariable String userName) {
+        User user = userService.getUserByRoleAndUserName(role, userName);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); 
     }
 }

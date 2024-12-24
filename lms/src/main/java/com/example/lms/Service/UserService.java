@@ -8,7 +8,8 @@ public interface UserService {
     User createUser(User user);
     List<User> getAllUsers();
     User updateUser(long id, User user);
-    boolean deleteUserByUserName(String userName); // Return boolean to indicate if user was deleted
-    User getUserByUserName(String userName); // Add method to fetch user by username
+    boolean deleteUserByUserName(String userName);
+    User getUserByUserName(String userName); 
     User getUserById(long id);
+    User getUserByRoleAndUserName(String role, String userName);
 }
