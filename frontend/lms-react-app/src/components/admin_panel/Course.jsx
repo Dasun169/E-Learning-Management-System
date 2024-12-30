@@ -184,7 +184,7 @@ const Course = () => {
               </tr>
               <tr>
                 <td colSpan={4} id="submit-button">
-                  <button type="submit">Submit</button>
+                  <button type="submit">Add a Course</button>
                 </td>
               </tr>
             </tbody>

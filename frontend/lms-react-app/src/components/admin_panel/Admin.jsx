@@ -6,12 +6,14 @@ import DeleteCourse from "./DeleteCourse";
 import LecturerRegistration from "./LecturerRegistration";
 import GetAllCourses from "./GetAllCourses";
 import GetAllLecturers from "./GetAllLecturers";
+import Register from "./Registration"; // Import the Register component
 import "./css files/Admin.css";
 import img1 from "./Images/Leanify1.png";
 import { Link } from "react-router-dom";
 
 function Admin() {
   const [activeForm, setActiveForm] = useState(null);
+
   return (
     <>
       <div className="container">
@@ -33,6 +35,17 @@ function Admin() {
                   }}
                 >
                   Add a Lecturer
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#register"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("register");
+                  }}
+                >
+                  Add a Student
                 </a>
               </li>
               <li>
@@ -84,7 +97,7 @@ function Admin() {
                   href="#getAllCourses"
                   onClick={(e) => {
                     e.preventDefault();
-                    setActiveForm("getAllCourses"); // Set activeForm to "seeAllCourses"
+                    setActiveForm("getAllCourses");
                   }}
                 >
                   See all courses
@@ -95,7 +108,7 @@ function Admin() {
                   href="#getAllLecturers"
                   onClick={(e) => {
                     e.preventDefault();
-                    setActiveForm("getAllLecturers"); // Set activeForm to "getAllLecturers"
+                    setActiveForm("getAllLecturers");
                   }}
                 >
                   See all lecturers
@@ -104,6 +117,7 @@ function Admin() {
             </ul>
           </div>
         </div>
+
         <div className="right-bar div2">
           <div className="header">
             <div className="logo">
@@ -120,6 +134,7 @@ function Admin() {
               </div>
             </div>
           </div>
+
           <div className="admin-body">
             <div className="left-admin-body">
               <div className="add-lecturer add-box">
@@ -179,12 +194,14 @@ function Admin() {
               <img src="./Images/admin-panel.png" alt="" />
             </div>
           </div>
+
           <div className="details-display">
             {activeForm === "lecturer" && <Lecturer />}
             {activeForm === "course" && <Course />}
             {activeForm === "deleteLecturer" && <DeleteLecturer />}
             {activeForm === "deleteCourse" && <DeleteCourse />}
             {activeForm === "lecturerRegistration" && <LecturerRegistration />}
+            {activeForm === "register" && <Register />}
             {activeForm === "getAllCourses" && <GetAllCourses />}
             {activeForm === "getAllLecturers" && <GetAllLecturers />}
           </div>

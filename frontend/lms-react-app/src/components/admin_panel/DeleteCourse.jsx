@@ -122,7 +122,7 @@ const DeleteCourse = () => {
                 )}
                 <tr>
                   <td colSpan={2} id="submit-button">
-                    <button type="submit">Submit</button>
+                    <button type="submit">Delete Course</button>
                   </td>
                 </tr>
               </tbody>
