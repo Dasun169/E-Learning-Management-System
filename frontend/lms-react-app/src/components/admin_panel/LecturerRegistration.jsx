@@ -179,7 +179,7 @@ const LecturerRegistration = () => {
                 <tr>
                   <td colSpan={2} id="submit-button">
                     <button type="submit" disabled={loading}>
-                      Submit
+                      Register Lecturer
                     </button>
                   </td>
                 </tr>

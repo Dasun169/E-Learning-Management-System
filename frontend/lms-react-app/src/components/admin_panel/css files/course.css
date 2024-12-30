@@ -40,7 +40,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 10%;
+  width: 15%;
 }
 
 .course-table button:hover {
