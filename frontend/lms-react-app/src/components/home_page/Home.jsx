@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import "./css files/Home.css";
 
 function Home() {
@@ -10,23 +11,47 @@ function Home() {
   const [role, setRole] = useState("student");
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (username === "admin" && password === "admin1234" && role === "admin") {
-      toast.success("Login successful!", {
-        className: "custom-toast",
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setTimeout(() => navigate("/Admin"), 2000);
-    } else {
-      toast.error("Invalid username, password, or role", {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/users/role/${role}/userName/${username}`
+      );
+
+      const user = response.data;
+
+      if (user.hashPassword === password) {
+        toast.success("Login successful!", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        if (role === "admin") {
+          setTimeout(() => navigate("/Admin"), 2000);
+        } else if (role === "student" || role === "lecturer") {
+          setTimeout(() => navigate("/Registration"), 2000);
+        }
+      } else {
+        toast.error("Invalid password", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch {
+      toast.error("User not found or invalid username/role", {
         className: "custom-toast",
         position: "top-center",
         autoClose: 3000,
@@ -103,9 +128,9 @@ function Home() {
               </button>
             </form>
             <div className="signup">
-              <p>
-                Dont have an account? <Link to="/Registration">Sign Up</Link>
-              </p>
+            <p>
+              Don&apos;t have an account? <Link to="/Registration">Sign Up</Link>
+            </p>
             </div>
           </div>
         </div>
