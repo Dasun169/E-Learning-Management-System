@@ -8,6 +8,7 @@ import GetAllCourses from "./GetAllCourses";
 import GetAllLecturers from "./GetAllLecturers";
 import "./css files/Admin.css";
 import img1 from "./Images/Leanify1.png";
+import { Link } from "react-router-dom";
 
 function Admin() {
   const [activeForm, setActiveForm] = useState(null);
@@ -113,9 +114,9 @@ function Admin() {
             </div>
             <div className="logout-button">
               <div className="circle-setting">
-                <a href="">
-                  <img src="./Images/box-arrow-right.svg" alt="" />
-                </a>
+                <Link to="/">
+                  <img src="./Images/box-arrow-right.svg" alt="Go to Home" />
+                </Link>
               </div>
             </div>
           </div>
