@@ -1,10 +1,10 @@
-/* Lecturer Registration Page Styles */
-.lecturer-registration {
+.registration-table {
   width: 80%;
   margin: 0 auto;
   background-color: #d4c3c3;
   box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7);
-  border-radius: 1rem;
+  border-radius: 1cap;
+  margin-top: -20px;
 }
 
 .div-table {
@@ -12,18 +12,18 @@
   margin: 0 auto;
 }
 
-.lecturer-registration h2 {
+.registration-table h2 {
   text-align: center;
   font-family: Arial, sans-serif;
   padding-top: 20px;
 }
 
-.lecturer-registration table {
+.registration-table table {
   width: 100%;
   margin-left: 30px;
 }
 
-.lecturer-registration input {
+.registration-table input {
   width: 500px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -31,11 +31,10 @@
   font-size: 14px;
 }
 
-.lecturer-registration button {
+.registration-table button {
   background-color: #007bff;
   color: white;
   padding: 10px 15px;
-  margin-top: 20px;
   margin-bottom: 20px;
   font-size: 14px;
   border: none;
@@ -45,27 +44,18 @@
   width: 20%;
 }
 
-.lecturer-registration button:hover {
+.registration-table button:hover {
   background-color: #0056b3;
 }
 
 #submit-button {
   text-align: center;
+  padding-top: 10px;
+  width: 200px;
 }
 
 .custom-toast {
   font-family: "Arial", sans-serif;
   font-size: 15px;
   color: #333;
-}
-
-.lecturer-registration input[type="text"],
-.lecturer-registration input[type="password"],
-.lecturer-registration input[type="file"] {
-  margin-bottom: 10px;
-}
-
-.lecturer-registration input::placeholder {
-  font-style: italic;
-  color: #888;
 }

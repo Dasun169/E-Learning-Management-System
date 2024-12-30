@@ -127,11 +127,6 @@ function Home() {
                 Login
               </button>
             </form>
-            <div className="signup">
-            <p>
-              Don&apos;t have an account? <Link to="/Registration">Sign Up</Link>
-            </p>
-            </div>
           </div>
         </div>
       </div>
