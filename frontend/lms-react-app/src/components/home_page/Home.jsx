@@ -68,15 +68,12 @@ function Home() {
     <>
       <ToastContainer />
       <div className="body">
-        <div className="image-section">
-          <img src="./Images/login/pic4.png" alt="" />
-        </div>
         <div className="form-section">
           <div className="form-container">
-            <h2>Login</h2>
+            <h2 id="heading1">Login to your Account</h2>
             <form onSubmit={handleSubmit}>
               <label htmlFor="name" className="label">
-                User Name
+                User Name :
               </label>
               <input
                 type="text"
@@ -90,7 +87,7 @@ function Home() {
               />
 
               <label htmlFor="password" className="label">
-                Password
+                Password :
               </label>
               <input
                 type="password"
@@ -104,7 +101,7 @@ function Home() {
               />
 
               <label htmlFor="role" className="label">
-                Role
+                Role :
               </label>
               <select
                 id="role"
@@ -128,6 +125,9 @@ function Home() {
               </button>
             </form>
           </div>
+        </div>
+        <div className="image-section">
+          <img src="./Images/login/pic4.png" alt="" />
         </div>
       </div>
     </>
