@@ -5,8 +5,8 @@
   margin-top: -10px;
   height: 280px; /* Fixed height */
   overflow-y: scroll; /* Make it scrollable if the content overflows */
-  background-color: #d4c3c3; /* Light color for the container background */
-  box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7); /* Box shadow for the container */
+  background-color: rgb(177, 171, 255);
+  box-shadow: 3px 4px 10px rgba(23, 19, 143, 0.7);
   border-radius: 10px; /* Improved border-radius */
   padding: 20px;
 }
