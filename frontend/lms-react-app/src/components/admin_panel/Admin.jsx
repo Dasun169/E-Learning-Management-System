@@ -18,11 +18,6 @@ function Admin() {
     <>
       <div className="container">
         <div className="left-nav-bar div1">
-          <div className="minimize-bar">
-            <a href="">
-              <img src="./Images/list.svg" alt="" />
-            </a>
-          </div>
           <h1>DashBoard</h1>
           <div className="nav-bar">
             <ul>
@@ -158,7 +153,33 @@ function Admin() {
                         setActiveForm("lecturer");
                       }}
                     >
-                      Add a <br /> Lecturer
+                      Add a Lecturer
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div className="add-course add-box">
+                <div className="course-logo">
+                  <a
+                    href="#register"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveForm("register");
+                    }}
+                  >
+                    <img src="./Images/person-add.svg" alt="" />
+                  </a>
+                </div>
+                <div className="course-title">
+                  <span id="course-text">
+                    <a
+                      href="#register"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveForm("register");
+                      }}
+                    >
+                      Add a Student
                     </a>
                   </span>
                 </div>
@@ -184,7 +205,85 @@ function Admin() {
                         setActiveForm("course");
                       }}
                     >
-                      Add a <br /> Course
+                      Add a Course
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div className="add-course add-box">
+                <div className="course-logo">
+                  <a
+                    href="#course"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveForm("course");
+                    }}
+                  >
+                    <img src="./Images/journals.svg" alt="" />
+                  </a>
+                </div>
+                <div className="course-title">
+                  <span id="course-text">
+                    <a
+                      href="#course"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveForm("course");
+                      }}
+                    >
+                      Add a Course
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div className="add-course add-box">
+                <div className="course-logo">
+                  <a
+                    href="#course"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveForm("course");
+                    }}
+                  >
+                    <img src="./Images/journals.svg" alt="" />
+                  </a>
+                </div>
+                <div className="course-title">
+                  <span id="course-text">
+                    <a
+                      href="#course"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveForm("course");
+                      }}
+                    >
+                      Add a Course
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div className="add-course add-box">
+                <div className="course-logo">
+                  <a
+                    href="#course"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveForm("course");
+                    }}
+                  >
+                    <img src="./Images/journals.svg" alt="" />
+                  </a>
+                </div>
+                <div className="course-title">
+                  <span id="course-text">
+                    <a
+                      href="#course"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveForm("course");
+                      }}
+                    >
+                      Add a Course
                     </a>
                   </span>
                 </div>

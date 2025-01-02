@@ -8,7 +8,7 @@ body {
 }
 
 .left-nav-bar {
-  background-color: #d4c3c3;
+  background-color: #004080;
   height: 100vh;
   width: 250px;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -20,7 +20,6 @@ body {
 }
 
 .right-bar {
-  background-color: wheat;
   height: 100vh;
   width: 300px;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -136,13 +135,14 @@ body {
   margin: 20px;
   height: 100px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   gap: 10px;
 }
 
 .add-box {
-  height: 150px;
-  width: 300px;
+  height: 80px;
+  width: 250px;
   background-color: rgb(205, 172, 128);
   border-radius: 0.4cap;
   box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7);
@@ -164,7 +164,7 @@ body {
 }
 
 #lecturer-text {
-  font-size: 27px;
+  font-size: 22px;
 }
 
 #lecturer-text a {
@@ -173,7 +173,7 @@ body {
 }
 
 #course-text {
-  font-size: 27px;
+  font-size: 22px;
 }
 
 #course-text a {
@@ -182,24 +182,24 @@ body {
 }
 
 .lecture-logo img {
-  height: 80px;
-  width: 80px;
+  height: 50px;
+  width: 50px;
 }
 
 .course-logo img {
-  height: 80px;
-  width: 80px;
+  height: 50px;
+  width: 50px;
 }
 
 .admin-body {
   display: flex;
   justify-content: space-evenly;
-  gap: 50px;
 }
 
 .right-admin-body {
   height: 300px;
   width: 350px;
+  width: 50%;
 }
 
 .right-admin-body img {

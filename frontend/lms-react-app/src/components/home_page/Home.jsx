@@ -70,7 +70,10 @@ function Home() {
       <div className="body">
         <div className="form-section">
           <div className="form-container">
-            <h2 id="heading1">Login to your Account</h2>
+            <div className="navbar-logo">
+              <img src="./Images/login/logo.jpg" alt="logo" />
+              <h1>L-Education</h1>
+            </div>
             <form onSubmit={handleSubmit}>
               <label htmlFor="name" className="label">
                 User Name :
