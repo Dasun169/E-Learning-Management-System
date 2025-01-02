@@ -100,7 +100,7 @@
   width: 95%;
   padding: 10px;
   font-size: 16px;
-  color: white;
+  color: rgb(255, 255, 255);
   background-color: #6c63ff;
   border: white solid 1px;
   border-radius: 5cap;
@@ -148,7 +148,7 @@
   color: #333;
 }
 
-.navbar-logo {
+.navbar-logo2 {
   display: flex;
   justify-content: center;
   align-items: center;
