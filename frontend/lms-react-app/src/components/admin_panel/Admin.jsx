@@ -116,7 +116,7 @@ function Admin() {
         <div className="right-bar div2">
           <div className="header">
             <div className="logo">
-              <img src={img1} alt="" />
+              <img src="./Images/studentHome/logoWithText.png" alt="" />
             </div>
             <div className="topic">
               <h1>Admin Panel</h1>
