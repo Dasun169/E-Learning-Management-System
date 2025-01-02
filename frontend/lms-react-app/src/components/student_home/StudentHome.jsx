@@ -4,7 +4,7 @@ import Body from "./Body";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 
-const studentHome = () => {
+const StudentHome = () => {
   return (
     <div>
       <Header />
@@ -14,4 +14,4 @@ const studentHome = () => {
   );
 };
 
-export default studentHome;
+export default StudentHome;

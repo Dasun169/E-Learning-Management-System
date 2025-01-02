@@ -36,7 +36,7 @@ function Home() {
         if (role === "admin") {
           setTimeout(() => navigate("/Admin"), 2000);
         } else if (role === "student" || role === "lecturer") {
-          setTimeout(() => navigate("/Registration"), 2000);
+          setTimeout(() => navigate("/StudentHome"), 2000);
         }
       } else {
         toast.error("Invalid password", {
@@ -70,9 +70,8 @@ function Home() {
       <div className="body">
         <div className="form-section">
           <div className="form-container">
-            <div className="navbar-logo">
-              <img src="./Images/login/logo.jpg" alt="logo" />
-              <h1>L-Education</h1>
+            <div className="navbar-logo2">
+              <img src="./Images/studentHome/logoWithText.png" alt="logo" />
             </div>
             <form onSubmit={handleSubmit}>
               <label htmlFor="name" className="label">
