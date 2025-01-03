@@ -263,7 +263,7 @@ function Admin() {
                 </div>
               </div>
               <div className="add-course add-box">
-                <div className="course-logo">
+                <div className="course-logo1">
                   <a
                     href="#lecturerRegistration"
                     onClick={(e) => {
@@ -274,8 +274,8 @@ function Admin() {
                     <img src="./Images/journals.svg" alt="" />
                   </a>
                 </div>
-                <div className="course-title">
-                  <span id="course-text">
+                <div className="course-title1">
+                  <span id="course-text1">
                     <a
                       href="#lecturerRegistration"
                       onClick={(e) => {
