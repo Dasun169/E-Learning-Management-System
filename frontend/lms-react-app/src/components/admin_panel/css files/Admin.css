@@ -178,7 +178,16 @@ body {
   font-size: 22px;
 }
 
+#course-text1 {
+  font-size: 20px;
+}
+
 #course-text a {
+  text-decoration: none;
+  color: black;
+}
+
+#course-text1 a {
   text-decoration: none;
   color: black;
 }
@@ -191,6 +200,12 @@ body {
 .course-logo img {
   height: 50px;
   width: 50px;
+}
+
+.course-logo1 img {
+  height: 50px;
+  width: 50px;
+  margin-left: 5px;
 }
 
 .admin-body {
