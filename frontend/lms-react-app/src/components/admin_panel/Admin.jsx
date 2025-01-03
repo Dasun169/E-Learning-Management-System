@@ -8,7 +8,7 @@ import GetAllCourses from "./GetAllCourses";
 import GetAllLecturers from "./GetAllLecturers";
 import Register from "./Registration"; // Import the Register component
 import "./css files/Admin.css";
-import img1 from "./Images/Leanify1.png";
+import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
 
 function Admin() {
@@ -213,10 +213,10 @@ function Admin() {
               <div className="add-course add-box">
                 <div className="course-logo">
                   <a
-                    href="#course"
+                    href="#deleteLecturer"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveForm("course");
+                      setActiveForm("deleteLecturer");
                     }}
                   >
                     <img src="./Images/journals.svg" alt="" />
@@ -225,13 +225,13 @@ function Admin() {
                 <div className="course-title">
                   <span id="course-text">
                     <a
-                      href="#course"
+                      href="#deleteLecturer"
                       onClick={(e) => {
                         e.preventDefault();
-                        setActiveForm("course");
+                        setActiveForm("deleteLecturer");
                       }}
                     >
-                      Add a Course
+                      Delete a Lecturer
                     </a>
                   </span>
                 </div>
@@ -239,10 +239,10 @@ function Admin() {
               <div className="add-course add-box">
                 <div className="course-logo">
                   <a
-                    href="#course"
+                    href="#deleteCourse"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveForm("course");
+                      setActiveForm("deleteCourse");
                     }}
                   >
                     <img src="./Images/journals.svg" alt="" />
@@ -251,13 +251,13 @@ function Admin() {
                 <div className="course-title">
                   <span id="course-text">
                     <a
-                      href="#course"
+                      href="#deleteCourse"
                       onClick={(e) => {
                         e.preventDefault();
-                        setActiveForm("course");
+                        setActiveForm("deleteCourse");
                       }}
                     >
-                      Add a Course
+                      Delete a Course
                     </a>
                   </span>
                 </div>
@@ -265,10 +265,10 @@ function Admin() {
               <div className="add-course add-box">
                 <div className="course-logo">
                   <a
-                    href="#course"
+                    href="#lecturerRegistration"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveForm("course");
+                      setActiveForm("lecturerRegistration");
                     }}
                   >
                     <img src="./Images/journals.svg" alt="" />
@@ -277,13 +277,13 @@ function Admin() {
                 <div className="course-title">
                   <span id="course-text">
                     <a
-                      href="#course"
+                      href="#lecturerRegistration"
                       onClick={(e) => {
                         e.preventDefault();
-                        setActiveForm("course");
+                        setActiveForm("lecturerRegistration");
                       }}
                     >
-                      Add a Course
+                      Lecturer Registration
                     </a>
                   </span>
                 </div>
@@ -306,6 +306,7 @@ function Admin() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
