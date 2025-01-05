@@ -7,4 +7,5 @@ import com.example.lms.Model.CourseRegistration;
 public interface CourseRegistrationService {
     CourseRegistration createEnrollment(CourseRegistration courseRegistration);
     List<CourseRegistration> getAllRegistrationsByCourseCode(String courseCode);
+    List<CourseRegistration> getAllRegistrationsByUserName(String userName);
 }

@@ -35,4 +35,10 @@ public class CourseRegistrationController {
         List<CourseRegistration> registrations = courseRegistrationService.getAllRegistrationsByCourseCode(courseCode);
         return ResponseEntity.ok(registrations);
     }
+
+    @GetMapping("/user/{userName}")
+    public ResponseEntity<List<CourseRegistration>> getRegistrationsByUserName(@PathVariable String userName) {
+        List<CourseRegistration> registrations = courseRegistrationService.getAllRegistrationsByUserName(userName);
+        return ResponseEntity.ok(registrations);
+    }
 }

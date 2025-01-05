@@ -2,13 +2,27 @@ package com.example.lms.Model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 @Document(collection = "course-registration")
 public class CourseRegistration {
+
     @Id
+    private String id; 
+    @Indexed 
     private String userName;
     private String courseName;
     private String courseCode;
+    private String yearType; 
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUserName() {
         return userName;
@@ -32,5 +46,13 @@ public class CourseRegistration {
 
     public void setCourseCode(String courseCode) {
         this.courseCode = courseCode;
+    }
+
+    public String getYearType() {
+        return yearType;
+    }
+
+    public void setYearType(String yearType) {
+        this.yearType = yearType;
     }
 }
