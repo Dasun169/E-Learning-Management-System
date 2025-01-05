@@ -24,4 +24,9 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
     public List<CourseRegistration> getAllRegistrationsByCourseCode(String courseCode) {
         return courseRegistrationRepository.findAllByCourseCode(courseCode);
     }
+
+    @Override
+    public List<CourseRegistration> getAllRegistrationsByUserName(String userName) {
+        return courseRegistrationRepository.findAllByUserName(userName);
+    }
 }
