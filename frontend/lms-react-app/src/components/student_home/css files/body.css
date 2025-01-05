@@ -11,7 +11,7 @@ body {
   margin: 0 auto;
 }
 
-.body_header {
+.body-header {
   text-align: left;
   margin-bottom: 20px;
 }
@@ -55,6 +55,12 @@ header h1 {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.course-card:hover {
+  transform: scale(1.02);
 }
 
 .course-thumbnail {
