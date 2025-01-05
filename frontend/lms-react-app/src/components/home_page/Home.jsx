@@ -36,7 +36,9 @@ function Home() {
         if (role === "admin") {
           setTimeout(() => navigate("/Admin"), 2000);
         } else if (role === "student" || role === "lecturer") {
-          setTimeout(() => navigate("/StudentHome"), 2000);
+          setTimeout(() => {
+            navigate("/StudentHome", { state: { username: username } });
+          }, 2000);
         }
       } else {
         toast.error("Invalid password", {
