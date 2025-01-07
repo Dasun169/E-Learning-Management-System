@@ -11,6 +11,7 @@ function Registration() {
   const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState(""); // Added state for email
   const [profileImage, setProfileImage] = useState(null);
+  const [email, setEmail] = useState(""); // New email state
 
   const checkUserNameExists = async (userName) => {
     try {
@@ -25,11 +26,6 @@ function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const isUserNameExist = await checkUserNameExists(userName);
-
-    if (isUserNameExist) {
-      toast.error("The User Name already exists", {
         className: "custom-toast",
         position: "top-center",
         autoClose: 3000,
@@ -38,7 +34,6 @@ function Registration() {
         pauseOnHover: true,
         draggable: true,
       });
-      return;
     }
 
     const currentDate = new Date();
@@ -50,6 +45,7 @@ function Registration() {
       contactNumber,
       email, // Added email to userData
       profileImage: null,
+      email, // Include email in the user data
       createdDate: currentDate.toISOString(),
       updatedDate: currentDate.toISOString(),
       role: "student",
@@ -77,12 +73,14 @@ function Registration() {
           draggable: true,
         });
 
+        // Reset form fields
         setUserName("");
         setPassword("");
         setFullName("");
         setContactNumber("");
         setEmail(""); // Clear email field
         setProfileImage(null);
+        setEmail(""); // Reset email field
       } else {
         toast.error("Failed to register student.", {
           className: "custom-toast",
@@ -171,14 +169,14 @@ function Registration() {
                 </tr>
                 <tr>
                   <td>
-                    <label>Email:</label>
+
                   </td>
                   <td>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g: johndoe@example.com"
+
                     />
                   </td>
                 </tr>

@@ -11,6 +11,7 @@ const Lecturer = () => {
   const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState(""); // Added state for email
   const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
+  const [email, setEmail] = useState(""); // New email state
 
   const checkUserNameExists = async (userName) => {
     try {
@@ -25,9 +26,7 @@ const Lecturer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const isUserNameExist = await checkUserNameExists(userName);
-
     if (isUserNameExist) {
       toast.error("The User Name already exists", {
         className: "custom-toast",
@@ -48,10 +47,6 @@ const Lecturer = () => {
       hashPassword: password,
       fullName,
       contactNumber,
-      email, // Include email in the user data
-      profileImage: null,
-      createdDate: currentDate.toISOString(),
-      updatedDate: currentDate.toISOString(),
       role: "lecturer", // Manually set the role to "lecturer"
     };
 
@@ -80,8 +75,7 @@ const Lecturer = () => {
         setPassword("");
         setFullName("");
         setContactNumber("");
-        setEmail(""); // Clear the email field
-        setProfileImage(null);
+
       } else {
         toast.error("Failed to add lecturer.", {
           className: "custom-toast",
@@ -178,6 +172,19 @@ const Lecturer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="e.g: johndoe@example.com"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Email:</label> {/* Email input field */}
+                  </td>
+                  <td>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="ex: john@example.com"
                     />
                   </td>
                 </tr>
