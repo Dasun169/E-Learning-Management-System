@@ -9,16 +9,23 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
+  const [email, setEmail] = useState(""); // Added state for email
   const [profileImage, setProfileImage] = useState(null);
   const [email, setEmail] = useState(""); // New email state
 
+  const checkUserNameExists = async (userName) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/users/${userName}`
+      );
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Basic email validation using regex
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!email || !emailRegex.test(email)) {
-      toast.error("Please enter a valid email address.", {
         className: "custom-toast",
         position: "top-center",
         autoClose: 3000,
@@ -27,7 +34,6 @@ function Registration() {
         pauseOnHover: true,
         draggable: true,
       });
-      return; // Stop form submission if the email is invalid
     }
 
     const currentDate = new Date();
@@ -37,6 +43,7 @@ function Registration() {
       hashPassword: password,
       fullName,
       contactNumber,
+      email, // Added email to userData
       profileImage: null,
       email, // Include email in the user data
       createdDate: currentDate.toISOString(),
@@ -71,6 +78,7 @@ function Registration() {
         setPassword("");
         setFullName("");
         setContactNumber("");
+        setEmail(""); // Clear email field
         setProfileImage(null);
         setEmail(""); // Reset email field
       } else {
@@ -161,14 +169,14 @@ function Registration() {
                 </tr>
                 <tr>
                   <td>
-                    <label>Email:</label> {/* Email input field */}
+
                   </td>
                   <td>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g: john@example.com"
+
                     />
                   </td>
                 </tr>

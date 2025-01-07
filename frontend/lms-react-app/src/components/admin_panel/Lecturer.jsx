@@ -9,6 +9,7 @@ const Lecturer = () => {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
+  const [email, setEmail] = useState(""); // Added state for email
   const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
   const [email, setEmail] = useState(""); // New email state
 
@@ -17,35 +18,15 @@ const Lecturer = () => {
       const response = await axios.get(
         `http://localhost:8080/api/users/${userName}`
       );
-      // If user exists, response status will be 200 and return the user object
       return response.status === 200;
     } catch (error) {
-      // If the user doesn't exist, the backend should return a 404
       return false;
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Basic email validation using regex
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!email || !emailRegex.test(email)) {
-      toast.error("Please enter a valid email address.", {
-        className: "custom-toast",
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      return; // Stop form submission if the email is invalid
-    }
-
-    // Check if the userName already exists
     const isUserNameExist = await checkUserNameExists(userName);
-
     if (isUserNameExist) {
       toast.error("The User Name already exists", {
         className: "custom-toast",
@@ -55,21 +36,17 @@ const Lecturer = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
       });
-      return; // Prevent form submission if user name exists
+      return;
     }
 
-    // Collect user data and manually set the role as "lecturer"
+    const currentDate = new Date();
+
     const userData = {
       userName,
       hashPassword: password,
       fullName,
       contactNumber,
-      profileImage: null, // Always send null for profileImage
-      email, // Include email in the user data
-      createdDate: new Date(), // Current timestamp for createdDate
-      updatedDate: new Date(), // Current timestamp for updatedDate
       role: "lecturer", // Manually set the role to "lecturer"
     };
 
@@ -93,15 +70,12 @@ const Lecturer = () => {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
         });
-        // Reset form fields after submission
         setUserName("");
         setPassword("");
         setFullName("");
         setContactNumber("");
-        setProfileImage(null); // Clear the profile image state
-        setEmail(""); // Reset email field
+
       } else {
         toast.error("Failed to add lecturer.", {
           className: "custom-toast",
@@ -111,7 +85,6 @@ const Lecturer = () => {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
         });
       }
     } catch (error) {
@@ -124,7 +97,6 @@ const Lecturer = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
       });
     }
   };
@@ -147,7 +119,7 @@ const Lecturer = () => {
                       type="text"
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
-                      placeholder="ex: jhond20133"
+                      placeholder="e.g: jhond20133"
                     />
                   </td>
                 </tr>
@@ -160,7 +132,7 @@ const Lecturer = () => {
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="ex: ABCabc123!@#"
+                      placeholder="e.g: ABCabc123!@#"
                     />
                   </td>
                 </tr>
@@ -173,7 +145,7 @@ const Lecturer = () => {
                       type="text"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder="ex: John Doe"
+                      placeholder="e.g: John Doe"
                     />
                   </td>
                 </tr>
@@ -186,7 +158,20 @@ const Lecturer = () => {
                       type="text"
                       value={contactNumber}
                       onChange={(e) => setContactNumber(e.target.value)}
-                      placeholder="ex: 07########"
+                      placeholder="e.g: 0123456789"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Email:</label>
+                  </td>
+                  <td>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="e.g: johndoe@example.com"
                     />
                   </td>
                 </tr>
