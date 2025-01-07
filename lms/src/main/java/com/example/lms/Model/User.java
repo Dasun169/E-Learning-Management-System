@@ -18,7 +18,6 @@ public class User {
     private String email; // Added email field
     private byte[] profileImage;
     private String role;
-    private String email; // New email field
 
     @CreatedDate
     private LocalDateTime createdDate;
@@ -88,14 +87,6 @@ public class User {
 
     public void setRole(String role) {
         this.role = role; 
-    }
-
-    public String getEmail() { // Getter for email
-        return email;
-    }
-
-    public void setEmail(String email) { // Setter for email
-        this.email = email;
     }
 
     public LocalDateTime getCreatedDate() {
