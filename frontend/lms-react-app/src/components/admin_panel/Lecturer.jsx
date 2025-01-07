@@ -10,6 +10,7 @@ const Lecturer = () => {
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
+  const [email, setEmail] = useState(""); // New email state
 
   const checkUserNameExists = async (userName) => {
     try {
@@ -26,6 +27,21 @@ const Lecturer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic email validation using regex
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!email || !emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return; // Stop form submission if the email is invalid
+    }
 
     // Check if the userName already exists
     const isUserNameExist = await checkUserNameExists(userName);
@@ -51,6 +67,7 @@ const Lecturer = () => {
       fullName,
       contactNumber,
       profileImage: null, // Always send null for profileImage
+      email, // Include email in the user data
       createdDate: new Date(), // Current timestamp for createdDate
       updatedDate: new Date(), // Current timestamp for updatedDate
       role: "lecturer", // Manually set the role to "lecturer"
@@ -84,6 +101,7 @@ const Lecturer = () => {
         setFullName("");
         setContactNumber("");
         setProfileImage(null); // Clear the profile image state
+        setEmail(""); // Reset email field
       } else {
         toast.error("Failed to add lecturer.", {
           className: "custom-toast",
@@ -169,6 +187,19 @@ const Lecturer = () => {
                       value={contactNumber}
                       onChange={(e) => setContactNumber(e.target.value)}
                       placeholder="ex: 07########"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Email:</label> {/* Email input field */}
+                  </td>
+                  <td>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="ex: john@example.com"
                     />
                   </td>
                 </tr>
