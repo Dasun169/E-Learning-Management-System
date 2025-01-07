@@ -1,0 +1,68 @@
+[33mdc2a469[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature-admin-interface5[m[33m, [m[1;31morigin/feature-admin-interface5[m[33m)[m try to complete the details send to the email part
+[33m3a7fe76[m get email details as input and store these to the user collection
+[33m223fed7[m complete studentHome page(displaying part).
+[33m650838a[m display the courses according to the user from backend and course search function completely done.
+[33mbc19941[m update the courseRegistration collection backend part
+[33m56e67cc[m add thumbnails for course
+[33m613e0ca[m update-admin-panel
+[33mb9cbe88[m update-admin-panel
+[33maf2362a[m update4
+[33m0c6be5c[m update3
+[33mc75d8fc[m update2
+[33me66e620[m update1
+[33m4f64ea3[m Merge pull request #26 from Dasun169/feature-create-studentHome-page-dila
+[33maf30004[m[33m ([m[1;31morigin/feature-create-studentHome-page-dila[m[33m)[m create-studentHome-page
+[33m4ae6471[m Merge pull request #25 from Dasun169/feature-create-studentHome-page-dila
+[33m9d88453[m create-footer-header
+[33me9c43e5[m Merge pull request #24 from Dasun169/feature-create-studentHome-page-dila
+[33mec814d5[m add-logo
+[33m68289eb[m Merge pull request #23 from Dasun169/feature-admin-interface4
+[33m6ee1f08[m[33m ([m[1;31morigin/feature-admin-interface4[m[33m, [m[1;32mfeature-admin-interface4[m[33m)[m add-some-changes
+[33mf5a6c73[m Merge pull request #22 from Dasun169/feature-admin-interface4
+[33m966adb3[m edit-login-page
+[33m873f309[m Merge pull request #21 from Dasun169/feature-admin-interface4
+[33m6a73a23[m update3
+[33mbbf7ada[m update2
+[33m20edd77[m update1
+[33ma5017f0[m Merge pull request #20 from Dasun169/feature-admin-interface3
+[33m0aa87b0[m[33m ([m[1;31morigin/feature-admin-interface3[m[33m, [m[1;32mfeature-admin-interface3[m[33m)[m small-change
+[33me5815e0[m Merge pull request #19 from Dasun169/connect-registration-page-to-backend-kalana
+[33mf99d9cb[m Merge pull request #18 from Dasun169/home-connect-to-backend-dila
+[33mea06dfb[m[33m ([m[1;31morigin/connect-registration-page-to-backend-kalana[m[33m)[m registration page connect to the backend
+[33m9566f08[m[33m ([m[1;31morigin/home-connect-to-backend-dila[m[33m)[m connect home page
+[33m751e58c[m Merge pull request #17 from Dasun169/feature-admin-interface3
+[33m972cbe2[m update backend for home page
+[33m3cac8a0[m Merge pull request #16 from Dasun169/feature-admin-interface3
+[33mc27b089[m add some changes
+[33mdd81957[m Merge pull request #15 from Dasun169/feature-admin-interface3
+[33m1c3459b[m update some component to the admin page
+[33m1f75568[m Merge pull request #14 from Dasun169/feature-admin-interface2
+[33m9461be3[m[33m ([m[1;31morigin/feature-admin-interface2[m[33m, [m[1;32mfeature-admin-interface2[m[33m)[m update lecture-registration part
+[33mee82ed5[m Merge pull request #13 from Dasun169/feature-admin-interface1
+[33m07d5fba[m[33m ([m[1;31morigin/feature-admin-interface1[m[33m, [m[1;32mfeature-admin-interface1[m[33m)[m connect some front part to backend
+[33m3ba3a8c[m Merge pull request #12 from Dasun169/admin-page-1
+[33m7432aa6[m[33m ([m[1;31morigin/admin-page-1[m[33m, [m[1;32madmin-page-1[m[33m)[m some parts connect to the backend
+[33m349e0be[m Merge pull request #11 from Dasun169/home-interface1
+[33m355563b[m[33m ([m[1;31morigin/home-interface1[m[33m)[m alert-message
+[33m6e1d394[m Merge pull request #10 from Dasun169/test-push
+[33m1532a50[m[33m ([m[1;31morigin/test-push[m[33m)[m test-push
+[33ma6f60ab[m test-push
+[33m9669032[m Merge pull request #9 from Dasun169/feature-connect-frontend
+[33mbbe3f72[m Connect some interface parts to backend
+[33md085bd5[m Merge pull request #8 from Dasun169/feature-aggest-interfaces
+[33me1fb971[m[33m ([m[1;31morigin/feature-aggest-interfaces[m[33m, [m[1;32mfeature-aggest-interfaces[m[33m)[m aggest frontend pages
+[33m86f7900[m Merge pull request #7 from Dasun169/feature-finish-backend
+[33m54f31b1[m[33m ([m[1;31morigin/feature-finish-backend[m[33m, [m[1;32mfeature-finish-backend[m[33m)[m Complete backend functionality
+[33mad486ea[m Merge pull request #6 from Dasun169/feature-admin-interface
+[33m4c0d0ed[m[33m ([m[1;31morigin/feature-admin-interface[m[33m, [m[1;32mfeature-admin-interface[m[33m)[m add-changes-to-course
+[33m9ef597c[m Merge pull request #5 from Dasun169/feature-admin-interface
+[33m3252fdd[m finished admin interface
+[33mf7168c6[m Merge pull request #4 from Dasun169/home-interface
+[33ma590d74[m[33m ([m[1;31morigin/home-interface[m[33m, [m[1;32mhome-interface[m[33m)[m create-react-app
+[33m77024f9[m Merge pull request #3 from Dasun169/feature-course-registration-backend
+[33m45a6731[m[33m ([m[1;31morigin/feature-course-registration-backend[m[33m)[m course-reistration-backend
+[33ma430c7f[m Merge pull request #2 from Dasun169/module-collection-backend
+[33m5cac9e5[m[33m ([m[1;31morigin/module-collection-backend[m[33m)[m Module-backend-part-update
+[33m9ffde87[m Merge pull request #1 from Dasun169/lecrirer-course-user-backend
+[33m0baa01c[m[33m ([m[1;31morigin/lecrirer-course-user-backend[m[33m)[m Lecturer-User-Course-backend
+[33m95bd625[m Initial commit
