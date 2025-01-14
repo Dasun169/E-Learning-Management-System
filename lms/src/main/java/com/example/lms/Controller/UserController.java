@@ -1,6 +1,7 @@
 package com.example.lms.Controller;
 
 import com.example.lms.Model.User;
+import com.example.lms.Model.LoginRequest;
 import com.example.lms.Service.UserService;
 
 import java.util.List;
@@ -34,6 +35,22 @@ public class UserController {
         User createdUser = this.userService.createUser(user);
         return ResponseEntity.ok(createdUser);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        User user = userService.getUserByRoleAndUserName(loginRequest.getRole(), loginRequest.getUsername());
+
+        if (user == null) {
+            return ResponseEntity.status(400).body("Invalid username or role");
+        }
+
+        if (userService.checkPassword(loginRequest.getPassword(), user.getHashPassword())) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(400).body("Invalid password");
+        }
+    }
+
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {

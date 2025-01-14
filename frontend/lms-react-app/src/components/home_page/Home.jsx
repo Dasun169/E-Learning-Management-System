@@ -15,13 +15,18 @@ function Home() {
     event.preventDefault();
 
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/users/role/${role}/userName/${username}`
+      // Send login request to the backend
+      const response = await axios.post(
+        `http://localhost:8080/api/users/login`, // Endpoint for login
+        {
+          username: username,
+          password: password,
+          role: role,
+        }
       );
 
-      const user = response.data;
-
-      if (user.hashPassword === password) {
+      // Handle successful login
+      if (response.status === 200) {
         toast.success("Login successful!", {
           className: "custom-toast",
           position: "top-center",
@@ -33,6 +38,7 @@ function Home() {
           progress: undefined,
         });
 
+        // Redirect based on the role
         if (role === "admin") {
           setTimeout(() => navigate("/Admin"), 2000);
         } else if (role === "student" || role === "lecturer") {
@@ -40,8 +46,22 @@ function Home() {
             navigate("/StudentHome", { state: { username: username } });
           }, 2000);
         }
+      }
+    } catch (error) {
+      // Handle login failure
+      if (error.response && error.response.data) {
+        toast.error(error.response.data, {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } else {
-        toast.error("Invalid password", {
+        toast.error("Login failed. Please try again.", {
           className: "custom-toast",
           position: "top-center",
           autoClose: 3000,
@@ -52,17 +72,6 @@ function Home() {
           progress: undefined,
         });
       }
-    } catch {
-      toast.error("User not found or invalid username/role", {
-        className: "custom-toast",
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
     }
   };
 
@@ -72,8 +81,9 @@ function Home() {
       <div className="body">
         <div className="form-section">
           <div className="form-container">
-            <div className="navbar-logo2">
-              <img src="./Images/studentHome/logoWithText.png" alt="logo" />
+            <div className="navbar-logo">
+              <img src="./Images/login/logo.jpg" alt="logo" />
+              <h1>L-Education</h1>
             </div>
             <form onSubmit={handleSubmit}>
               <label htmlFor="name" className="label">

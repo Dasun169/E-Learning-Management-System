@@ -9,9 +9,8 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [email, setEmail] = useState(""); // Added state for email
+  const [email, setEmail] = useState(""); // Remove duplicate declaration of `email`
   const [profileImage, setProfileImage] = useState(null);
-  const [email, setEmail] = useState(""); // New email state
 
   const checkUserNameExists = async (userName) => {
     try {
@@ -26,15 +25,6 @@ function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-        className: "custom-toast",
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-    }
 
     const currentDate = new Date();
 
@@ -45,7 +35,6 @@ function Registration() {
       contactNumber,
       email, // Added email to userData
       profileImage: null,
-      email, // Include email in the user data
       createdDate: currentDate.toISOString(),
       updatedDate: currentDate.toISOString(),
       role: "student",
@@ -80,7 +69,6 @@ function Registration() {
         setContactNumber("");
         setEmail(""); // Clear email field
         setProfileImage(null);
-        setEmail(""); // Reset email field
       } else {
         toast.error("Failed to register student.", {
           className: "custom-toast",
@@ -169,14 +157,14 @@ function Registration() {
                 </tr>
                 <tr>
                   <td>
-
+                    <label>Email:</label> {/* Add a label for email */}
                   </td>
                   <td>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-
+                      placeholder="e.g: johndoe@example.com"
                     />
                   </td>
                 </tr>
