@@ -1,0 +1,64 @@
+.course-enrollment{
+    background-color: rgb(236, 240, 240) ;
+    display: fixed;
+    padding: 20px 50px;
+}  
+
+.course-enrollment h1{
+    font-size: 35px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 700px;
+}
+
+.course-enrollment .body{
+    padding: 20px  40px;
+    background-color: white;
+    display: flex;
+}
+.course-enrollment .body .left{
+    background-color: aliceblue;
+    padding: 30px;
+    border-radius: 10px;
+}
+.course-enrollment .body .left .course-pic{
+    width: 300px;
+    height: 120px;
+    background-color: blue;
+    border-radius: 10px;
+    margin-bottom: 20px;    
+}
+.course-enrollment .body .left h2{
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600px;
+    margin-top: -10px;
+}
+.course-enrollment .body .left .lecture{
+    margin-left: 15px;
+}
+.course-enrollment .body .right{
+    margin: 70px 0 0 80px;
+}
+
+.course-enrollment .body .right .enrollment-option{
+    display: flex;
+}
+
+.course-enrollment .body .right .title h3{
+    font-size: 25px;
+}
+
+.course-enrollment .body .right .enrollment-option input{
+    margin-top: 18px;
+    margin-left: 30px;
+    height: 20px;
+    width: 200px;
+}
+
+.course-enrollment .body .right .enrollment-option button{
+    margin-top: 15px;
+    margin-left: 10px;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+}
