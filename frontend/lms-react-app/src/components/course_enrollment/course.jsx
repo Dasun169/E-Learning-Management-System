@@ -1,4 +1,4 @@
-import "./course.css";
+import "./css files/course.css";
 
 function Course() {
   return (
