@@ -1,22 +1,23 @@
 .course-enrollment{
-    background-color: rgb(236, 240, 240) ;
+    background-color: #f9f9f9 ;
     display: fixed;
     padding: 20px 50px;
+    box-shadow: 0 0 10px #ddd;
 }  
 
 .course-enrollment h1{
     font-size: 35px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family:'Arial, sans-serif';
     font-weight: 700px;
 }
 
 .course-enrollment .body{
     padding: 20px  40px;
-    background-color: white;
+    background-color: #fff;
     display: flex;
 }
 .course-enrollment .body .left{
-    background-color: aliceblue;
+    background-color: #ddd;
     padding: 30px;
     border-radius: 10px;
 }
@@ -29,7 +30,7 @@
 }
 .course-enrollment .body .left h2{
     font-size: 25px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Arial, sans-serif';
     font-weight: 600px;
     margin-top: -10px;
 }
@@ -61,4 +62,10 @@
     height: 30px;
     width: 100px;
     border-radius: 10px;
+    border-width: 2;
+    background-color: #6c63ff;
+    border-color: #afb8fa;
+
+    font-family: Arial, sans-serif ;
 }
+
