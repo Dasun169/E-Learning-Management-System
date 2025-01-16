@@ -1,6 +1,6 @@
-import "./css files/course.css";
+import "./css files/enrollment.css";
 
-function Course() {
+function Enrollment() {
   return (
     <div className="course-enrollment">
       <h1>PMAT 23456 - Mathematical Method</h1>
@@ -39,4 +39,4 @@ function Course() {
   );
 }
 
-export default Course;
+export default Enrollment;
