@@ -6,8 +6,7 @@ function Enrollment() {
       <h1>PMAT 23456 - Mathematical Method</h1>
 
       <section className="body">
-
-        <div className="left"> 
+        <div className="left">
           <h2>Enrolment options</h2>
           <div className="lecture">
             <h3>
@@ -25,15 +24,12 @@ function Enrollment() {
           <div className="title">
             <h3>Self Enrolment (Student)</h3>
           </div>
-          <div className="enrollment-option"> 
+          <div className="enrollment-option">
             <h4>Enrolment key</h4>
-            <input type="text"/>
-            <button>
-              Enrol Me
-            </button>
+            <input type="text" />
+            <button>Enrol Me</button>
           </div>
         </div>
-
       </section>
     </div>
   );
