@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -17,15 +17,20 @@ function Home() {
     try {
       // Send login request to the backend
       const response = await axios.post(
-        `http://localhost:8080/api/users/login`, // Endpoint for login
+        "http://localhost:8080/api/users/login",
         {
           username: username,
           password: password,
           role: role,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
 
-      // Handle successful login
+      // Handle successful login response from the backend
       if (response.status === 200) {
         toast.success("Login successful!", {
           className: "custom-toast",
@@ -38,7 +43,7 @@ function Home() {
           progress: undefined,
         });
 
-        // Redirect based on the role
+        // Redirect based on the role after successful login
         if (role === "admin") {
           setTimeout(() => navigate("/Admin"), 2000);
         } else if (role === "student" || role === "lecturer") {
