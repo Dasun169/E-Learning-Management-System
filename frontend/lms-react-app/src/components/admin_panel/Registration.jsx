@@ -157,7 +157,7 @@ function Registration() {
                 </tr>
                 <tr>
                   <td>
-                    <label>Email:</label> {/* Add a label for email */}
+                    <label>Email:</label>
                   </td>
                   <td>
                     <input
