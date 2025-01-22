@@ -11,7 +11,6 @@ const Lecturer = () => {
   const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState(""); // Added state for email
   const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
-  const [email, setEmail] = useState(""); // New email state
 
   const checkUserNameExists = async (userName) => {
     try {
@@ -75,7 +74,6 @@ const Lecturer = () => {
         setPassword("");
         setFullName("");
         setContactNumber("");
-
       } else {
         toast.error("Failed to add lecturer.", {
           className: "custom-toast",
