@@ -10,7 +10,6 @@ const Lecturer = () => {
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState(""); // Added state for email
-
   const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
 
   const checkUserNameExists = async (userName) => {
@@ -171,6 +170,19 @@ const Lecturer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="e.g: johndoe@example.com"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Email:</label> {/* Email input field */}
+                  </td>
+                  <td>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="ex: john@example.com"
                     />
                   </td>
                 </tr>
