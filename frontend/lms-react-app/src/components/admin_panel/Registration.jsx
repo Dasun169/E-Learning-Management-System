@@ -9,7 +9,7 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [email, setEmail] = useState(""); // Remove duplicate declaration of `email`
+  const [email, setEmail] = useState(""); // Added state for email
   const [profileImage, setProfileImage] = useState(null);
 
   const checkUserNameExists = async (userName) => {
