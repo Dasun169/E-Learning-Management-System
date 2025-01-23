@@ -7,8 +7,6 @@ import com.example.lms.Service.UserService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,13 +18,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SequenceService sequenceService;
 
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @Override
     public User createUser(User user) {
-        String hashedPassword = passwordEncoder.encode(user.getHashPassword());
-        user.setHashPassword(hashedPassword); 
-
         long id = sequenceService.getNextSequenceId("user_sequence");
         user.setId(id); 
         return userRepository.save(user);
@@ -70,10 +63,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByRoleAndUserName(String role, String userName) {
         return userRepository.findByRoleAndUserName(role, userName); 
-    }
-
-    @Override
-    public boolean checkPassword(String rawPassword, String encodedPassword) {
-        return passwordEncoder.matches(rawPassword, encodedPassword); // Compare the raw password with the encoded one
     }
 }

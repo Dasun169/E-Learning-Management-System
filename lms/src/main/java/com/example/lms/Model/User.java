@@ -15,7 +15,8 @@ public class User {
     private String hashPassword;
     private String fullName;
     private String contactNumber;
-    private String email; 
+    private String email; // Added email field
+    private byte[] profileImage;
     private String role;
 
     @CreatedDate
@@ -63,13 +64,29 @@ public class User {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
-    
+
+    public byte[] getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(byte[] profileImage) {
+        this.profileImage = profileImage;
+    }
+
     public String getRole() {
         return role; 
     }
 
     public void setRole(String role) {
         this.role = role; 
+    }
+
+    public String getEmail() { // Getter for email
+        return email;
+    }
+
+    public void setEmail(String email) { // Setter for email
+        this.email = email;
     }
 
     public LocalDateTime getCreatedDate() {
