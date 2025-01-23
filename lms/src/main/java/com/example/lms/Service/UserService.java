@@ -12,5 +12,4 @@ public interface UserService {
     User getUserByUserName(String userName); 
     User getUserById(long id);
     User getUserByRoleAndUserName(String role, String userName);
-    boolean checkPassword(String rawPassword, String encodedPassword);
 }

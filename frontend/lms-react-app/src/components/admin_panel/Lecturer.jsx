@@ -10,7 +10,8 @@ const Lecturer = () => {
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState(""); // Added state for email
-  const [profileImage, setProfileImage] = useState(null);
+
+  const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
 
   const checkUserNameExists = async (userName) => {
     try {
