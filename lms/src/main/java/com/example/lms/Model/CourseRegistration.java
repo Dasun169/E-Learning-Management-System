@@ -15,7 +15,6 @@ public class CourseRegistration {
     private String courseCode;
     private String yearType; 
 
-
     public String getId() {
         return id;
     }

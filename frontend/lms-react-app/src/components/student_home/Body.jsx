@@ -27,19 +27,21 @@ const Body = ({ username, fullName }) => {
 
   // Fetch courses when the page loads
   useEffect(() => {
+    console.log("Username:", username); // Check if username is available
     if (username) {
       const fetchCourses = async () => {
         try {
           const response = await axios.get(
             `http://localhost:8080/api/courseRegistrations/user/${username}`
           );
-
+          console.log(response.data); // Log the API response
           if (response.data) {
-            setCourses(response.data); // Store all courses
-            setFilteredCourses(response.data); // Initially display all courses
+            setCourses(response.data);
+            setFilteredCourses(response.data);
           }
           setLoading(false);
         } catch (err) {
+          console.error("Error fetching courses:", err); // Log the error
           setError("Failed to fetch course data");
           setLoading(false);
         }

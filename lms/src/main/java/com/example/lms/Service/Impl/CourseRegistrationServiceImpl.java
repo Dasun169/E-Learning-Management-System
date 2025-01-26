@@ -29,4 +29,9 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
     public List<CourseRegistration> getAllRegistrationsByUserName(String userName) {
         return courseRegistrationRepository.findAllByUserName(userName);
     }
+
+    @Override
+    public boolean checkIfExists(String userName, String courseCode) {
+        return courseRegistrationRepository.existsByUserNameAndCourseCode(userName, courseCode);
+    }
 }

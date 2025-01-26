@@ -174,19 +174,6 @@ const Lecturer = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    <label>Email:</label> {/* Email input field */}
-                  </td>
-                  <td>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="ex: john@example.com"
-                    />
-                  </td>
-                </tr>
-                <tr>
                   <td colSpan={2} id="submit-button">
                     <button type="submit">Add a Lecturer</button>
                   </td>
