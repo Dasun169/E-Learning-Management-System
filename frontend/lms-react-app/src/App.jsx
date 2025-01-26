@@ -16,7 +16,7 @@ function App() {
         <Route path="/Admin" element={<Admin />} />
         <Route path="/StudentHome" element={<StudentHome />} />
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
-        <Route path="/" element={<CoursePage />} />
+        <Route path="/CoursePage" element={<CoursePage />} />
       </Routes>
     </Router>
   );

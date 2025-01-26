@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./css files/body.css";
+import { useNavigate } from "react-router-dom";
 
 const Body = ({ username, fullName }) => {
   const [courses, setCourses] = useState([]); // To store all courses
@@ -8,6 +9,8 @@ const Body = ({ username, fullName }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState(""); // Track the search query input
+
+  const navigate = useNavigate();
 
   // Array of image URLs for the background
   const backgroundImages = [
@@ -68,6 +71,22 @@ const Body = ({ username, fullName }) => {
     }
   };
 
+  const handleCourseClick = (courseCode, courseName) => {
+    console.log("Navigating with data:", {
+      userName: username, // Should log the username
+      courseCode: courseCode, // Should log the selected course code
+      courseName: courseName, // Should log the selected course name
+    });
+
+    navigate("/CoursePage", {
+      state: {
+        userName: username, // Pass username
+        courseCode: courseCode, // Pass courseCode
+        courseName: courseName, // Pass courseName
+      },
+    });
+  };
+
   return (
     <div className="dashboard">
       <header className="body-header">
@@ -103,7 +122,9 @@ const Body = ({ username, fullName }) => {
                 <div
                   key={index}
                   className="course-card"
-                  onClick={() => alert(`Clicked on ${course.courseName}`)}
+                  onClick={() =>
+                    handleCourseClick(course.courseCode, course.courseName)
+                  }
                 >
                   {/* Set a sequential background image for the course thumbnail */}
                   <div
