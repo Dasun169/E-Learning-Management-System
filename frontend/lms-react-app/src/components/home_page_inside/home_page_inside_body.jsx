@@ -1,5 +1,5 @@
-import React, { useState } from "react"; // Add useState import
-import "./css files/home_page_inside_body.css"; // Ensure the correct path to your CSS file
+import React, { useState } from "react"; 
+import "./css files/home_page_inside_body.css"; 
 
 function HomePageInsideBody() {
   const [isFacultiesOpen, setIsFacultiesOpen] = useState(false);
