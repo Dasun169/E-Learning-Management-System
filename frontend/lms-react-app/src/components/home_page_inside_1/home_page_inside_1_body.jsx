@@ -48,7 +48,7 @@ const HomePageInsideBodyNew = () => {
                 <p>{course.name}</p>
                 <span>{course.level}</span>
               </div>
-              <button className="more-options">⋮</button>
+              <button className="enrllment"><img src="./Images/lock.png" alt="lock"/></button>
             </div>
           ))}
         </div>
