@@ -8,27 +8,29 @@ import FullEnrollment from "./components/course_enrollment/FullEnrollment";
 import CoursePage from "./components/course_page/course_page";
 import HomePageInside from "./components/home_page_inside/home_page_inside";
 
-
 import StatCsNew from "./components/home_page_inside_1/STAT_CS";
 import ElecPhyNew from "./components/home_page_inside_1/ELEC_PHY";
 import MathsNew from "./components/home_page_inside_1/MATHS";
+
+import ProfileNew from "./components/profile/profile";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/StudentHome" element={<StudentHome />} />
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
-        <Route path="/HomePageInside" element={<HomePageInside />} />
-
+        <Route path="/HomePageInside" element={<HomePageInside />} />x
 
         <Route path="/StatCsNew" element={<StatCsNew />} />
         <Route path="/ElecPhyNew" element={<ElecPhyNew />} />
         <Route path="/MathsNew" element={<MathsNew />} />
+
+        <Route path="/" element={<ProfileNew />} />
 
       </Routes>
     </Router>
