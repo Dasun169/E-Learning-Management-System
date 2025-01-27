@@ -7,20 +7,20 @@ import StudentHome from "./components/student_home/StudentHome";
 import FullEnrollment from "./components/course_enrollment/FullEnrollment";
 import CoursePage from "./components/course_page/course_page";
 import HomePageInside from "./components/home_page_inside/home_page_inside";
-import HomePageInsideNew from "./components/home_page_inside_1/home_page_inside_1";
+import StatCs from "./components/home_page_inside_1/STAT_CS";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/StudentHome" element={<StudentHome />} />
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
         <Route path="/HomePageInside" element={<HomePageInside />} />
-        <Route path="/" element={<HomePageInsideNew />} />
+        <Route path="/" element={<StatCs />} />
       </Routes>
     </Router>
   );

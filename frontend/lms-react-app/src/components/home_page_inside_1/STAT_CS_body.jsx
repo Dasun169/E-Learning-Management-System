@@ -1,5 +1,5 @@
 
-import "./css files/home_page_inside_1_body.css";
+import "./css files/STAT_CS_body.css";
 
 const courses = [
   {
@@ -24,7 +24,7 @@ const courses = [
   },
 ];
 
-const HomePageInsideBodyNew = () => {
+const StatCs = () => {
   return (
     <div className="dashboard"> 
       <section className="course-overview">
@@ -55,4 +55,4 @@ const HomePageInsideBodyNew = () => {
   );
 };
 
-export default HomePageInsideBodyNew;
+export default StatCs;
