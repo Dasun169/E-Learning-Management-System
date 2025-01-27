@@ -12,4 +12,5 @@ public interface CourseService {
     boolean doesCourseExistByCourseCode(String courseCode);
     void deleteCourseByCourseCode(String courseCode);
     Course getCourseByCourseCode(String courseCode);
+    List<Course> getCoursesByNamePrefixAndYearLevel(String courseNamePrefix, String yearLevel);
 }
