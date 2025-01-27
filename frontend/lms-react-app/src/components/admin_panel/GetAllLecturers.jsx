@@ -4,6 +4,7 @@ import "./css files/GetAllLecturers.css"; // Ensure this CSS file is correctly l
 
 const GetAllLecturers = () => {
   const [lecturers, setLecturers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -11,9 +12,11 @@ const GetAllLecturers = () => {
       try {
         const response = await axios.get("http://localhost:8080/api/users"); // API endpoint
         setLecturers(response.data);
+        setLoading(false); // Stop loading when data is fetched
       } catch (err) {
         setError("Error fetching lecturers.");
         console.error(err);
+        setLoading(false); // Stop loading even on error
       }
     };
 
@@ -22,36 +25,43 @@ const GetAllLecturers = () => {
 
   return (
     <div className="lecturers-container">
-      {error && <div className="error-message">{error}</div>}
-      <h2>Lecturer Details</h2>
-      <div className="lecturers-list">
-        {lecturers.length > 0 ? (
-          lecturers.map((lecturer) => (
-            <div className="lecturer-card" key={lecturer.id}>
-              <p>
-                <strong>Lecturer ID:</strong> {lecturer.id}
-              </p>
-              <p>
-                <strong>Username:</strong> {lecturer.userName}
-              </p>
-              <p>
-                <strong>Full Name:</strong> {lecturer.fullName}
-              </p>
-              <p>
-                <strong>Email:</strong> {lecturer.email}
-              </p>
-              <p>
-                <strong>Role:</strong> {lecturer.role}
-              </p>
-              <p>
-                <strong>Status:</strong> {lecturer.status}
-              </p>
-            </div>
-          ))
-        ) : (
-          <p>No lecturers available.</p>
-        )}
-      </div>
+      {loading ? (
+        <div className="loading-message">Loading... Please Wait!!!</div>
+      ) : error ? (
+        <div className="error-message">{error}</div>
+      ) : (
+        <>
+          <h2>Lecturer Details</h2>
+          <div className="lecturers-list">
+            {lecturers.length > 0 ? (
+              lecturers.map((lecturer) => (
+                <div className="lecturer-card" key={lecturer.id}>
+                  <p>
+                    <strong>Lecturer ID:</strong> {lecturer.id}
+                  </p>
+                  <p>
+                    <strong>Username:</strong> {lecturer.userName}
+                  </p>
+                  <p>
+                    <strong>Full Name:</strong> {lecturer.fullName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {lecturer.email}
+                  </p>
+                  <p>
+                    <strong>Role:</strong> {lecturer.role}
+                  </p>
+                  <p>
+                    <strong>Status:</strong> {lecturer.status}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p>No lecturers available.</p>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

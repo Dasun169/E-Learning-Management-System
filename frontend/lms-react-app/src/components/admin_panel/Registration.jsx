@@ -23,8 +23,59 @@ function Registration() {
     }
   };
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Contact number validation function (10 digits)
+  const isValidContactNumber = (contactNumber) => {
+    const contactNumberRegex = /^[0-9]{10}$/;
+    return contactNumberRegex.test(contactNumber);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isValidEmail(email)) {
+      toast.error("Invalid email format.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+
+    if (!isValidContactNumber(contactNumber)) {
+      toast.error("Contact number must be exactly 10 digits.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+
+    const isUserNameExist = await checkUserNameExists(userName);
+    if (isUserNameExist) {
+      toast.error("The User Name already exists", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
 
     const currentDate = new Date();
 
