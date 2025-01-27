@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./css files/GetAllCourses.css"; // Assuming you have a separate CSS file for styling
+import "./css files/GetAllCourses.css"; // Ensure this CSS file is updated as provided
 
 const GetAllCourse = () => {
   const [courses, setCourses] = useState([]);
   const [error, setError] = useState(null);
 
-  // Fetch all courses from the API
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -24,38 +23,31 @@ const GetAllCourse = () => {
   return (
     <div className="courses-container">
       {error && <div className="error-message">{error}</div>}
+      <h2>Course Details</h2>
       <div className="courses-list">
         {courses.length > 0 ? (
           courses.map((course) => (
             <div className="course-card" key={course.id}>
-              <table className="course-table1">
-                <tbody>
-                  {/* First row with 3 columns */}
-                  <tr className="course-row">
-                    <td className="course-detail">
-                      <strong>Course ID:</strong> {course.id}
-                    </td>
-                    <td className="course-detail">
-                      <strong>Course Code:</strong> {course.courseCode}
-                    </td>
-                    <td className="course-detail">
-                      <strong>Course Name:</strong> {course.courseName}
-                    </td>
-                  </tr>
-                  {/* Second row with the remaining 3 columns */}
-                  <tr className="course-row">
-                    <td className="course-detail">
-                      <strong>Lecturer ID:</strong> {course.lecturerId}
-                    </td>
-                    <td className="course-detail">
-                      <strong>Year Level:</strong> {course.yearLevel}
-                    </td>
-                    <td className="course-detail">
-                      <strong>Enrollment Key:</strong> {course.enrollmentKey}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div className="course-row">
+                <p>
+                  <strong>Course ID:</strong> {course.id}
+                </p>
+                <p>
+                  <strong>Course Code:</strong> {course.courseCode}
+                </p>
+                <p>
+                  <strong>Course Name:</strong> {course.courseName}
+                </p>
+                <p>
+                  <strong>Lecturer ID:</strong> {course.lecturerId}
+                </p>
+                <p>
+                  <strong>Year Level:</strong> {course.yearLevel}
+                </p>
+                <p>
+                  <strong>Enrollment Key:</strong> {course.enrollmentKey}
+                </p>
+              </div>
             </div>
           ))
         ) : (
