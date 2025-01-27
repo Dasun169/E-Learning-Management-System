@@ -9,8 +9,8 @@ const Lecturer = () => {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [email, setEmail] = useState(""); // Added state for email
-  const [profileImage, setProfileImage] = useState(null); // Keep the state, but will pass null
+  const [email, setEmail] = useState("");
+  const [profileImage, setProfileImage] = useState(null);
 
   const checkUserNameExists = async (userName) => {
     try {
@@ -23,8 +23,49 @@ const Lecturer = () => {
     }
   };
 
+  // Email validation function
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Contact number validation function
+  const isValidContactNumber = (number) => {
+    const contactRegex = /^\d{10}$/; // Matches exactly 10 digits
+    return contactRegex.test(number);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if email is valid
+    if (!isValidEmail(email)) {
+      toast.error("Invalid email format.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+
+    // Check if contact number is valid
+    if (!isValidContactNumber(contactNumber)) {
+      toast.error("Contact number must be exactly 10 digits.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+
     const isUserNameExist = await checkUserNameExists(userName);
     if (isUserNameExist) {
       toast.error("The User Name already exists", {
@@ -46,7 +87,11 @@ const Lecturer = () => {
       hashPassword: password,
       fullName,
       contactNumber,
-      role: "lecturer", // Manually set the role to "lecturer"
+      email,
+      profileImage: null,
+      createdDate: currentDate.toISOString(),
+      updatedDate: currentDate.toISOString(),
+      role: "lecturer",
     };
 
     try {
@@ -74,6 +119,8 @@ const Lecturer = () => {
         setPassword("");
         setFullName("");
         setContactNumber("");
+        setEmail("");
+        setProfileImage(null);
       } else {
         toast.error("Failed to add lecturer.", {
           className: "custom-toast",
