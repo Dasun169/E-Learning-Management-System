@@ -36,6 +36,11 @@ const StatCs = () => {
             <option>Level III</option>
             <option>Level IV</option>
           </select>
+          <select>
+            <option>STAT</option>
+            <option>COSC</option>
+            <option>COST</option>
+          </select>
         </div>
         <div className="courses">
           {courses.map((course, index) => (
