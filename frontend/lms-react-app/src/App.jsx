@@ -7,6 +7,7 @@ import StudentHome from "./components/student_home/StudentHome";
 import FullEnrollment from "./components/course_enrollment/FullEnrollment";
 import CoursePage from "./components/course_page/course_page";
 import HomePageInside from "./components/home_page_inside/home_page_inside";
+import HomePageInsideNew from "./components/home_page_inside_1/home_page_inside_1";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Route path="/StudentHome" element={<StudentHome />} />
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
-        <Route path="/" element={<HomePageInside />} />
+        <Route path="/HomePageInside" element={<HomePageInside />} />
+        <Route path="/" element={<HomePageInsideNew />} />
       </Routes>
     </Router>
   );
