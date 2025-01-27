@@ -62,4 +62,9 @@ public class CourseServiceImpl implements CourseService {
     public Course getCourseByCourseCode(String courseCode) {
         return courseRepository.findByCourseCode(courseCode);
     }
+
+    @Override
+    public List<Course> getCoursesByNamePrefixAndYearLevel(String courseNamePrefix, String yearLevel) {
+        return courseRepository.findByCourseNameStartingWithAndYearLevel(courseNamePrefix, yearLevel);
+    }
 }

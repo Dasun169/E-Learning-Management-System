@@ -72,4 +72,11 @@ public class CourseController {
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
+
+    @GetMapping("/search/{courseNamePrefix}/{yearLevel}")
+    public ResponseEntity<List<Course>> getCoursesByNamePrefixAndYearLevel(
+            @PathVariable String courseNamePrefix, @PathVariable String yearLevel) {
+        List<Course> courses = courseService.getCoursesByNamePrefixAndYearLevel(courseNamePrefix, yearLevel);
+        return courses.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(courses);
+    }
 }

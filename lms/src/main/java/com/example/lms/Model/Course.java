@@ -11,7 +11,6 @@ public class Course {
     private String courseName;
     private String courseCode;
     private long lecturerId;
-    private String description;
     private String yearLevel;
     private String enrollmentKey;
 
@@ -45,14 +44,6 @@ public class Course {
 
     public void setLecturerId(long lecturerId) {
         this.lecturerId = lecturerId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getYearLevel() {
