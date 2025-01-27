@@ -1,0 +1,21 @@
+.home-page-inside-container {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .home-page-inside-container > header,
+  .home-page-inside-container > footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px 20px;
+  }
+  
+  .home-page-inside-container > main {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
