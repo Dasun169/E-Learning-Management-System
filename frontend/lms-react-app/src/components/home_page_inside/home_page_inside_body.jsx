@@ -11,12 +11,11 @@ function HomePageInsideBody() {
   return (
     <section className="inside">
         <h1>Course and Lecture Details</h1>
-            <div className="courses">
                 <button onClick={toggleFaculties} className="couresesButton">
                 Courses {isFacultiesOpen ? "▼" : "▶"}
                 </button>
                 {isFacultiesOpen && (
-                <ul className="courseslist">
+                <ul className="list">
                     <li>
                     <a href="/industrial-management">Department of Industrial Management</a>
                     </li>
@@ -52,13 +51,13 @@ function HomePageInsideBody() {
                     </li>
                 </ul>
                 )}
-            </div>
+
             <div className="lecturers">
                 <button onClick={toggleLibrary} className="lecturersButton">
                 Lecturers {isLibraryOpen ? "▼" : "▶"}
                 </button>
                 {isLibraryOpen && (
-                <ul className="lecturerslist">
+                <ul className="list">
                     <li>
                     <a href="/lecturers/dasun-navidu">Dasun Navidu</a>
                     </li>
