@@ -18,7 +18,7 @@ function App() {
         <Route path="/StudentHome" element={<StudentHome />} />
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
-        <Route path="/" element={<HomePageInside />} />
+        <Route path="/HomePageInside" element={<HomePageInside />} />
       </Routes>
     </Router>
   );
