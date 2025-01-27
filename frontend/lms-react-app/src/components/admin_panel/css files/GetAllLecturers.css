@@ -1,4 +1,4 @@
-/* Ensure the container is centered and has 3 columns */
+/* Ensure the container is centered and styled */
 .lecturers-container {
   width: 70%;
   margin: 0 auto;
@@ -7,98 +7,68 @@
   overflow-y: scroll; /* Make it scrollable if the content overflows */
   background-color: rgb(177, 171, 255);
   box-shadow: 3px 4px 10px rgba(23, 19, 143, 0.7);
-  border-radius: 10px; /* Improved border-radius */
+  border-radius: 10px;
   padding: 20px;
 }
 
-/* Modern scrollbar styling for webkit browsers */
+/* Modern scrollbar styling */
 .lecturers-container::-webkit-scrollbar {
-  width: 12px; /* Set the width of the scrollbar */
+  width: 12px;
 }
 
 .lecturers-container::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Light color for the scrollbar track */
-  border-radius: 10px; /* Round the corners of the scrollbar track */
+  background-color: #f1f1f1;
+  border-radius: 10px;
 }
 
 .lecturers-container::-webkit-scrollbar-thumb {
-  background-color: #888; /* Darker color for the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners for the thumb */
-  border: 3px solid #f1f1f1; /* Space between the thumb and the track */
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
 }
 
 .lecturers-container::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Darker thumb when hovered */
+  background-color: #555;
 }
 
-/* List of lecturers */
+.lecturers-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: -5px;
+}
+
+/* Lecturer list with 3-column layout */
 .lecturers-list {
-  width: 90%;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 10px;
 }
 
 /* Lecturer card style */
 .lecturer-card {
-  padding: 10px;
-  padding-top: 5px;
+  padding-left: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7); /* Box shadow for the container */
-  margin-bottom: 10px;
-  background-color: #fff; /* Background color for each lecturer card */
-}
-
-/* Styling for the table */
-.lecturer-table1 {
-  width: 100%;
-  border-collapse: collapse; /* To avoid space between table cells */
-  margin-top: 10px;
-}
-
-/* Table cell styling */
-.lecturer-table1 td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
+  box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7);
+  background-color: #fff;
   font-size: 14px;
+  line-height: 5px;
 }
 
-/* Highlighting lecturer details cells */
-.lecturer-table1 td.lecturer-detail {
-  background-color: #fff8e1; /* Light yellow background to highlight lecturer details */
-  font-weight: bold;
-  border-left: 2px solid #d1c4e9; /* Adding a left border for separation */
-}
-
-/* Bold text for column labels */
-.lecturer-table1 td strong {
-  font-weight: bold;
-}
-
-/* Alternate row colors with two color conditions */
-.lecturer-table1 tr:nth-child(odd) {
-  background-color: #f2f2f2; /* Light grey for odd rows */
-}
-
-.lecturer-table1 tr:nth-child(even) {
-  background-color: #e6f7ff; /* Light blue for even rows */
-}
-
-/* Optional: Add error message styling */
+/* Error message styling */
 .error-message {
   color: red;
   font-weight: bold;
   margin-bottom: 15px;
-  text-align: center;
 }
 
-/* Make sure the table looks good on smaller screens */
+/* Responsive design for smaller screens */
 @media (max-width: 768px) {
-  .lecturer-card {
-    padding: 10px;
+  .lecturers-list {
+    grid-template-columns: 1fr; /* Single column layout */
   }
 
-  .lecturer-table td {
-    font-size: 12px; /* Smaller text for smaller screens */
+  .lecturer-card {
+    font-size: 12px;
   }
 }

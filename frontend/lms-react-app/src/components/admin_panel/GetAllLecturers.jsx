@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./css files/GetAllLecturers.css"; // Assuming you have a separate CSS file for styling
+import "./css files/GetAllLecturers.css"; // Ensure this CSS file is correctly linked
 
 const GetAllLecturers = () => {
   const [lecturers, setLecturers] = useState([]);
   const [error, setError] = useState(null);
 
-  // Fetch all lecturers from the API
   useEffect(() => {
     const fetchLecturers = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/users"); // Adjust the API endpoint as needed
+        const response = await axios.get("http://localhost:8080/api/users"); // API endpoint
         setLecturers(response.data);
       } catch (err) {
         setError("Error fetching lecturers.");
@@ -24,38 +23,29 @@ const GetAllLecturers = () => {
   return (
     <div className="lecturers-container">
       {error && <div className="error-message">{error}</div>}
+      <h2>Lecturer Details</h2>
       <div className="lecturers-list">
         {lecturers.length > 0 ? (
           lecturers.map((lecturer) => (
             <div className="lecturer-card" key={lecturer.id}>
-              <table className="lecturer-table1">
-                <tbody>
-                  {/* First row with lecturer details */}
-                  <tr className="lecturer-row">
-                    <td className="lecturer-detail">
-                      <strong>Lecturer ID:</strong> {lecturer.id}
-                    </td>
-                    <td className="lecturer-detail">
-                      <strong>Username:</strong> {lecturer.userName}
-                    </td>
-                    <td className="lecturer-detail">
-                      <strong>Full Name:</strong> {lecturer.fullName}
-                    </td>
-                  </tr>
-                  {/* Second row with more lecturer details */}
-                  <tr className="lecturer-row">
-                    <td className="lecturer-detail">
-                      <strong>Email:</strong> {lecturer.email}
-                    </td>
-                    <td className="lecturer-detail">
-                      <strong>Role:</strong> {lecturer.role}
-                    </td>
-                    <td className="lecturer-detail">
-                      <strong>Status:</strong> {lecturer.status}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <p>
+                <strong>Lecturer ID:</strong> {lecturer.id}
+              </p>
+              <p>
+                <strong>Username:</strong> {lecturer.userName}
+              </p>
+              <p>
+                <strong>Full Name:</strong> {lecturer.fullName}
+              </p>
+              <p>
+                <strong>Email:</strong> {lecturer.email}
+              </p>
+              <p>
+                <strong>Role:</strong> {lecturer.role}
+              </p>
+              <p>
+                <strong>Status:</strong> {lecturer.status}
+              </p>
             </div>
           ))
         ) : (
