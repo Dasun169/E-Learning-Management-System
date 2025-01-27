@@ -39,7 +39,6 @@ const Maths = () => {
           <select>
             <option>PMAT</option>
             <option>AMAT</option>
-
           </select>
         </div>
         <div className="courses">
