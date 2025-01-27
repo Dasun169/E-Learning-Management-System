@@ -27,11 +27,9 @@ const courses = [
 const HomePageInsideBodyNew = () => {
   return (
     <div className="dashboard"> 
-
       <section className="course-overview">
-        <h2>Course Overview</h2>
         <div className="search-sort">
-          <input type="text" placeholder="Search" />
+          <input type="text" placeholder="Search Courses" />
           <select>
             <option>Level I</option>
             <option>Level II</option>
