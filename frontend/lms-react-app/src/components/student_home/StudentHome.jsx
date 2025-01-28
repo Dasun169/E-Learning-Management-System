@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import axios from "axios"; // Make sure axios is installed
+import axios from "axios";
 import "./css files/studentHome.css";
 import Body from "./Body";
 import Header from "../header/Header";
@@ -8,12 +8,12 @@ import Footer from "../footer/Footer";
 
 const StudentHome = () => {
   const location = useLocation();
-  const { username } = location.state || {}; // Retrieve the username from the state passed via navigate
+  const { username, role } = location.state || {}; // Retrieve username and role from state passed via navigate
 
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // If we have the username, fetch user data from the backend
+    // Fetch user data based on the username
     if (username) {
       axios
         .get(`http://localhost:8080/api/users/${username}`)
@@ -29,8 +29,10 @@ const StudentHome = () => {
   return (
     <div>
       <Header />
-      {/* Pass both username and fullName as props to the Body component */}
-      {userData && <Body username={username} fullName={userData.fullName} />}
+      {/* Pass username and role as props to the Body component */}
+      {userData && (
+        <Body username={username} role={role} fullName={userData.fullName} />
+      )}
       <Footer />
     </div>
   );
