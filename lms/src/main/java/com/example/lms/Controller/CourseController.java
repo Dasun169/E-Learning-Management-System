@@ -79,4 +79,25 @@ public class CourseController {
         List<Course> courses = courseService.getCoursesByNamePrefixAndYearLevel(courseNamePrefix, yearLevel);
         return courses.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(courses);
     }
+
+    @PutMapping("/update-description/{courseCode}")
+    public ResponseEntity<Course> updateDescriptionByCourseCode(
+            @PathVariable String courseCode, @RequestBody String description) {
+        try {
+            Course updatedCourse = courseService.updateDescriptionByCourseCode(courseCode, description);
+            return ResponseEntity.ok(updatedCourse);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("/description/{courseCode}")
+    public ResponseEntity<String> getDescriptionByCourseCode(@PathVariable String courseCode) {
+        try {
+            String description = courseService.getDescriptionByCourseCode(courseCode);
+            return ResponseEntity.ok(description);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
 }
