@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/Home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/StudentHome" element={<StudentHome />} />
@@ -30,7 +30,7 @@ function App() {
         <Route path="/ElecPhyNew" element={<ElecPhyNew />} />
         <Route path="/MathsNew" element={<MathsNew />} />
 
-        <Route path="/" element={<ProfileNew />} />
+        <Route path="/ProfileNew" element={<ProfileNew />} />
 
       </Routes>
     </Router>
