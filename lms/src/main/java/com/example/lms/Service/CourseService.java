@@ -13,4 +13,6 @@ public interface CourseService {
     void deleteCourseByCourseCode(String courseCode);
     Course getCourseByCourseCode(String courseCode);
     List<Course> getCoursesByNamePrefixAndYearLevel(String courseNamePrefix, String yearLevel);
+    Course updateDescriptionByCourseCode(String courseCode, String description);
+    String getDescriptionByCourseCode(String courseCode);
 }
