@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./css files/course_body.css";
 
-function CourseBody({ userName, courseCode, courseName }) {
+function CourseBody({ userName, courseCode, courseName, role }) {
   const [introduction, setIntroduction] = useState(
     "Write your course introduction here..."
-  ); // State for course introduction
-  const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
-  const [sections, setSections] = useState([]); // State for additional sections
+  );
+  const [isEditing, setIsEditing] = useState(false);
+  const [sections, setSections] = useState([]);
+  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
-    // Optionally fetch course details if needed using courseCode or userName
-    console.log("Course Info:", { courseCode, courseName, userName });
-  }, [courseCode, courseName, userName]);
+    console.log("Course Info:", { courseCode, courseName, userName, role });
+    setUserRole(role); // Ensuring role is set properly
+  }, [courseCode, courseName, userName, role]);
+
+  useEffect(() => {
+    console.log("Updated Role:", userRole);
+  }, [userRole]);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -22,92 +27,120 @@ function CourseBody({ userName, courseCode, courseName }) {
   };
 
   const handleAddSection = () => {
-    const newSection = {
-      id: sections.length + 1,
-      content: `New Section ${sections.length + 1}`,
-      isEditing: false,
-    };
-    setSections([...sections, newSection]);
+    setSections([
+      ...sections,
+      { title: "New Section", description: "", isEditing: true },
+    ]);
   };
 
-  const handleDeleteSection = (id) => {
-    setSections(sections.filter((section) => section.id !== id));
+  const handleSectionChange = (index, field, value) => {
+    const updatedSections = [...sections];
+    updatedSections[index][field] = value;
+    setSections(updatedSections);
   };
 
-  const handleEditSectionToggle = (id) => {
-    setSections(
-      sections.map((section) =>
-        section.id === id
-          ? { ...section, isEditing: !section.isEditing }
-          : section
-      )
-    );
+  const toggleSectionEdit = (index) => {
+    const updatedSections = [...sections];
+    updatedSections[index].isEditing = !updatedSections[index].isEditing;
+    setSections(updatedSections);
   };
 
-  const handleSectionContentChange = (id, newContent) => {
-    setSections(
-      sections.map((section) =>
-        section.id === id ? { ...section, content: newContent } : section
-      )
-    );
+  const handleDeleteSection = (index) => {
+    const updatedSections = sections.filter((_, i) => i !== index);
+    setSections(updatedSections);
   };
 
   return (
-    <section className="course">
-      <h1>PMAT 23456 - Mathematical Method</h1>
-      <div className="course-body">
-        <div className="course-body1">
-          <h2>Course Introduction</h2>
-          <div className="course-intro">
-            {isEditing ? (
-              <textarea
-                value={introduction}
-                onChange={handleIntroductionChange}
-              ></textarea>
-            ) : (
-              <p>{introduction}</p>
-            )}
-            <div className="btn">
-              <button onClick={handleEditToggle}>
-                {isEditing ? "Ok" : "Edit"}
-              </button>
-            </div>
-          </div>
+    <div>
+      {/* Edit Toggle Button (Visible only for lecturers) */}
+      {userRole === "lecturer" && (
+        <div className="edit-toggle-container">
+          <button className="edit-toggle-btn" onClick={handleEditToggle}>
+            {isEditing ? "Turn Off Edit" : "Turn On Edit"}
+          </button>
         </div>
+      )}
 
-        <div className="add-next-body">
-          <div className="sections">
-            {sections.map((section) => (
-              <div key={section.id} className="section">
-                {section.isEditing ? (
-                  <textarea
-                    value={section.content}
+      {/* Course Content */}
+      <div className="course-body">
+        <header className="course-header">
+          <h1>
+            {courseCode}: {courseName}
+          </h1>
+        </header>
+
+        {/* Introduction Section */}
+        <section className="course-introduction">
+          <h2>Introduction</h2>
+          {isEditing ? (
+            <textarea
+              value={introduction}
+              onChange={handleIntroductionChange}
+              rows="4"
+            />
+          ) : (
+            <p>{introduction}</p>
+          )}
+        </section>
+
+        {/* Sections */}
+        <section className="additional-sections">
+          <h2>Sections</h2>
+          {sections.map((section, index) => (
+            <div key={index} className="section">
+              {section.isEditing ? (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Section Title"
+                    value={section.title}
                     onChange={(e) =>
-                      handleSectionContentChange(section.id, e.target.value)
+                      handleSectionChange(index, "title", e.target.value)
                     }
-                  ></textarea>
-                ) : (
-                  <h3>{section.content}</h3>
+                  />
+                  <textarea
+                    placeholder="Section Description"
+                    value={section.description}
+                    onChange={(e) =>
+                      handleSectionChange(index, "description", e.target.value)
+                    }
+                    rows="2"
+                  />
+                </>
+              ) : (
+                <>
+                  <h3>{section.title}</h3>
+                  <p>{section.description}</p>
+                </>
+              )}
+              <div className="section-buttons">
+                {isEditing && (
+                  <>
+                    <button
+                      className="edit-btn"
+                      onClick={() => toggleSectionEdit(index)}
+                    >
+                      {section.isEditing ? "Save" : "Edit"}
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteSection(index)}
+                    >
+                      Delete
+                    </button>
+                  </>
                 )}
-                <div className="section-controls">
-                  <button onClick={() => handleEditSectionToggle(section.id)}>
-                    {section.isEditing ? "Save" : "Edit"}
-                  </button>
-                  <button onClick={() => handleDeleteSection(section.id)}>
-                    Delete
-                  </button>
-                </div>
               </div>
-            ))}
-          </div>
-          <div className="add">
-            <button onClick={handleAddSection} className="add-btn">
-              ADD
+            </div>
+          ))}
+          {isEditing && (
+            <button className="course-body-btn" onClick={handleAddSection}>
+              Add Section
             </button>
-          </div>
-        </div>
+          )}
+        </section>
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -14,13 +14,15 @@ function Home() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    //test commit
     try {
+      console.log("Logging in with:", { username, role });
+
       const response = await axios.get(
         `http://localhost:8080/api/users/role/${role}/userName/${username}`
       );
 
       const user = response.data;
+      console.log("User fetched:", user);
 
       if (user.hashPassword === password) {
         toast.success("Login successful!", {
@@ -34,15 +36,17 @@ function Home() {
           progress: undefined,
         });
 
-        if (role === "admin") {
-          setTimeout(() => navigate("/Admin"), 2000);
-        } else if (role === "student" || role === "lecturer") {
-          setTimeout(() => {
-            navigate("/StudentHome", { state: { username: username } });
-          }, 2000);
-        }
+        setTimeout(() => {
+          if (role === "admin") {
+            navigate("/Admin");
+          } else {
+            navigate("/StudentHome", {
+              state: { username: username, role: role },
+            });
+          }
+        }, 2000);
       } else {
-        toast.error("Invalid password", {
+        toast.error("Invalid password. Please try again.", {
           className: "custom-toast",
           position: "top-center",
           autoClose: 3000,
@@ -53,8 +57,9 @@ function Home() {
           progress: undefined,
         });
       }
-    } catch {
-      toast.error("User not found or invalid username/role", {
+    } catch (error) {
+      console.error("Login Error:", error);
+      toast.error("User not found or invalid username/role.", {
         className: "custom-toast",
         position: "top-center",
         autoClose: 3000,
