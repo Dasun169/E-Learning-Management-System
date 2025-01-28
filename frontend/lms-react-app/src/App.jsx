@@ -24,7 +24,7 @@ function App() {
         <Route path="/StudentHome" element={<StudentHome />} />
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
-        <Route path="/HomePageInside" element={<HomePageInside />} />x
+        <Route path="/HomePageInside" element={<HomePageInside />} />
 //confict handel
         <Route path="/StatCsNew" element={<StatCsNew />} />
         <Route path="/ElecPhyNew" element={<ElecPhyNew />} />
