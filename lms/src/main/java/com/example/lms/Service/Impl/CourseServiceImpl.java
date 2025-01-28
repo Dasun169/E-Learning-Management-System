@@ -67,4 +67,24 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> getCoursesByNamePrefixAndYearLevel(String courseNamePrefix, String yearLevel) {
         return courseRepository.findByCourseNameStartingWithAndYearLevel(courseNamePrefix, yearLevel);
     }
+
+    @Override
+    public Course updateDescriptionByCourseCode(String courseCode, String description) {
+        Course course = courseRepository.findByCourseCode(courseCode);
+        if (course != null) {
+            course.setDescription(description);
+            return courseRepository.save(course);
+        }
+        throw new RuntimeException("Course with code " + courseCode + " not found.");
+    }
+
+    @Override
+    public String getDescriptionByCourseCode(String courseCode) {
+        Course course = courseRepository.findDescriptionByCourseCode(courseCode);
+        if (course != null) {
+            return course.getDescription();
+        }
+        throw new RuntimeException("Course with code " + courseCode + " not found.");
+    }
+
 }
