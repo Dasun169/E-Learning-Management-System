@@ -20,7 +20,7 @@ function App() {
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
         <Route path="/HomePageInside" element={<HomePageInside />} />
-        <Route path="/" element={<HomePageInsideNew />} />
+        <Route path="/HomePageInsideNew" element={<HomePageInsideNew />} />
       </Routes>
     </Router>
   );
