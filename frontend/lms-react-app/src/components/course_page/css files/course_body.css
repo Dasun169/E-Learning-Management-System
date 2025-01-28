@@ -7,8 +7,8 @@
   background-color: #f9f9f9;
   margin-left: 160px;
   margin-right: 160px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .course-header {
@@ -43,8 +43,8 @@
 }
 
 textarea,
-input {
-  width: 100%;
+.section input {
+  width: 98%;
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -95,7 +95,7 @@ input {
 }
 
 .edit-btn:hover {
-  background-color: #e0a800;
+  background-color: #0056b3;
 }
 
 .delete-btn {
@@ -104,7 +104,7 @@ input {
 }
 
 .delete-btn:hover {
-  background-color: #c82333;
+  background-color: #0056b3;
 }
 
 .course-body-btn {
