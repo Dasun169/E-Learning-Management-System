@@ -3,7 +3,7 @@ import axios from "axios";
 import "./css files/body.css";
 import { useNavigate } from "react-router-dom";
 
-const Body = ({ username, fullName }) => {
+const Body = ({ username, role, fullName }) => {
   const [courses, setCourses] = useState([]); // To store all courses
   const [filteredCourses, setFilteredCourses] = useState([]); // To store filtered courses based on user input
   const [loading, setLoading] = useState(true);
@@ -74,6 +74,7 @@ const Body = ({ username, fullName }) => {
   const handleCourseClick = (courseCode, courseName) => {
     console.log("Navigating with data:", {
       userName: username, // Should log the username
+      role: role,
       courseCode: courseCode, // Should log the selected course code
       courseName: courseName, // Should log the selected course name
     });
@@ -81,6 +82,7 @@ const Body = ({ username, fullName }) => {
     navigate("/CoursePage", {
       state: {
         userName: username, // Pass username
+        role: role,
         courseCode: courseCode, // Pass courseCode
         courseName: courseName, // Pass courseName
       },
