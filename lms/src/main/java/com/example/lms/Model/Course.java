@@ -9,6 +9,7 @@ public class Course {
     @Id
     private long id;
     private String courseName;
+    private String description;
     private String courseCode;
     private long lecturerId;
     private String yearLevel;
@@ -28,6 +29,14 @@ public class Course {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCourseCode() {
