@@ -1,49 +1,47 @@
-.inside{
-    background-color: #f9f9f9 ;
-    margin:20px 0px 70px 100px;
-  }
-.inside h1{
-    font-size: 35px;
-    font-family:'Arial, sans-serif';
-    font-weight: 700px;
+.inside {
+  background-color: #f9f9f9;
+  margin: 20px 0px 70px 100px;
+}
+.inside h1 {
+  font-size: 35px;
+  font-family: "Arial, sans-serif";
+  font-weight: 700px;
 }
 
-.couresesButton{
-    background-color: #f9f9f9;
-    border-width: 0;
-    font-size: 15px;
-    margin-left: 50px;
+.couresesButton {
+  background-color: #f9f9f9;
+  border-width: 0;
+  font-size: 15px;
+  margin-left: 50px;
 }
- .lecturersButton {
-    background-color: #f9f9f9;
-    border-width: 0;
-    font-size: 15px;
-    margin-left: 50px;
-    margin-top: 15px;
+.lecturersButton {
+  background-color: #f9f9f9;
+  border-width: 0;
+  font-size: 15px;
+  margin-left: 50px;
+  margin-top: 15px;
 }
 .list {
-    margin-left: 70px;
+  margin-left: 70px;
 }
 
-.courseslist{
-    list-style-type: square;
-    margin-left: 20px;
+.courseslist {
+  list-style-type: square;
+  margin-left: 20px;
 }
- .lecturerslist {
-    list-style-type: square;
-    margin-left: 20px;
+.lecturerslist {
+  list-style-type: square;
+  margin-left: 20px;
 }
 
 .list a {
-    text-decoration: none;
-    color: #000000;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
+  text-decoration: none;
+  color: #000000;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
 }
 
-.list a:hover{
-    text-decoration: underline;
-    color: #6c63ff;
+.list a:hover {
+  text-decoration: underline;
+  color: #6c63ff;
 }
-
-
