@@ -1,19 +1,43 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./css files/course_body.css";
 
 function CourseBody({ userName, courseCode, courseName, role }) {
   const [introduction, setIntroduction] = useState(
-    "Write your course introduction here..."
+    "Loading course description..."
   );
   const [isEditing, setIsEditing] = useState(false);
   const [sections, setSections] = useState([]);
   const [userRole, setUserRole] = useState("");
 
+  // Fetch course description on initial render
   useEffect(() => {
     console.log("Course Info:", { courseCode, courseName, userName, role });
     setUserRole(role); // Ensuring role is set properly
+
+    if (courseCode) {
+      // Fetch the course description using axios GET request
+      console.log("Fetching course description for courseCode:", courseCode); // Debugging log
+      axios
+        .get(`http://localhost:8080/api/courses/description/${courseCode}`)
+        .then((response) => {
+          console.log("API Response:", response); // Log the entire response
+          // Assuming the response returns the description in the 'data' field
+          if (response.data) {
+            setIntroduction(response.data); // Directly set the description
+          } else {
+            console.log("No description found in response.");
+            setIntroduction("No course description available.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching course description:", error);
+          setIntroduction("Failed to load course description.");
+        });
+    }
   }, [courseCode, courseName, userName, role]);
 
+  // Log user role for debugging
   useEffect(() => {
     console.log("Updated Role:", userRole);
   }, [userRole]);
@@ -50,6 +74,11 @@ function CourseBody({ userName, courseCode, courseName, role }) {
     setSections(updatedSections);
   };
 
+  const handleUpdateIntroduction = () => {
+    // Update the introduction (optional API call can be placed here)
+    console.log("Updated Introduction:", introduction);
+  };
+
   return (
     <div>
       {/* Edit Toggle Button (Visible only for lecturers) */}
@@ -71,13 +100,23 @@ function CourseBody({ userName, courseCode, courseName, role }) {
 
         {/* Introduction Section */}
         <section className="course-introduction">
-          <h2>Introduction</h2>
+          <h2>Course Description</h2>
           {isEditing ? (
-            <textarea
-              value={introduction}
-              onChange={handleIntroductionChange}
-              rows="4"
-            />
+            <div style={{ position: "relative" }}>
+              <textarea
+                value={introduction}
+                onChange={handleIntroductionChange}
+                rows="4"
+              />
+              {/* Button to update the introduction, right-aligned */}
+              <button
+                className="update-btn"
+                onClick={handleUpdateIntroduction}
+                style={{ position: "absolute", right: "10px", top: "10px" }}
+              >
+                Update
+              </button>
+            </div>
           ) : (
             <p>{introduction}</p>
           )}
