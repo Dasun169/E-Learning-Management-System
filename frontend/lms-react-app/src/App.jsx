@@ -30,7 +30,7 @@ function App() {
         <Route path="/ElecPhyNew" element={<ElecPhyNew />} />
         <Route path="/MathsNew" element={<MathsNew />} />
 
-        <Route path="/" element={<ProfileNew />} />
+        <Route path="/ProfileNew" element={<ProfileNew />} />
 
       </Routes>
     </Router>
