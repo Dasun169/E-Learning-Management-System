@@ -7,6 +7,6 @@ import java.util.List;
 public interface ModuleService {
     Module createModule(Module module);
     List<Module> getAllModules();
-    Module updateModule(long id, Module module);
-    void deleteModule(long id);
+
+    List<Module> getModulesByCourseCodeSortedByDate(String courseCode); 
 }
