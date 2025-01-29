@@ -3,28 +3,17 @@ package com.example.lms.Model;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "modules")
 public class Module {
 
-    @Id
-    private long id;
     private String courseCode;
     private String header;
     private String description;
     
     @CreatedDate
     private LocalDateTime createdDate;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getCourseCode() {
         return courseCode;
