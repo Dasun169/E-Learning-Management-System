@@ -1,18 +1,36 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./css files/course_body.css";
 
 function CourseBody({ userName, courseCode, courseName, role }) {
   const [introduction, setIntroduction] = useState(
-    "Write your course introduction here..."
+    "Loading course description..."
   );
   const [isEditing, setIsEditing] = useState(false);
-  const [sections, setSections] = useState([]);
   const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
     console.log("Course Info:", { courseCode, courseName, userName, role });
-    setUserRole(role); // Ensuring role is set properly
-  }, [courseCode, courseName, userName, role]);
+    setUserRole(role);
+
+    if (courseCode) {
+      axios
+        .get(`http://localhost:8080/api/courses/description/${courseCode}`)
+        .then((response) => {
+          if (response.data && response.data.description) {
+            setIntroduction(response.data.description);
+          } else {
+            setIntroduction("No course description available.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching course description:", error);
+          setIntroduction("Failed to load course description.");
+        });
+    }
+  }, [courseCode]);
 
   useEffect(() => {
     console.log("Updated Role:", userRole);
@@ -26,33 +44,50 @@ function CourseBody({ userName, courseCode, courseName, role }) {
     setIntroduction(e.target.value);
   };
 
-  const handleAddSection = () => {
-    setSections([
-      ...sections,
-      { title: "New Section", description: "", isEditing: true },
-    ]);
-  };
-
-  const handleSectionChange = (index, field, value) => {
-    const updatedSections = [...sections];
-    updatedSections[index][field] = value;
-    setSections(updatedSections);
-  };
-
-  const toggleSectionEdit = (index) => {
-    const updatedSections = [...sections];
-    updatedSections[index].isEditing = !updatedSections[index].isEditing;
-    setSections(updatedSections);
-  };
-
-  const handleDeleteSection = (index) => {
-    const updatedSections = sections.filter((_, i) => i !== index);
-    setSections(updatedSections);
+  const handleUpdateIntroduction = () => {
+    if (!courseCode) {
+      console.error("Course code is missing!");
+      return;
+    }
+    axios
+      .put(
+        `http://localhost:8080/api/courses/update-description/${courseCode}`,
+        {
+          description: introduction,
+        }
+      )
+      .then((response) => {
+        console.log("Updated successfully:", response);
+        toast.success("Updated successfully!", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        console.error("Error updating course description:", error);
+        toast.error("Failed to update.", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   return (
     <div>
-      {/* Edit Toggle Button (Visible only for lecturers) */}
+      <ToastContainer />
       {userRole === "lecturer" && (
         <div className="edit-toggle-container">
           <button className="edit-toggle-btn" onClick={handleEditToggle}>
@@ -60,83 +95,31 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           </button>
         </div>
       )}
-
-      {/* Course Content */}
       <div className="course-body">
         <header className="course-header">
           <h1>
             {courseCode}: {courseName}
           </h1>
         </header>
-
-        {/* Introduction Section */}
         <section className="course-introduction">
-          <h2>Introduction</h2>
+          <h1>Course Description</h1>
           {isEditing ? (
-            <textarea
-              value={introduction}
-              onChange={handleIntroductionChange}
-              rows="4"
-            />
+            <div style={{ position: "relative" }}>
+              <textarea
+                value={introduction}
+                onChange={handleIntroductionChange}
+                rows="4"
+              />
+              <button
+                className="update-btn"
+                onClick={handleUpdateIntroduction}
+                style={{ position: "absolute", right: "10px", top: "10px" }}
+              >
+                Update
+              </button>
+            </div>
           ) : (
             <p>{introduction}</p>
-          )}
-        </section>
-
-        {/* Sections */}
-        <section className="additional-sections">
-          <h2>Sections</h2>
-          {sections.map((section, index) => (
-            <div key={index} className="section">
-              {section.isEditing ? (
-                <>
-                  <input
-                    type="text"
-                    placeholder="Section Title"
-                    value={section.title}
-                    onChange={(e) =>
-                      handleSectionChange(index, "title", e.target.value)
-                    }
-                  />
-                  <textarea
-                    placeholder="Section Description"
-                    value={section.description}
-                    onChange={(e) =>
-                      handleSectionChange(index, "description", e.target.value)
-                    }
-                    rows="2"
-                  />
-                </>
-              ) : (
-                <>
-                  <h3>{section.title}</h3>
-                  <p>{section.description}</p>
-                </>
-              )}
-              <div className="section-buttons">
-                {isEditing && (
-                  <>
-                    <button
-                      className="edit-btn"
-                      onClick={() => toggleSectionEdit(index)}
-                    >
-                      {section.isEditing ? "Save" : "Edit"}
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDeleteSection(index)}
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-          ))}
-          {isEditing && (
-            <button className="course-body-btn" onClick={handleAddSection}>
-              Add Section
-            </button>
           )}
         </section>
       </div>
