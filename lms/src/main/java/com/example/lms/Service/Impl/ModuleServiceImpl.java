@@ -25,16 +25,7 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
-    public Module updateModule(long id, Module module) {
-        if(moduleRepository.existsById(id)) {
-            module.setId(id);
-            return moduleRepository.save(module);
-        }
-        return null;
-    }
-
-    @Override
-    public void deleteModule(long id) {
-        moduleRepository.deleteById(id);
+    public List<Module> getModulesByCourseCodeSortedByDate(String courseCode) {
+        return moduleRepository.findByCourseCodeOrderByCreatedDateAsc(courseCode);  // Fetch sorted by createdDate
     }
 }
