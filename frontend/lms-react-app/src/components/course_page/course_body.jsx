@@ -10,84 +10,63 @@ function CourseBody({ userName, courseCode, courseName, role }) {
   );
   const [isEditing, setIsEditing] = useState(false);
   const [sections, setSections] = useState([]);
-  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
-    console.log("Course Info:", { courseCode, courseName, userName, role });
-    setUserRole(role);
-
     if (courseCode) {
       axios
         .get(`http://localhost:8080/api/courses/description/${courseCode}`)
         .then((response) => {
-          if (response.data && response.data.description) {
-            setIntroduction(response.data.description);
-          } else {
-            setIntroduction("No course description available.");
-          }
+          setIntroduction(
+            response.data?.description || "No course description available."
+          );
         })
-        .catch((error) => {
-          console.error("Error fetching course description:", error);
+        .catch(() => {
           setIntroduction("Failed to load course description.");
+        });
+
+      axios
+        .get(`http://localhost:8080/api/modules/course/${courseCode}`)
+        .then((response) => {
+          setSections(response.data);
+        })
+        .catch(() => {
+          toast.error("Failed to load sections.");
         });
     }
   }, [courseCode]);
 
-  useEffect(() => {
-    console.log("Updated Role:", userRole);
-  }, [userRole]);
+  const handleEditToggle = () => setIsEditing(!isEditing);
 
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-  };
-
-  const handleIntroductionChange = (e) => {
-    setIntroduction(e.target.value);
-  };
+  const handleIntroductionChange = (e) => setIntroduction(e.target.value);
 
   const handleUpdateIntroduction = () => {
-    if (!courseCode) {
-      console.error("Course code is missing!");
-      return;
-    }
     axios
       .put(
         `http://localhost:8080/api/courses/update-description/${courseCode}`,
         { description: introduction }
       )
-      .then((response) => {
-        console.log("Updated successfully:", response);
-        toast.success("Updated successfully!", {
-          className: "custom-toast",
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      .then(() => {
+        toast.success("Updated successfully!");
         setIsEditing(false);
       })
-      .catch((error) => {
-        console.error("Error updating course description:", error);
-        toast.error("Failed to update.", {
-          className: "custom-toast",
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      });
+      .catch(() => toast.error("Failed to update."));
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "Unknown Date";
+    const date = new Date(dateString);
+    return `Created Date - ${date.toLocaleString()}`;
   };
 
   const handleAddSection = () => {
     setSections([
       ...sections,
-      { title: "New Section", description: "", isEditing: true },
+      {
+        header: "",
+        description: "",
+        createdDate: new Date().toISOString(),
+        isEditing: true,
+      },
     ]);
   };
 
@@ -97,21 +76,43 @@ function CourseBody({ userName, courseCode, courseName, role }) {
     setSections(updatedSections);
   };
 
-  const toggleSectionEdit = (index) => {
-    const updatedSections = [...sections];
-    updatedSections[index].isEditing = !updatedSections[index].isEditing;
-    setSections(updatedSections);
+  const handleSaveSection = (index) => {
+    const section = sections[index];
+    if (!section.header || !section.description) {
+      toast.error("Please fill in both fields before saving.");
+      return;
+    }
+
+    axios
+      .post("http://localhost:8080/api/modules", {
+        courseCode,
+        header: section.header,
+        description: section.description,
+      })
+      .then((response) => {
+        const updatedSections = [...sections];
+        updatedSections[index] = response.data;
+        updatedSections[index].isEditing = false;
+        setSections(updatedSections);
+        toast.success("Section saved successfully!");
+      })
+      .catch(() => toast.error("Failed to save section."));
   };
 
-  const handleDeleteSection = (index) => {
-    const updatedSections = sections.filter((_, i) => i !== index);
-    setSections(updatedSections);
+  const handleDeleteSection = (index, header) => {
+    axios
+      .delete(`http://localhost:8080/api/modules/delete/${header}`)
+      .then(() => {
+        toast.success("Section deleted.");
+        setSections(sections.filter((_, i) => i !== index));
+      })
+      .catch(() => toast.error("Failed to delete section."));
   };
 
   return (
     <div>
       <ToastContainer />
-      {userRole === "lecturer" && (
+      {role === "lecturer" && (
         <div className="edit-toggle-container">
           <button className="edit-toggle-btn" onClick={handleEditToggle}>
             {isEditing ? "Turn Off Edit" : "Turn On Edit"}
@@ -146,7 +147,6 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           )}
         </section>
 
-        {/* Sections */}
         <section className="additional-sections">
           <h1>Sections</h1>
           {sections.map((section, index) => (
@@ -156,9 +156,9 @@ function CourseBody({ userName, courseCode, courseName, role }) {
                   <input
                     type="text"
                     placeholder="Section Title"
-                    value={section.title}
+                    value={section.header}
                     onChange={(e) =>
-                      handleSectionChange(index, "title", e.target.value)
+                      handleSectionChange(index, "header", e.target.value)
                     }
                   />
                   <textarea
@@ -172,7 +172,8 @@ function CourseBody({ userName, courseCode, courseName, role }) {
                 </>
               ) : (
                 <>
-                  <h3>{section.title}</h3>
+                  <h3>{formatDate(section.createdDate)}</h3>
+                  <h3>{section.header}</h3>
                   <p>{section.description}</p>
                 </>
               )}
@@ -181,13 +182,13 @@ function CourseBody({ userName, courseCode, courseName, role }) {
                   <>
                     <button
                       className="edit-btn"
-                      onClick={() => toggleSectionEdit(index)}
+                      onClick={() => handleSaveSection(index)}
                     >
-                      {section.isEditing ? "Save" : "Edit"}
+                      Save
                     </button>
                     <button
                       className="delete-btn"
-                      onClick={() => handleDeleteSection(index)}
+                      onClick={() => handleDeleteSection(index, section.header)}
                     >
                       Delete
                     </button>
