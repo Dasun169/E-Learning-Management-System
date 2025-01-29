@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,14 @@ public class ModuleController {
     public ResponseEntity<Void> deleteModuleByHeader(@PathVariable String header) {
         moduleService.deleteModuleByHeader(header); // Call the service to delete by header
         return ResponseEntity.noContent().build();  // Return 204 No Content after deletion
+    }
+
+    @PutMapping("/update/{header}")
+    public ResponseEntity<Module> updateDescriptionByHeader(@PathVariable String header, @RequestBody String newDescription) {
+        Module updatedModule = moduleService.updateDescriptionByHeader(header, newDescription);
+        if (updatedModule != null) {
+            return ResponseEntity.ok(updatedModule);  // Return the updated module
+        }
+        return ResponseEntity.notFound().build();  // Return 404 if the module with that header doesn't exist
     }
 }
