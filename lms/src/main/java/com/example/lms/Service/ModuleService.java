@@ -9,4 +9,5 @@ public interface ModuleService {
     List<Module> getAllModules();
 
     List<Module> getModulesByCourseCodeSortedByDate(String courseCode); 
+    void deleteModuleByHeader(String header);   
 }
