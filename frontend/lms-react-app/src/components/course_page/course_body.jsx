@@ -27,26 +27,47 @@ function CourseBody({ userName, courseCode, courseName, role }) {
       axios
         .get(`http://localhost:8080/api/modules/course/${courseCode}`)
         .then((response) => {
-          setSections(response.data);
+          setSections(
+            response.data.map((section) => ({ ...section, isNew: false }))
+          );
         })
         .catch(() => {
-          toast.error("Failed to load sections.");
+          toast.error("Failed to load sections.", {
+            className: "custom-toast",
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         });
     }
   }, [courseCode]);
 
   const handleEditToggle = () => setIsEditing(!isEditing);
-
   const handleIntroductionChange = (e) => setIntroduction(e.target.value);
 
   const handleUpdateIntroduction = () => {
     axios
       .put(
         `http://localhost:8080/api/courses/update-description/${courseCode}`,
-        { description: introduction }
+        {
+          description: introduction,
+        }
       )
       .then(() => {
-        toast.success("Updated successfully!");
+        toast.success("Updated successfully!", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         setIsEditing(false);
       })
       .catch(() => toast.error("Failed to update."));
@@ -66,6 +87,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
         description: "",
         createdDate: new Date().toISOString(),
         isEditing: true,
+        isNew: true,
       },
     ]);
   };
@@ -79,7 +101,16 @@ function CourseBody({ userName, courseCode, courseName, role }) {
   const handleSaveSection = (index) => {
     const section = sections[index];
     if (!section.header || !section.description) {
-      toast.error("Please fill in both fields before saving.");
+      toast.error("Please fill in both fields before saving.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
 
@@ -91,22 +122,61 @@ function CourseBody({ userName, courseCode, courseName, role }) {
       })
       .then((response) => {
         const updatedSections = [...sections];
-        updatedSections[index] = response.data;
-        updatedSections[index].isEditing = false;
+        updatedSections[index] = { ...response.data, isNew: false };
         setSections(updatedSections);
-        toast.success("Section saved successfully!");
+        toast.success("Section saved successfully!", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
-      .catch(() => toast.error("Failed to save section."));
+      .catch(() =>
+        toast.error("Failed to save section.", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      );
   };
 
   const handleDeleteSection = (index, header) => {
     axios
       .delete(`http://localhost:8080/api/modules/delete/${header}`)
       .then(() => {
-        toast.success("Section deleted.");
+        toast.success("Section deleted.", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         setSections(sections.filter((_, i) => i !== index));
       })
-      .catch(() => toast.error("Failed to delete section."));
+      .catch(() =>
+        toast.error("Failed to delete section.", {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      );
   };
 
   return (
@@ -178,21 +248,21 @@ function CourseBody({ userName, courseCode, courseName, role }) {
                 </>
               )}
               <div className="section-buttons">
+                {isEditing && section.isNew && (
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleSaveSection(index)}
+                  >
+                    Save
+                  </button>
+                )}
                 {isEditing && (
-                  <>
-                    <button
-                      className="edit-btn"
-                      onClick={() => handleSaveSection(index)}
-                    >
-                      Save
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDeleteSection(index, section.header)}
-                    >
-                      Delete
-                    </button>
-                  </>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDeleteSection(index, section.header)}
+                  >
+                    Delete
+                  </button>
                 )}
               </div>
             </div>
