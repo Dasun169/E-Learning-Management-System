@@ -28,4 +28,9 @@ public class ModuleServiceImpl implements ModuleService {
     public List<Module> getModulesByCourseCodeSortedByDate(String courseCode) {
         return moduleRepository.findByCourseCodeOrderByCreatedDateAsc(courseCode);  // Fetch sorted by createdDate
     }
+
+    @Override
+    public void deleteModuleByHeader(String header) {
+        moduleRepository.deleteByHeader(header); // Call the repository method to delete the module by header
+    }
 }
