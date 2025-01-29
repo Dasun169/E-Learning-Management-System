@@ -48,6 +48,7 @@ const Lecturer = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        progress: undefined,
       });
       return;
     }
@@ -62,6 +63,7 @@ const Lecturer = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        progress: undefined,
       });
       return;
     }
@@ -76,6 +78,7 @@ const Lecturer = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        progress: undefined,
       });
       return;
     }
@@ -114,6 +117,7 @@ const Lecturer = () => {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
+          progress: undefined,
         });
         setUserName("");
         setPassword("");
@@ -130,6 +134,7 @@ const Lecturer = () => {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
+          progress: undefined,
         });
       }
     } catch (error) {
@@ -142,6 +147,7 @@ const Lecturer = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        progress: undefined,
       });
     }
   };
