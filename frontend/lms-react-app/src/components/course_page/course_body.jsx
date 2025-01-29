@@ -9,6 +9,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
     "Loading course description..."
   );
   const [isEditing, setIsEditing] = useState(false);
+  const [sections, setSections] = useState([]);
   const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
@@ -52,9 +53,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
     axios
       .put(
         `http://localhost:8080/api/courses/update-description/${courseCode}`,
-        {
-          description: introduction,
-        }
+        { description: introduction }
       )
       .then((response) => {
         console.log("Updated successfully:", response);
@@ -83,6 +82,30 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           progress: undefined,
         });
       });
+  };
+
+  const handleAddSection = () => {
+    setSections([
+      ...sections,
+      { title: "New Section", description: "", isEditing: true },
+    ]);
+  };
+
+  const handleSectionChange = (index, field, value) => {
+    const updatedSections = [...sections];
+    updatedSections[index][field] = value;
+    setSections(updatedSections);
+  };
+
+  const toggleSectionEdit = (index) => {
+    const updatedSections = [...sections];
+    updatedSections[index].isEditing = !updatedSections[index].isEditing;
+    setSections(updatedSections);
+  };
+
+  const handleDeleteSection = (index) => {
+    const updatedSections = sections.filter((_, i) => i !== index);
+    setSections(updatedSections);
   };
 
   return (
@@ -120,6 +143,63 @@ function CourseBody({ userName, courseCode, courseName, role }) {
             </div>
           ) : (
             <p>{introduction}</p>
+          )}
+        </section>
+
+        {/* Sections */}
+        <section className="additional-sections">
+          <h1>Sections</h1>
+          {sections.map((section, index) => (
+            <div key={index} className="section">
+              {section.isEditing ? (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Section Title"
+                    value={section.title}
+                    onChange={(e) =>
+                      handleSectionChange(index, "title", e.target.value)
+                    }
+                  />
+                  <textarea
+                    placeholder="Section Description"
+                    value={section.description}
+                    onChange={(e) =>
+                      handleSectionChange(index, "description", e.target.value)
+                    }
+                    rows="2"
+                  />
+                </>
+              ) : (
+                <>
+                  <h3>{section.title}</h3>
+                  <p>{section.description}</p>
+                </>
+              )}
+              <div className="section-buttons">
+                {isEditing && (
+                  <>
+                    <button
+                      className="edit-btn"
+                      onClick={() => toggleSectionEdit(index)}
+                    >
+                      {section.isEditing ? "Save" : "Edit"}
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteSection(index)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
+          {isEditing && (
+            <button className="course-body-btn" onClick={handleAddSection}>
+              Add Section
+            </button>
           )}
         </section>
       </div>
