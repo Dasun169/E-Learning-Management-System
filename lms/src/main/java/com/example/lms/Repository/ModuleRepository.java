@@ -8,4 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ModuleRepository extends MongoRepository<Module, Long> {
   List<Module> findByCourseCodeOrderByCreatedDateAsc(String courseCode);
+  void deleteByHeader(String header);
 }
