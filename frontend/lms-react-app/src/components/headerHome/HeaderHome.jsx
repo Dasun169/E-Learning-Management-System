@@ -1,7 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./headerHome.css";
+import HomePageInside from "../home_page_inside/home_page_inside";
 
-function Header() {
+const HeaderHome = ({ username }) => {
+  const navigate = useNavigate(); // Initialize navigation
+
+  // Function to handle navigation to HomePageInside
+  const goToHomePageInside = () => {
+    navigate("/HomePageInside", { state: { username } }); // Pass username as state
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-logo1">
@@ -12,15 +21,17 @@ function Header() {
         />
       </div>
       <div className="navbar-links">
-        <button className="nav-button">Home</button>
-        <button className="nav-button">My Courses</button>
-        <button className="nav-button">Dashboard</button>
+        {/* Navigate to HomePageInside on click */}
+        <button className="nav-button" onClick={goToHomePageInside}>
+          Course Enrollment
+        </button>
+        <button className="nav-button">See Courses Results</button>
       </div>
       <div className="navbar-search">
         <input type="text" placeholder="Search..." className="search-input" />
       </div>
     </nav>
   );
-}
+};
 
-export default Header;
+export default HeaderHome;
