@@ -1,3 +1,4 @@
+import React from "react";
 import "./css files/STAT_CS_body.css";
 
 const courses = [
@@ -23,10 +24,11 @@ const courses = [
   },
 ];
 
-const StatCs = () => {
+const StatCs = ({ userName }) => {
   return (
     <div className="dashboard">
       <section className="course-overview">
+        <h2>Course Enrollment - {userName}</h2> {/* Display username */}
         <div className="search-sort">
           <input type="text" placeholder="Search Courses" />
           <select>
