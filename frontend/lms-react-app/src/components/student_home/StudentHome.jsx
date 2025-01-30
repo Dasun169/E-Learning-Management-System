@@ -8,17 +8,16 @@ import Footer from "../footer/Footer";
 
 const StudentHome = () => {
   const location = useLocation();
-  const { username, role } = location.state || {}; // Retrieve username and role from state passed via navigate
+  const { username, role } = location.state || {}; // Retrieve username and role
 
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // Fetch user data based on the username
     if (username) {
       axios
         .get(`http://localhost:8080/api/users/${username}`)
         .then((response) => {
-          setUserData(response.data); // Set the fetched user data
+          setUserData(response.data);
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -28,8 +27,8 @@ const StudentHome = () => {
 
   return (
     <div>
-      <HeaderHome />
-      {/* Pass username and role as props to the Body component */}
+      {/* Pass username as a prop to HeaderHome */}
+      <HeaderHome username={username} />
       {userData && (
         <Body username={username} role={role} fullName={userData.fullName} />
       )}
