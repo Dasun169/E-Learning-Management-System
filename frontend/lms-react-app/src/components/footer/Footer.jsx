@@ -16,22 +16,6 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="footer-section-links">
-          <h3>Quick Links</h3>
-          <p>
-            <a href="/home">Home</a>
-          </p>
-          <p>
-            <a href="/course">MY Course</a>
-          </p>
-          <p>
-            <a href="/dashboard">Dash Board</a>
-          </p>
-          <p>
-            <a href="/qae">QAE</a>
-          </p>
-        </div>
-
         <div className="footer-section-contact">
           <h3>Contact Us</h3>
           <p>Email: support@LEducation.lk</p>
