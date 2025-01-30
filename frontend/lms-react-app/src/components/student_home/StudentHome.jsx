@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./css files/studentHome.css";
 import Body from "./Body";
-import Header from "../header/Header";
+import HeaderHome from "../headerHome/HeaderHome";
 import Footer from "../footer/Footer";
 
 const StudentHome = () => {
@@ -28,7 +28,7 @@ const StudentHome = () => {
 
   return (
     <div>
-      <Header />
+      <HeaderHome />
       {/* Pass username and role as props to the Body component */}
       {userData && (
         <Body username={username} role={role} fullName={userData.fullName} />

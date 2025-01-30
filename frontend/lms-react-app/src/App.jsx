@@ -7,6 +7,9 @@ import StudentHome from "./components/student_home/StudentHome";
 import FullEnrollment from "./components/course_enrollment/FullEnrollment";
 import CoursePage from "./components/course_page/course_page";
 import HomePageInside from "./components/home_page_inside/home_page_inside";
+import StatCsNew from "./components/Home_page_inside_1/STAT_CS";
+import ElecPhyNew from "./components/Home_page_inside_1/ELEC_PHY";
+import MathsNew from "./components/Home_page_inside_1/MATHS";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
         <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
         <Route path="/HomePageInside" element={<HomePageInside />} />
+        <Route path="/ElecPhyNew" element={<ElecPhyNew />} />
+        <Route path="/StatCsNew" element={<StatCsNew />} />
+        <Route path="/MathsNew" element={<MathsNew />} />
       </Routes>
     </Router>
   );
