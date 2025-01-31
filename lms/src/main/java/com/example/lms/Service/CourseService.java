@@ -15,4 +15,7 @@ public interface CourseService {
     List<Course> getCoursesByNamePrefixAndYearLevel(String courseNamePrefix, String yearLevel);
     Course updateDescriptionByCourseCode(String courseCode, String description);
     String getDescriptionByCourseCode(String courseCode);
+    List<Course> getCoursesByNamePrefix(String courseNamePrefix);
+    List<Course> getCoursesByCodePrefixAndYearLevel(String courseCodePrefix, String yearLevel);
+
 }
