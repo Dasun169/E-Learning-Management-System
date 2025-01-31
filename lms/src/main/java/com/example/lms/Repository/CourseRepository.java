@@ -19,4 +19,11 @@ public interface CourseRepository extends MongoRepository<Course, Long> {
 
   @Query("{ 'courseCode': ?0 }")
   Course updateDescriptionByCourseCode(String courseCode, String description);
+
+  @Query("{ 'courseCode': { $regex: ?0, $options: 'i' } }")
+  List<Course> findByCourseCodeStartingWith(String prefix);
+
+  @Query("{ 'courseCode': { $regex: '^?0', $options: 'i' }, 'yearLevel': ?1 }")
+  List<Course> findByCourseCodeStartingWithAndYearLevel(String courseCodePrefix, String yearLevel);
+
 }
