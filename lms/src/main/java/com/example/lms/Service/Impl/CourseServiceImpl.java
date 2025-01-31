@@ -87,4 +87,14 @@ public class CourseServiceImpl implements CourseService {
         throw new RuntimeException("Course with code " + courseCode + " not found.");
     }
 
+    @Override
+    public List<Course> getCoursesByNamePrefix(String courseNamePrefix) {
+        return courseRepository.findByCourseCodeStartingWith(courseNamePrefix);
+    }
+
+    @Override
+    public List<Course> getCoursesByCodePrefixAndYearLevel(String courseCodePrefix, String yearLevel) {
+        return courseRepository.findByCourseCodeStartingWithAndYearLevel(courseCodePrefix, yearLevel);
+    }
+
 }

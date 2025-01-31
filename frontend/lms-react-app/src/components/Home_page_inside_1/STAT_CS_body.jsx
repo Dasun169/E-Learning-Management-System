@@ -1,28 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./css files/STAT_CS_body.css";
-
-const courses = [
-  {
-    code: "COSC 32133/BECS 32263",
-    name: "Full-Stack Software Development (22/23)",
-    level: "Level III",
-  },
-  {
-    code: "PMAT 32322",
-    name: "Mathematical Methods (22/23)",
-    level: "Level III",
-  },
-  {
-    code: "STAT 32672",
-    name: "Non-parametric Statistics (22/23)",
-    level: "Level III",
-  },
-  {
-    code: "STAT 32682",
-    name: "Statistical Simulations (22/23)",
-    level: "Level III",
-  },
-];
 
 const backgroundImages = [
   "https://th.bing.com/th/id/OIP.4n767ii5z9sdzFjJNEm7vgHaHa?rs=1&pid=ImgDetMain",
@@ -37,48 +14,145 @@ const backgroundImages = [
 ];
 
 const StatCs = ({ userName }) => {
+  const [courses, setCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  useEffect(() => {
+    const fetchAllCourses = async () => {
+      try {
+        const statResponse = await fetch(
+          "http://localhost:8080/api/courses/search-by-name/STAT"
+        );
+        const statCourses = await statResponse.json();
+
+        const coscResponse = await fetch(
+          "http://localhost:8080/api/courses/search-by-name/COSC"
+        );
+        const coscCourses = await coscResponse.json();
+
+        const costResponse = await fetch(
+          "http://localhost:8080/api/courses/search-by-name/COST"
+        );
+        const costCourses = await costResponse.json();
+
+        const allCourses = [...statCourses, ...coscCourses, ...costCourses];
+
+        setCourses(allCourses);
+        setFilteredCourses(allCourses);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchAllCourses();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedCategory && !selectedLevel) {
+      setFilteredCourses(courses);
+      return;
+    }
+
+    if (selectedCategory && selectedLevel) {
+      const fetchFilteredCourses = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/api/courses/search-by-code/${selectedCategory}/${selectedLevel}`
+          );
+          if (!response.ok)
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          const data = await response.json();
+          setFilteredCourses(data);
+        } catch (error) {
+          console.error("Error fetching filtered courses:", error);
+          setFilteredCourses([]);
+        }
+      };
+
+      fetchFilteredCourses();
+    }
+  }, [selectedCategory, selectedLevel, courses]);
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    if (query === "") {
+      setFilteredCourses(courses);
+    } else {
+      setFilteredCourses(
+        courses.filter(
+          (course) =>
+            course.courseCode.toLowerCase().includes(query.toLowerCase()) ||
+            course.courseName.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    }
+  };
+
   return (
     <div className="dashboard">
       <section className="course-overview">
-        <h2>Course Enrollment - {userName}</h2> {/* Display username */}
+        <h2>Course Enrollment - {userName}</h2>
         <div className="search-sort">
-          <input type="text" placeholder="Search Courses" />
-          <select>
-            <option>Level I</option>
-            <option>Level II</option>
-            <option>Level III</option>
-            <option>Level IV</option>
+          <input
+            type="text"
+            placeholder="Search Courses"
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+          <select
+            className="search-sort-select"
+            value={selectedLevel}
+            onChange={(e) => setSelectedLevel(e.target.value)}
+          >
+            <option value="">Select Level</option>
+            <option value="1">Level I</option>
+            <option value="2">Level II</option>
+            <option value="3">Level III</option>
+            <option value="4">Level IV</option>
           </select>
-          <select>
-            <option>STAT</option>
-            <option>COSC</option>
-            <option>COST</option>
+          <select
+            className="search-sort-select"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">Select Category</option>
+            <option value="STAT">STAT</option>
+            <option value="COSC">COSC</option>
+            <option value="COST">COST</option>
           </select>
         </div>
         <div className="courses">
-          {courses.map((course, index) => {
-            const imageIndex = index % backgroundImages.length;
-            return (
-              <div key={index} className="course-card">
-                <div
-                  className="course-thumbnail"
-                  style={{
-                    backgroundImage: `url(${backgroundImages[imageIndex]})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                ></div>
-                <div className="course-info">
-                  <h3>{course.code}</h3>
-                  <p>{course.name}</p>
-                  <span>{course.level}</span>
+          {filteredCourses.length > 0 ? (
+            filteredCourses.map((course, index) => {
+              const imageIndex = index % backgroundImages.length;
+              return (
+                <div key={index} className="course-card">
+                  <div
+                    className="course-thumbnail"
+                    style={{
+                      backgroundImage: `url(${backgroundImages[imageIndex]})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  ></div>
+                  <div className="course-info">
+                    <h3>{course.courseCode}</h3>
+                    <p>{course.courseName}</p>
+                    <span>{course.yearLevel}</span>
+                  </div>
+                  <button className="enrllment">
+                    <img src="./Images/lock.png" alt="lock" />
+                  </button>
                 </div>
-                <button className="enrllment">
-                  <img src="./Images/lock.png" alt="lock" />
-                </button>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <p>No courses found...</p>
+          )}
         </div>
       </section>
     </div>
