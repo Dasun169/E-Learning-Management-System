@@ -1,3 +1,4 @@
+import React from "react";
 import "./css files/ELEC_PHY_body.css";
 
 const courses = [
@@ -23,11 +24,24 @@ const courses = [
   },
 ];
 
-const ElecPhy = () => {
+const backgroundImages = [
+  "https://th.bing.com/th/id/OIP.4n767ii5z9sdzFjJNEm7vgHaHa?rs=1&pid=ImgDetMain",
+  "https://img.freepik.com/free-vector/simple-pattern-background_1319-147.jpg",
+  "https://static.vecteezy.com/system/resources/previews/002/176/171/original/cute-floral-pattern-background-simple-pattern-design-template-vector.jpg",
+  "https://th.bing.com/th/id/OIP.Ybs87k7UWtZDnz8hRYqwGQHaHa?rs=1&pid=ImgDetMain",
+  "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/abstract-vector-seamless-pattern-mosaic-of-wire-hexagons-outlines-on-white-background-simple-retro-design-wallpaper-petr-polak.jpg",
+  "https://th.bing.com/th/id/OIP.brTqKF0p32qzlFtU6gMdswHaEU?rs=1&pid=ImgDetMain",
+  "https://th.bing.com/th/id/OIP.i476LXnXmnnqH-bMoNF67gHaEK?rs=1&pid=ImgDetMain",
+  "https://th.bing.com/th/id/OIP.5kgX68tPcDwHccBbonGfkAHaHq?rs=1&pid=ImgDetMain",
+  "https://static.vecteezy.com/system/resources/previews/000/365/303/original/cubes-retro-pattern-vector.jpg",
+];
+
+const ElecPhy = ({ userName }) => {
   return (
-    <div className="dashboard">
-      <section className="course-overview">
-        <div className="search-sort">
+    <div className="dashboard1">
+      <section className="course-overview1">
+        <h2>Course Enrollment - {userName}</h2> {/* Display username */}
+        <div className="search-sort1">
           <input type="text" placeholder="Search Courses" />
           <select>
             <option>Level I</option>
@@ -40,20 +54,30 @@ const ElecPhy = () => {
             <option>PHY</option>
           </select>
         </div>
-        <div className="courses">
-          {courses.map((course, index) => (
-            <div key={index} className="course-card">
-              <div className="course-thumbnail"></div>
-              <div className="course-info">
-                <h3>{course.code}</h3>
-                <p>{course.name}</p>
-                <span>{course.level}</span>
+        <div className="courses1">
+          {courses.map((course, index) => {
+            const imageIndex = index % backgroundImages.length;
+            return (
+              <div key={index} className="course-card1">
+                <div
+                  className="course-thumbnail1"
+                  style={{
+                    backgroundImage: `url(${backgroundImages[imageIndex]})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+                <div className="course-info1">
+                  <h3>{course.code}</h3>
+                  <p>{course.name}</p>
+                  <span>{course.level}</span>
+                </div>
+                <button className="enrllment1">
+                  <img src="./Images/lock.png" alt="lock" />
+                </button>
               </div>
-              <button className="enrllment">
-                <img src="./Images/lock.png" alt="lock" />
-              </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>

@@ -24,6 +24,18 @@ const courses = [
   },
 ];
 
+const backgroundImages = [
+  "https://th.bing.com/th/id/OIP.4n767ii5z9sdzFjJNEm7vgHaHa?rs=1&pid=ImgDetMain",
+  "https://img.freepik.com/free-vector/simple-pattern-background_1319-147.jpg",
+  "https://static.vecteezy.com/system/resources/previews/002/176/171/original/cute-floral-pattern-background-simple-pattern-design-template-vector.jpg",
+  "https://th.bing.com/th/id/OIP.Ybs87k7UWtZDnz8hRYqwGQHaHa?rs=1&pid=ImgDetMain",
+  "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/abstract-vector-seamless-pattern-mosaic-of-wire-hexagons-outlines-on-white-background-simple-retro-design-wallpaper-petr-polak.jpg",
+  "https://th.bing.com/th/id/OIP.brTqKF0p32qzlFtU6gMdswHaEU?rs=1&pid=ImgDetMain",
+  "https://th.bing.com/th/id/OIP.i476LXnXmnnqH-bMoNF67gHaEK?rs=1&pid=ImgDetMain",
+  "https://th.bing.com/th/id/OIP.5kgX68tPcDwHccBbonGfkAHaHq?rs=1&pid=ImgDetMain",
+  "https://static.vecteezy.com/system/resources/previews/000/365/303/original/cubes-retro-pattern-vector.jpg",
+];
+
 const StatCs = ({ userName }) => {
   return (
     <div className="dashboard">
@@ -44,19 +56,29 @@ const StatCs = ({ userName }) => {
           </select>
         </div>
         <div className="courses">
-          {courses.map((course, index) => (
-            <div key={index} className="course-card">
-              <div className="course-thumbnail"></div>
-              <div className="course-info">
-                <h3>{course.code}</h3>
-                <p>{course.name}</p>
-                <span>{course.level}</span>
+          {courses.map((course, index) => {
+            const imageIndex = index % backgroundImages.length;
+            return (
+              <div key={index} className="course-card">
+                <div
+                  className="course-thumbnail"
+                  style={{
+                    backgroundImage: `url(${backgroundImages[imageIndex]})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+                <div className="course-info">
+                  <h3>{course.code}</h3>
+                  <p>{course.name}</p>
+                  <span>{course.level}</span>
+                </div>
+                <button className="enrllment">
+                  <img src="./Images/lock.png" alt="lock" />
+                </button>
               </div>
-              <button className="enrllment">
-                <img src="./Images/lock.png" alt="lock" />
-              </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>
