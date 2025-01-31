@@ -11,6 +11,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.course-overview h2 {
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
 .search-sort {
   display: flex;
   gap: 10px;
@@ -100,4 +105,8 @@
 .enrllment img:hover {
   border: 2px solid #000000;
   background-color: rgb(58, 36, 123);
+}
+
+.search-sort select {
+  width: 140px;
 }
