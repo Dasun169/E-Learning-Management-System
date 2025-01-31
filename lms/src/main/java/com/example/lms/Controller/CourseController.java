@@ -100,4 +100,18 @@ public class CourseController {
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
+
+    @GetMapping("/search-by-name/{courseNamePrefix}")
+    public ResponseEntity<List<Course>> getCoursesByNamePrefix(@PathVariable String courseNamePrefix) {
+        List<Course> courses = courseService.getCoursesByNamePrefix(courseNamePrefix);
+        return courses.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(courses);
+    }
+
+    @GetMapping("/search-by-code/{courseCodePrefix}/{yearLevel}")
+    public ResponseEntity<List<Course>> getCoursesByCodePrefixAndYearLevel(
+            @PathVariable String courseCodePrefix, @PathVariable String yearLevel) {
+        List<Course> courses = courseService.getCoursesByCodePrefixAndYearLevel(courseCodePrefix, yearLevel);
+        return courses.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(courses);
+    }
+
 }
