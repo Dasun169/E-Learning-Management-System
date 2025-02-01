@@ -16,6 +16,7 @@ const backgroundImages = [
 const StatCs = ({ userName }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [enrolledCourses, setEnrolledCourses] = useState([]); // FIXED: Added missing state
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -39,16 +40,30 @@ const StatCs = ({ userName }) => {
         const costCourses = await costResponse.json();
 
         const allCourses = [...statCourses, ...coscCourses, ...costCourses];
-
         setCourses(allCourses);
         setFilteredCourses(allCourses);
+
+        // Fetch enrolled courses
+        const enrolledStatusPromises = allCourses.map(async (course) => {
+          const response = await fetch(
+            `http://localhost:8080/api/courseRegistrations/exists/${userName}/${course.courseCode}`
+          );
+          return response.ok ? response.json() : false;
+        });
+
+        const enrolledStatuses = await Promise.all(enrolledStatusPromises);
+        const enrolledCourseCodes = allCourses
+          .filter((_, index) => enrolledStatuses[index])
+          .map((course) => course.courseCode);
+
+        setEnrolledCourses(enrolledCourseCodes);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
     };
 
     fetchAllCourses();
-  }, []);
+  }, [userName]);
 
   useEffect(() => {
     if (!selectedCategory && !selectedLevel) {
@@ -129,6 +144,8 @@ const StatCs = ({ userName }) => {
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course, index) => {
               const imageIndex = index % backgroundImages.length;
+              const isEnrolled = enrolledCourses.includes(course.courseCode); // FIXED: Check enrollment
+
               return (
                 <div key={index} className="course-card">
                   <div
@@ -144,9 +161,11 @@ const StatCs = ({ userName }) => {
                     <p>{course.courseName}</p>
                     <span>{course.yearLevel}</span>
                   </div>
-                  <button className="enrllment">
-                    <img src="./Images/lock.png" alt="lock" />
-                  </button>
+                  {!isEnrolled && ( // FIXED: Hide button if enrolled
+                    <button className="enrllment">
+                      <img src="./Images/lock.png" alt="lock" />
+                    </button>
+                  )}
                 </div>
               );
             })
