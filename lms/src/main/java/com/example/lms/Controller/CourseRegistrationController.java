@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -45,8 +44,9 @@ public class CourseRegistrationController {
         return ResponseEntity.ok(registrations);
     }
 
-    @GetMapping("/exists")
-    public boolean checkExistence(@RequestParam String userName, @RequestParam String courseCode) {
+    @GetMapping("/exists/{userName}/{courseCode}")
+    public boolean checkExistence(@PathVariable String userName, @PathVariable String courseCode) {
         return courseRegistrationService.checkIfExists(userName, courseCode);
     }
+
 }
