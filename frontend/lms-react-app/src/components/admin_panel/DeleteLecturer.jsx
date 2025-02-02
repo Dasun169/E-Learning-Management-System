@@ -5,12 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import "./css files/deleteLecturer.css";
 
 const DeleteLecturer = () => {
-  const [userName, setUserName] = useState(""); // State to hold the userName input value
-  const [loading, setLoading] = useState(false); // State for loading indicator
-  const [error, setError] = useState(""); // To handle error messages
-  const [message, setMessage] = useState(""); // To display success or failure messages
+  const [userName, setUserName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-  // Function to handle form submission
   const handleDelete = async (e) => {
     e.preventDefault();
 
@@ -19,9 +18,9 @@ const DeleteLecturer = () => {
       return;
     }
 
-    setLoading(true); // Set loading to true before making the requests
-    setError(""); // Clear any previous errors
-    setMessage(""); // Clear any previous success message
+    setLoading(true);
+    setError("");
+    setMessage("");
 
     try {
       const checkResponse = await axios.get(
@@ -34,7 +33,6 @@ const DeleteLecturer = () => {
         );
 
         if (deleteResponse.status === 204) {
-          // Show success toast on successful deletion
           toast.success("Lecturer deleted successfully!", {
             className: "custom-toast",
             position: "top-center",
@@ -46,21 +44,10 @@ const DeleteLecturer = () => {
             progress: undefined,
           });
 
-          //setMessage("Lecturer account deleted successfully.");
-          setUserName(""); // Clear the input field after successful deletion
+          setUserName("");
         }
       }
     } catch (err) {
-      // Step 3: Handle errors (either lecturer not found or unable to delete)
-      if (err.response && err.response.status === 404) {
-        //setError("Error: Lecturer not found.");
-      } else {
-        //setError("Error: Unable to delete the lecturer.");
-      }
-
-      //setMessage(""); // Clear any previous success message
-
-      // Show error toast
       toast.error(error || "Error: Unable to delete the lecturer.", {
         className: "custom-toast",
         position: "top-center",
@@ -95,7 +82,7 @@ const DeleteLecturer = () => {
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
                       placeholder="ex: jhond20133"
-                      disabled={loading} // Disable input while loading
+                      disabled={loading}
                     />
                   </td>
                 </tr>
