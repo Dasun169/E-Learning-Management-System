@@ -28,7 +28,6 @@ function Registration() {
     return emailRegex.test(email);
   };
 
-  // Contact number validation function (10 digits)
   const isValidContactNumber = (contactNumber) => {
     const contactNumberRegex = /^[0-9]{10}$/;
     return contactNumberRegex.test(contactNumber);
@@ -84,7 +83,7 @@ function Registration() {
       hashPassword: password,
       fullName,
       contactNumber,
-      email, // Added email to userData
+      email,
       profileImage: null,
       createdDate: currentDate.toISOString(),
       updatedDate: currentDate.toISOString(),
