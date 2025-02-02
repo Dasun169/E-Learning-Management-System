@@ -16,18 +16,16 @@ const Course = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare course data including the ID
     const courseData = {
-      id: parseInt(id), // Ensure ID is a valid number
+      id: parseInt(id),
       courseName,
       courseCode,
-      lecturerId: parseInt(lecturerId), // Ensure lecturerId is a valid number
+      lecturerId: parseInt(lecturerId),
       description,
       yearLevel,
       enrollmentKey,
     };
 
-    // Log the data before sending
     console.log(courseData);
 
     try {
@@ -53,7 +51,6 @@ const Course = () => {
           progress: undefined,
         });
 
-        // Clear form fields after submission
         setId("");
         setCourseName("");
         setCourseCode("");
