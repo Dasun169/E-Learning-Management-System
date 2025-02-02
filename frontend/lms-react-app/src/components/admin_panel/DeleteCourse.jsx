@@ -2,22 +2,20 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./css files/deleteCourse.css"; // Assuming this CSS file styles your component
+import "./css files/deleteCourse.css";
 
 const DeleteCourse = () => {
-  const [courseCode, setCourseCode] = useState(""); // State to hold the courseCode input value
-  const [loading, setLoading] = useState(false); // State for loading indicator
-  const [error, setError] = useState(""); // To handle error messages
-  const [message, setMessage] = useState(""); // To display success or failure messages
+  const [courseCode, setCourseCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-  // Handle input change for courseCode
   const handleInputChange = (e) => {
     setCourseCode(e.target.value);
   };
 
-  // Function to check if the course exists and then delete it
   const handleDeleteCourse = async (e) => {
-    e.preventDefault(); // Prevent form default action (refresh)
+    e.preventDefault();
 
     // Validate input
     if (!courseCode) {
@@ -25,24 +23,21 @@ const DeleteCourse = () => {
       return;
     }
 
-    setLoading(true); // Set loading to true before the request
-    setError(""); // Clear any previous errors
-    setMessage(""); // Clear any previous success message
+    setLoading(true);
+    setError("");
+    setMessage("");
 
     try {
-      // First, check if the course exists by courseCode
       const checkResponse = await axios.get(
         `http://localhost:8080/api/courses/exists/${courseCode}`
       );
 
       if (checkResponse.status === 200) {
-        // If the course exists, proceed with deletion
         const deleteResponse = await axios.delete(
           `http://localhost:8080/api/courses/delete/${courseCode}`
         );
 
         if (deleteResponse.status === 200) {
-          // Show success toast on successful deletion
           toast.success("Course deleted successfully.", {
             className: "custom-toast",
             position: "top-center",
@@ -54,18 +49,16 @@ const DeleteCourse = () => {
             progress: undefined,
           });
 
-          //setMessage("Course deleted successfully.");
-          setCourseCode(""); // Clear the input field after successful deletion
+          setCourseCode("");
         }
       }
     } catch (err) {
-      // Handle errors such as course not found or unable to delete
       if (err.response && err.response.status === 404) {
         //setError(`Error: Course with code ${courseCode} not found.`);
       } else {
         //setError("Error: Unable to delete the course.");
       }
-      setMessage(""); // Clear any previous success message
+      setMessage("");
 
       // Show error toast
       toast.error(error || "Error: Unable to delete the course.", {
@@ -79,7 +72,7 @@ const DeleteCourse = () => {
         progress: undefined,
       });
     } finally {
-      setLoading(false); // Set loading to false after the request finishes
+      setLoading(false);
     }
   };
 
@@ -102,7 +95,7 @@ const DeleteCourse = () => {
                       placeholder="e.g., COSC 1234"
                       value={courseCode}
                       onChange={handleInputChange}
-                      disabled={loading} // Disable input while loading
+                      disabled={loading}
                     />
                   </td>
                 </tr>
