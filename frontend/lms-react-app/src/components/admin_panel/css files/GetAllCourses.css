@@ -1,17 +1,15 @@
-/* Ensure the container is centered and has 3 columns */
 .courses-container {
   width: 70%;
   margin: 0 auto;
   margin-top: -10px;
-  height: 280px; /* Fixed height */
-  overflow-y: scroll; /* Make it scrollable if the content overflows */
+  height: 280px;
+  overflow-y: scroll;
   background-color: rgb(177, 171, 255);
   box-shadow: 3px 4px 10px rgba(23, 19, 143, 0.7);
-  border-radius: 10px; /* Improved border-radius */
+  border-radius: 10px;
   padding: 20px;
 }
 
-/* Modern scrollbar styling */
 .courses-container::-webkit-scrollbar {
   width: 12px;
 }
@@ -37,28 +35,25 @@
   margin-top: -5px;
 }
 
-/* List of courses with 3 columns layout */
 .courses-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-  gap: 10px; /* Small gap between cards */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-/* Course card style */
 .course-card {
   padding-left: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 3px 4px 20px rgba(174, 39, 39, 0.7);
   background-color: #fff;
-  margin-bottom: 10px; /* Add a small margin for spacing */
+  margin-bottom: 10px;
   font-size: 14px;
   line-height: 15px;
 }
 
-/* Rows within course card */
 .course-row p {
-  margin: 5px 0; /* Ensure small margin between text rows */
+  margin: 5px 0;
   font-size: 14px;
 }
 
@@ -66,7 +61,6 @@
   color: #000000;
 }
 
-/* Error message styling */
 .error-message {
   color: red;
   font-weight: bold;
@@ -76,7 +70,7 @@
 /* Responsive styling */
 @media (max-width: 768px) {
   .courses-list {
-    grid-template-columns: 1fr; /* Single column layout on smaller screens */
+    grid-template-columns: 1fr;
   }
 
   .course-card {

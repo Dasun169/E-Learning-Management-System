@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./css files/GetAllCourses.css"; // Ensure this CSS file is updated as provided
+import "./css files/GetAllCourses.css";
 
 const GetAllCourse = () => {
   const [courses, setCourses] = useState([]);
@@ -12,11 +12,11 @@ const GetAllCourse = () => {
       try {
         const response = await axios.get("http://localhost:8080/api/courses");
         setCourses(response.data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       } catch (err) {
         setError("Error fetching courses.");
         console.error(err);
-        setLoading(false); // Stop loading even if there is an error
+        setLoading(false);
       }
     };
 

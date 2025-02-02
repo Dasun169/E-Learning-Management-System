@@ -23,22 +23,18 @@ const Lecturer = () => {
     }
   };
 
-  // Email validation function
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-
-  // Contact number validation function
   const isValidContactNumber = (number) => {
-    const contactRegex = /^\d{10}$/; // Matches exactly 10 digits
+    const contactRegex = /^\d{10}$/;
     return contactRegex.test(number);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if email is valid
     if (!isValidEmail(email)) {
       toast.error("Invalid email format.", {
         className: "custom-toast",
@@ -53,7 +49,6 @@ const Lecturer = () => {
       return;
     }
 
-    // Check if contact number is valid
     if (!isValidContactNumber(contactNumber)) {
       toast.error("Contact number must be exactly 10 digits.", {
         className: "custom-toast",

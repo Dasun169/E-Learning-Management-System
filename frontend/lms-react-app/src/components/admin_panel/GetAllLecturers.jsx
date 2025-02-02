@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./css files/GetAllLecturers.css"; // Ensure this CSS file is correctly linked
+import "./css files/GetAllLecturers.css";
 
 const GetAllLecturers = () => {
   const [lecturers, setLecturers] = useState([]);
@@ -10,13 +10,13 @@ const GetAllLecturers = () => {
   useEffect(() => {
     const fetchLecturers = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/users"); // API endpoint
+        const response = await axios.get("http://localhost:8080/api/users");
         setLecturers(response.data);
-        setLoading(false); // Stop loading when data is fetched
+        setLoading(false);
       } catch (err) {
         setError("Error fetching lecturers.");
         console.error(err);
-        setLoading(false); // Stop loading even on error
+        setLoading(false);
       }
     };
 

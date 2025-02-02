@@ -5,13 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "./css files/lecturerRegistration.css";
 
 const LecturerRegistration = () => {
-  const [lecturerId, setLecturerId] = useState(""); // State to hold the lecturerId input value
-  const [courseCode, setCourseCode] = useState(""); // State to hold the courseCode input value
-  const [loading, setLoading] = useState(false); // State for loading indicator
-  const [error, setError] = useState(""); // To handle error messages
-  const [message, setMessage] = useState(""); // To display success or failure messages
+  const [lecturerId, setLecturerId] = useState("");
+  const [courseCode, setCourseCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-  // Function to handle form submission
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -20,24 +19,21 @@ const LecturerRegistration = () => {
       return;
     }
 
-    setLoading(true); // Set loading to true before making the requests
-    setError(""); // Clear any previous errors
-    setMessage(""); // Clear any previous success message
+    setLoading(true);
+    setError("");
+    setMessage("");
 
     try {
-      // Step 1: Check if the lecturer exists
       const checkLecturerResponse = await axios.get(
         `http://localhost:8080/api/users/id/${lecturerId}`
       );
 
       if (checkLecturerResponse.status === 200) {
-        // Step 2: Check if the course exists
         const checkCourseResponse = await axios.get(
           `http://localhost:8080/api/courses/exists/${courseCode}`
         );
 
         if (checkCourseResponse.status === 200) {
-          // Step 3: Proceed to register the lecturer if the course is valid
           const registrationData = {
             lecturerId,
             courseCode,
@@ -57,7 +53,6 @@ const LecturerRegistration = () => {
             registerLecturerResponse.status === 200 ||
             registerLecturerResponse.status === 201
           ) {
-            // Show success toast on successful registration
             toast.success("Lecturer registered successfully!", {
               className: "custom-toast",
               position: "top-center",
@@ -70,11 +65,10 @@ const LecturerRegistration = () => {
             });
 
             setMessage("Lecturer registered successfully.");
-            setLecturerId(""); // Clear the lecturer ID input after successful registration
-            setCourseCode(""); // Clear the course code input after successful registration
+            setLecturerId("");
+            setCourseCode("");
           }
         } else {
-          // If the course code is invalid, show an error toast
           setError("Invalid course code.");
           toast.error("Invalid course code!", {
             className: "custom-toast",
@@ -88,7 +82,6 @@ const LecturerRegistration = () => {
           });
         }
       } else {
-        // If the lecturer doesn't exist, show an error toast
         setError("Lecturer not found.");
         toast.error("Lecturer not found!", {
           className: "custom-toast",
@@ -109,7 +102,6 @@ const LecturerRegistration = () => {
         setError("Error: Unable to register the lecturer.");
       }
 
-      // Show error toast
       toast.error(error || "Error: Unable to register the lecturer.", {
         className: "custom-toast",
         position: "top-center",
@@ -121,7 +113,7 @@ const LecturerRegistration = () => {
         progress: undefined,
       });
     } finally {
-      setLoading(false); // Set loading to false after the request finishes
+      setLoading(false);
     }
   };
 
@@ -144,7 +136,7 @@ const LecturerRegistration = () => {
                       value={lecturerId}
                       onChange={(e) => setLecturerId(e.target.value)}
                       placeholder="ex: L12345"
-                      disabled={loading} // Disable input while loading
+                      disabled={loading}
                     />
                   </td>
                 </tr>
@@ -158,7 +150,7 @@ const LecturerRegistration = () => {
                       value={courseCode}
                       onChange={(e) => setCourseCode(e.target.value)}
                       placeholder="ex: CS101"
-                      disabled={loading} // Disable input while loading
+                      disabled={loading}
                     />
                   </td>
                 </tr>
