@@ -34,13 +34,13 @@ const ResultBody = () => {
 
     return (
         <div className="inside">
-            <div className="student-info">
-                <h2>Student Results</h2>
-                        <p><strong>Student Name:</strong> Mr S.T.D. MADHUKSHA</p>
-                        <p><strong>Student User Name:</strong> PS/2020/020</p>
-                        <p><strong>Academic Year:</strong> 2020/2021</p>
-            </div>
             <div className="inside-inside">
+                <div className="student-info">
+                    <h2>Student Results</h2>
+                    <p><b>Student Name:</b> Mr S.T.D. MADHUKSHA</p>
+                    <p><b>Student User Name:</b> PS/2020/020</p>
+                    <p><b>Academic Year:</b> 2020/2021</p>
+                </div>
                     <div className="sidebar">
                         <select className="year-select" value={selectedYear} onChange={handleYearChange}>
                             <option value="Year 1">Year 1</option>
@@ -51,9 +51,7 @@ const ResultBody = () => {
                     </div>
 
                     <div className="main-content">
-                        <div className="result-container">
-                            
-                            <button className="add-row-btn" onClick={addRow}>+ Add New Row</button>
+                        <div className="result-container"> 
                             <table className="result-table">
                                 <thead>
                                     <tr>
@@ -112,6 +110,7 @@ const ResultBody = () => {
                                     ))}
                                 </tbody>
                             </table>
+                            <button className="add-row-btn" onClick={addRow}>+ Add New Row</button>
                         </div>
                     </div>
 
