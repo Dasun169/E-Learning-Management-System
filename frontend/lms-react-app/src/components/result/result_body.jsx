@@ -34,9 +34,14 @@ const ResultBody = () => {
 
     return (
         <div className="inside">
+            <div className="student-info">
+                <h2>Student Results</h2>
+                        <p><strong>Student Name:</strong> Mr S.T.D. MADHUKSHA</p>
+                        <p><strong>Student User Name:</strong> PS/2020/020</p>
+                        <p><strong>Academic Year:</strong> 2020/2021</p>
+            </div>
             <div className="inside-inside">
                     <div className="sidebar">
-                    <h2>Student Results</h2>
                         <select className="year-select" value={selectedYear} onChange={handleYearChange}>
                             <option value="Year 1">Year 1</option>
                             <option value="Year 2">Year 2</option>
@@ -110,12 +115,7 @@ const ResultBody = () => {
                         </div>
                     </div>
 
-                    <div className="student-info">
-                        <p><strong>Student Name with Initial:</strong> Mr S.T.D. MADHUKSHA</p>
-                        <p><strong>Student Full Name:</strong> Mr SOYSA THIRIMANNA DILSHAN MADHUKSHA</p>
-                        <p><strong>Student University ID No:</strong> PS/2020/020</p>
-                        <p><strong>Relevant Student Handbook - Academic Year:</strong> 2020/2021</p>
-                    </div>
+                    
                 </div>
             </div>
     );
