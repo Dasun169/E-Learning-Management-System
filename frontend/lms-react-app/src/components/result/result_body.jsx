@@ -110,7 +110,7 @@ const ResultBody = () => {
                                     ))}
                                 </tbody>
                             </table>
-                            <button className="add-row-btn" onClick={addRow}>+ Add New Row</button>
+                            
                         </div>
                     </div>
 
