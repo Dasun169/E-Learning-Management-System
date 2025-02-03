@@ -25,10 +25,6 @@
 
 .sidebar {
     width: 200px;
-    background-color: #007bff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
 }
 
 .sidebar select {
@@ -109,7 +105,6 @@ th {
     text-decoration: underline;
 }
 
-/* Button Styles */
 .add-row-btn, .save-btn, .delete-btn {
     padding: 5px 10px;
     margin: 5px;
@@ -148,6 +143,6 @@ th {
 }
 
 input {
-    width: 100%;
+    width: 90%;
     padding: 5px;
 }

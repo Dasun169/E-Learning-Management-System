@@ -36,6 +36,7 @@ const ResultBody = () => {
         <div className="inside">
             <div className="inside-inside">
                     <div className="sidebar">
+                    <h2>Student Results</h2>
                         <select className="year-select" value={selectedYear} onChange={handleYearChange}>
                             <option value="Year 1">Year 1</option>
                             <option value="Year 2">Year 2</option>
@@ -46,7 +47,7 @@ const ResultBody = () => {
 
                     <div className="main-content">
                         <div className="result-container">
-                            <h2>Student Results</h2>
+                            
                             <button className="add-row-btn" onClick={addRow}>+ Add New Row</button>
                             <table className="result-table">
                                 <thead>
