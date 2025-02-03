@@ -8,7 +8,7 @@ import Footer from "../footer/Footer";
 
 const StudentHome = () => {
   const location = useLocation();
-  const { username, role } = location.state || {}; // Retrieve username and role
+  const { username, role } = location.state || {};
 
   const [userData, setUserData] = useState(null);
 
@@ -27,8 +27,7 @@ const StudentHome = () => {
 
   return (
     <div>
-      {/* Pass username as a prop to HeaderHome */}
-      <HeaderHome username={username} />
+      <HeaderHome username={username} role={role} />
       {userData && (
         <Body username={username} role={role} fullName={userData.fullName} />
       )}
