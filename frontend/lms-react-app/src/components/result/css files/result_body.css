@@ -5,9 +5,9 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     max-width: 1200px;
-  }
-  
-  .inside-inside {
+}
+
+.inside-inside {
     background-color: #fff;
     padding: 1px 20px;
     border-radius: 8px;
@@ -17,11 +17,12 @@
     margin-right: 20px;
     margin-top: 10px;
     margin-bottom: 20px;
-  }
+}
 
 .container {
     display: flex;
 }
+
 .sidebar {
     width: 200px;
     background-color: #007bff;
@@ -96,4 +97,42 @@ th {
 
 .sign-out:hover {
     text-decoration: underline;
+}
+
+/* Button Styles */
+.add-row-btn, .save-btn, .delete-btn {
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-row-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.save-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.add-row-btn:hover {
+    background-color: #218838;
+}
+
+.save-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
 }
