@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./headerHome.css";
 import HomePageInside from "../home_page_inside/home_page_inside";
 
-const HeaderHome = ({ username }) => {
-  const navigate = useNavigate(); // Initialize navigation
+const HeaderHome = ({ username, role }) => {
+  const navigate = useNavigate();
 
-  // Function to handle navigation to HomePageInside
   const goToHomePageInside = () => {
-    navigate("/HomePageInside", { state: { username } }); // Pass username as state
+    navigate("/HomePageInside", { state: { username } });
   };
 
   return (
@@ -20,13 +19,16 @@ const HeaderHome = ({ username }) => {
           alt="logo"
         />
       </div>
-      <div className="navbar-links">
-        {/* Navigate to HomePageInside on click */}
-        <button className="nav-button" onClick={goToHomePageInside}>
-          Course Enrollment
-        </button>
-        <button className="nav-button">See Courses Results</button>
-      </div>
+
+      {role === "student" && (
+        <div className="navbar-links">
+          <button className="nav-button" onClick={goToHomePageInside}>
+            Course Enrollment
+          </button>
+          <button className="nav-button">See Courses Results</button>
+        </div>
+      )}
+
       <div className="navbar-search">
         <input type="text" placeholder="Search..." className="search-input" />
       </div>
