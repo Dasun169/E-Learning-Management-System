@@ -3,7 +3,7 @@ import "./css files/result_body.css";
 
 const ResultBody = () => {
     const [courses, setCourses] = useState([
-        { code: "", name: "", year: "", attempt: , grade: "" }
+        { code: "", name: "", year: "", attempt: 1, grade: "" }
     ]);
 
     const handleEdit = (index, field, value) => {
@@ -11,7 +11,6 @@ const ResultBody = () => {
         updatedCourses[index][field] = value;
         setCourses(updatedCourses);
     };
-
 
     const addRow = () => {
         const newCourse = { code: "", name: "", year: "", attempt: 1, grade: "" };
@@ -27,20 +26,25 @@ const ResultBody = () => {
         setCourses(updatedCourses);
     };
 
+    const [selectedYear, setSelectedYear] = useState("Year 1");
+
+    const handleYearChange = (e) => {
+        setSelectedYear(e.target.value);
+    };
+
     return (
         <div className="inside">
             <div className="inside-inside">
-                <div className="container">
                     <div className="sidebar">
-                        <a href="#">Year 1</a>
-                        <a href="#">Year 2</a>
-                        <a href="#">Year 3</a>
-                        <a href="#">Year 4</a>
+                        <select className="year-select" value={selectedYear} onChange={handleYearChange}>
+                            <option value="Year 1">Year 1</option>
+                            <option value="Year 2">Year 2</option>
+                            <option value="Year 3">Year 3</option>
+                            <option value="Year 4">Year 4</option>
+                        </select>
                     </div>
 
                     <div className="main-content">
-                        <h2>First Year Registration</h2>
-
                         <div className="result-container">
                             <h2>Student Results</h2>
                             <button className="add-row-btn" onClick={addRow}>+ Add New Row</button>
@@ -113,7 +117,6 @@ const ResultBody = () => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 
