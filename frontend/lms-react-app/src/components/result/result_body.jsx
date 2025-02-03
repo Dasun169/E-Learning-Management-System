@@ -3,28 +3,25 @@ import "./css files/result_body.css";
 
 const ResultBody = () => {
     const [courses, setCourses] = useState([
-        { code: "ACLT 11013", name: "ACADEMIC LITERACY I", year: "2020/2021", attempt: 1, grade: "D" }
+        { code: "", name: "", year: "", attempt: , grade: "" }
     ]);
 
-    // Function to handle editing input fields
     const handleEdit = (index, field, value) => {
         const updatedCourses = [...courses];
         updatedCourses[index][field] = value;
         setCourses(updatedCourses);
     };
 
-    // Function to add a new row
+
     const addRow = () => {
         const newCourse = { code: "", name: "", year: "", attempt: 1, grade: "" };
         setCourses([...courses, newCourse]);
     };
 
-    // Function to save row
     const saveRow = (index) => {
         alert(`Course Name: ${courses[index].name}\nGrade: ${courses[index].grade}\n\nSaved Successfully!`);
     };
 
-    // Function to delete a row
     const deleteRow = (index) => {
         const updatedCourses = courses.filter((_, i) => i !== index);
         setCourses(updatedCourses);
@@ -35,12 +32,10 @@ const ResultBody = () => {
             <div className="inside-inside">
                 <div className="container">
                     <div className="sidebar">
-                        <a href="#">Registration - Year 1</a>
-                        <a href="#">Registration - Year 2</a>
-                        <a href="#">Registration - Year 3</a>
-                        <a href="#">Registration - Year 4</a>
-                        <a href="#">Exam Admission</a>
-                        <a href="#">Registration - Repeat</a>
+                        <a href="#">Year 1</a>
+                        <a href="#">Year 2</a>
+                        <a href="#">Year 3</a>
+                        <a href="#">Year 4</a>
                     </div>
 
                     <div className="main-content">
