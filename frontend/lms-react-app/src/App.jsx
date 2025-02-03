@@ -10,12 +10,13 @@ import HomePageInside from "./components/home_page_inside/home_page_inside";
 import StatCsNew from "./components/Home_page_inside_1/STAT_CS";
 import ElecPhyNew from "./components/Home_page_inside_1/ELEC_PHY";
 import MathsNew from "./components/Home_page_inside_1/MATHS";
+import ResultPage from "./components/result/result";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/StudentHome" element={<StudentHome />} />
@@ -25,6 +26,7 @@ function App() {
         <Route path="/ElecPhyNew" element={<ElecPhyNew />} />
         <Route path="/StatCsNew" element={<StatCsNew />} />
         <Route path="/MathsNew" element={<MathsNew />} />
+        <Route path="/" element={<ResultPage />} />
       </Routes>
     </Router>
   );
