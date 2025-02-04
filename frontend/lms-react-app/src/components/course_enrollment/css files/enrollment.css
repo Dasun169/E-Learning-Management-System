@@ -1,4 +1,4 @@
-/* Main Container */
+
 .course-enrollment5 {
   background-color: #f9f9f9;
   padding: 20px 50px;
@@ -8,15 +8,14 @@
   margin: 20px auto;
 }
 
-/* Page Title */
 .course-enrollment5 h1 {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  margin-top: 5px;
 }
 
-/* Body Section */
 .course-enrollment5 .body5 {
   padding: 20px;
   background-color: #ffffff;
@@ -26,39 +25,40 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Left Section */
 .left5 {
   flex: 1;
   min-width: 320px;
   background-color: #e0e3ec;
   padding: 20px;
   border-radius: 10px;
-  height: 180px; /* Fixed height */
+  height: 180px; 
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* Left Section Headings */
 .left5 h2 {
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 80px;
+  margin-left: 20px;
+  font-weight: bold;
 }
 
 .left5 .lecture5 h3 {
   font-size: 18px;
   color: #333;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  margin-left: 20px;
 }
 
-/* Course Link */
 .left5 .link5 a {
   font-size: 16px;
   text-decoration: none;
   color: #6c63ff;
   font-weight: bold;
   transition: color 0.3s ease;
+  margin-left: 20px;
 }
 
 .left5 .link5 a:hover {
@@ -66,7 +66,6 @@
   text-decoration: underline;
 }
 
-/* Right Section */
 .right5 {
   flex: 1;
   min-width: 320px;
@@ -75,20 +74,19 @@
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  height: 180px; /* Fixed height */
+  height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* Enrollment Title */
+
 .right5 .title5 h3 {
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-/* Enrollment Options */
 .enrollment-option5 {
   display: flex;
   align-items: center;
@@ -96,7 +94,6 @@
   gap: 10px;
 }
 
-/* Input Field */
 .enrollment-option5 input {
   height: 35px;
   width: 200px;
@@ -106,7 +103,6 @@
   font-size: 16px;
 }
 
-/* Enroll Button */
 .enrollment-option5 button {
   height: 35px;
   width: 120px;
@@ -114,14 +110,17 @@
   border: none;
   background-color: #6c63ff;
   color: white;
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .enrollment-option5 button:hover {
-  background-color: #5248c8;
+  color: #5248c8;
+  background-color: white;
   transform: scale(1.05);
+  border: 1px solid #5248c8;
+  font-size: 12px;
 }
 
 .enrollment-option5 button:active {

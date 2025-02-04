@@ -7,7 +7,7 @@ function Enrollment() {
 
       <section className="body5">
         <div className="left5">
-          <h2>Enrolment options</h2>
+          <h2><u>Enrolment options</u></h2>
           <div className="lecture5">
             <h3>Lecturer's Name: Dasun Navindu</h3>
           </div>
