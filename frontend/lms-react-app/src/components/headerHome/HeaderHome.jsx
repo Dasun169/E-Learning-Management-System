@@ -10,6 +10,10 @@ const HeaderHome = ({ username, role }) => {
     navigate("/HomePageInside", { state: { username } });
   };
 
+  const goToResultPage = () => {
+    navigate("/ResultPage", { state: { username } });
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-logo1">
@@ -25,7 +29,9 @@ const HeaderHome = ({ username, role }) => {
           <button className="nav-button" onClick={goToHomePageInside}>
             Course Enrollment
           </button>
-          <button className="nav-button">See Courses Results</button>
+          <button className="nav-button" onClick={goToResultPage}>
+            See Courses Results
+          </button>
         </div>
       )}
 
