@@ -1,0 +1,10 @@
+package com.example.lms.Service;
+
+import com.example.lms.Model.UserResults;
+import java.util.List;
+
+public interface UserResultsService {
+    UserResults createUserResult(UserResults userResult);
+    List<UserResults> getUserResultsByUserName(String userName);
+    UserResults updateUserResult(String userName, String result);
+}
