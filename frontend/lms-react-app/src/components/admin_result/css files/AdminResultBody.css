@@ -15,7 +15,7 @@
   max-width: 1200px;
   margin-left: 20px;
   margin-right: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -60,7 +60,7 @@
   background-color: white;
 }
 
-.inside h2 {
+.student-info h2 {
   color: #007bff;
   font-size: 50px;
   margin-left: 5px;
