@@ -6,7 +6,8 @@ import DeleteCourse from "./DeleteCourse";
 import LecturerRegistration from "./LecturerRegistration";
 import GetAllCourses from "./GetAllCourses";
 import GetAllLecturers from "./GetAllLecturers";
-import Register from "./Registration"; // Import the Register component
+import Register from "./Registration";
+import AdminResultBody from "../admin_result/AdminResultBody";
 import "./css files/Admin.css";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
@@ -107,6 +108,17 @@ function Admin() {
                   }}
                 >
                   See all lecturers
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#adminResultBody"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("adminResultBody");
+                  }}
+                >
+                  Add Results
                 </a>
               </li>
             </ul>
@@ -303,6 +315,7 @@ function Admin() {
             {activeForm === "register" && <Register />}
             {activeForm === "getAllCourses" && <GetAllCourses />}
             {activeForm === "getAllLecturers" && <GetAllLecturers />}
+            {activeForm === "adminResultBody" && <AdminResultBody />}
           </div>
         </div>
       </div>
