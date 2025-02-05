@@ -11,6 +11,7 @@ import StatCsNew from "./components/Home_page_inside_1/STAT_CS";
 import ElecPhyNew from "./components/Home_page_inside_1/ELEC_PHY";
 import MathsNew from "./components/Home_page_inside_1/MATHS";
 import ResultPage from "./components/result/result";
+import AdminResult from "./components/admin_result/AdminResult";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/StatCsNew" element={<StatCsNew />} />
         <Route path="/MathsNew" element={<MathsNew />} />
         <Route path="/ResultPage" element={<ResultPage />} />
+        <Route path="/AdminResult" element={<AdminResult />} />
       </Routes>
     </Router>
   );
