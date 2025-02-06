@@ -1,13 +1,17 @@
 .course-table {
   width: 80%;
   margin: 0 auto;
-  background-color: rgb(177, 171, 255);
+  background-color: rgb(255, 255, 255);
   box-shadow: 3px 4px 10px rgba(23, 19, 143, 0.7);
   border-radius: 1cap;
+  border-radius: 1cap;
+  margin-top: -20px;
+  height: 330px;
+  overflow-y: scroll;
 }
 
 .course-table table {
-  width: 100%;
+  width: 95%;
   margin-left: 30px;
 }
 
@@ -22,7 +26,6 @@
 .course-table h2 {
   text-align: center;
   font-family: Arial, sans-serif;
-  padding-top: 20px;
 }
 
 #submit-button {
