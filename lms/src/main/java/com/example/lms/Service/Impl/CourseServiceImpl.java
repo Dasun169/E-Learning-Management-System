@@ -102,4 +102,13 @@ public class CourseServiceImpl implements CourseService {
       Course course = courseRepository.findByCourseCode(courseCode);
       return course != null ? course.getEnrollmentKey() : null;
     }
+
+    @Override
+    public String getYearLevelByCourseCode(String courseCode) {
+        Course course = courseRepository.findByCourseCode(courseCode);
+        if(course != null){
+            return course.getYearLevel();
+        }
+        return null; // Or throw an exception if you prefer
+    }
 }

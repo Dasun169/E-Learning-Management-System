@@ -7,4 +7,5 @@ public interface UserResultsService {
     UserResults createUserResult(UserResults userResult);
     List<UserResults> getUserResultsByUserName(String userName);
     UserResults updateUserResult(String userName, String result);
+    List<UserResults> createMultipleUserResults(List<UserResults> userResults);
 }

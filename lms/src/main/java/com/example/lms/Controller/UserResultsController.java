@@ -20,6 +20,12 @@ public class UserResultsController {
         return ResponseEntity.ok(userResultsService.createUserResult(userResult));
     }
 
+    @PostMapping("/bulk") 
+    public ResponseEntity<List<UserResults>> createMultipleUserResults(@RequestBody List<UserResults> userResults) {
+        List<UserResults> createdResults = userResultsService.createMultipleUserResults(userResults);
+        return ResponseEntity.ok(createdResults);
+    }
+
     @GetMapping("/userName/{userName}")
     public ResponseEntity<List<UserResults>> getUserResultsByUserName(@PathVariable String userName) {
         return ResponseEntity.ok(userResultsService.getUserResultsByUserName(userName));

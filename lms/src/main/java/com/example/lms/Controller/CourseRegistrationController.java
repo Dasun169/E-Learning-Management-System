@@ -63,4 +63,13 @@ public class CourseRegistrationController {
         courseRegistrationService.deleteRegistration(userName, role, courseCode);
         return ResponseEntity.noContent().build(); // 204 No Content on successful deletion
     }
+
+    @GetMapping("/user/{userName}/{role}") // Using PathVariables
+    public ResponseEntity<List<CourseRegistration>> getRegistrationsByUserNameAndRole(
+            @PathVariable String userName,  // userName as PathVariable
+            @PathVariable String role) {     // role as PathVariable
+
+        List<CourseRegistration> registrations = courseRegistrationService.getAllRegistrationsByUserNameAndRole(userName, role);
+        return ResponseEntity.ok(registrations);
+    }
 }
