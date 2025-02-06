@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -84,6 +85,23 @@ public class UserController {
              return ResponseEntity.status(204).body("User account deleted successfully."); //204 No Content
         } else {
             return ResponseEntity.status(404).body("Error: User not found."); //404 Not Found
+        }
+    }
+
+    @PutMapping("/update") // Changed to /update, using query parameters
+    public ResponseEntity<User> updateUserByUserNameAndRole(
+            @RequestParam String userName,       // userName as query parameter
+            @RequestParam String role,           // role as query parameter
+            @RequestParam(required = false) String fullName,     // fullName as query parameter (optional)
+            @RequestParam(required = false) String contactNumber, // contactNumber as query parameter (optional)
+            @RequestParam(required = false) String email) {      // email as query parameter (optional)
+
+        User updatedUser = userService.updateUserByUserNameAndRole(userName, role, fullName, contactNumber, email);
+
+        if (updatedUser != null) {
+            return ResponseEntity.ok(updatedUser);
+        } else {
+            return ResponseEntity.notFound().build(); // 404 if not found
         }
     }
 }

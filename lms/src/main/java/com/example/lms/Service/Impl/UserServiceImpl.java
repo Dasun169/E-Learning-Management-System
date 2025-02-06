@@ -78,4 +78,22 @@ public class UserServiceImpl implements UserService {
             return false; // User not found with userName and role.
         }
     }
+
+    @Override
+    public User updateUserByUserNameAndRole(String userName, String role, String fullName, String contactNumber, String email) {
+        User user = userRepository.findByRoleAndUserName(role, userName);
+        if (user != null) {
+            if (fullName != null) {
+                user.setFullName(fullName);
+            }
+            if (contactNumber != null) {
+                user.setContactNumber(contactNumber);
+            }
+            if (email != null) {
+                user.setEmail(email);
+            }
+            return userRepository.save(user);
+        }
+        return null;
+    }
 }
