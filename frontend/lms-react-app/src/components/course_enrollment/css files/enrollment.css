@@ -53,7 +53,9 @@
   position: relative;
   background-color: #ffffff;
   display: flex;
-  
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px  #ffffff; 
+  opacity: 80%; 
 }
 
 .left5 .lecture5 h3 {
