@@ -137,7 +137,7 @@ const Body = ({ username, role, fullName }) => {
                   <div className="course-info">
                     <h3>{course.courseCode}</h3>
                     <p>{course.courseName}</p>
-                    <span>{course.yearType}</span>
+                    <span>Year Level : {course.yearType}</span>
                   </div>
                 </div>
               );
