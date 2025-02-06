@@ -7,13 +7,13 @@ import Footer from "../footer/Footer.jsx";
 
 const HomePageInside = () => {
   const location = useLocation();
-  const { username } = location.state || {}; // Retrieve username from state
+  const { username, role } = location.state || {}; // Retrieve username from state
 
   return (
     <div className="home-page-inside-container">
       {/* Pass username to Header */}
       <Header />
-      <HomePageInsideBody username={username} />
+      <HomePageInsideBody username={username} role={role} />
       <Footer />
     </div>
   );
