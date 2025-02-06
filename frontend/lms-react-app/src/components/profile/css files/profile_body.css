@@ -18,6 +18,14 @@
     max-width: 900px;
 }
 
+.profile-section {
+    width: 40%;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+}
+
+
 .profile-img {
     width: 80px;
     height: 80px;
