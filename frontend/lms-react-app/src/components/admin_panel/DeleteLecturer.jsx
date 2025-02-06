@@ -9,6 +9,7 @@ const DeleteLecturer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const lecturer = "lecturer";
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -24,12 +25,12 @@ const DeleteLecturer = () => {
 
     try {
       const checkResponse = await axios.get(
-        `http://localhost:8080/api/users/${userName}`
+        `http://localhost:8080/api/users/role/${lecturer}/userName/${userName}`
       );
 
       if (checkResponse.status === 200) {
         const deleteResponse = await axios.delete(
-          `http://localhost:8080/api/users/${userName}`
+          `http://localhost:8080/api/users/${userName}/${lecturer}`
         );
 
         if (deleteResponse.status === 204) {

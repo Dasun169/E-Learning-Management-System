@@ -94,7 +94,7 @@ const Course = () => {
         <form onSubmit={handleSubmit}>
           <table>
             <tbody>
-              <tr>
+              {/* <tr>
                 <td>
                   <label>Course ID:</label>
                 </td>
@@ -106,7 +106,7 @@ const Course = () => {
                     placeholder="Enter Course ID"
                   />
                 </td>
-              </tr>
+              </tr> */}
               <tr>
                 <td>
                   <label>Course Name:</label>
