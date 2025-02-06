@@ -17,4 +17,5 @@ public interface CourseService {
     String getDescriptionByCourseCode(String courseCode);
     List<Course> getCoursesByNamePrefix(String courseNamePrefix);
     List<Course> getCoursesByCodePrefixAndYearLevel(String courseCodePrefix, String yearLevel);
+    String getEnrollmentKeyByCourseCodeAlt(String courseCode);
 }
