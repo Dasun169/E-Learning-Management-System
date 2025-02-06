@@ -20,19 +20,19 @@ function ProfileBody() {
                 <h3>Edit Profile</h3>
                 <form>
                     <label>User Name</label>
-                    <input type="text" defaultValue="S.T.D Madhuksha" />
+                    <input type="text" placeholder="S.T.D Madhuksha" />
 
                     <label>Password</label>
-                    <input type="password" defaultValue="@^#&%@&@" />
+                    <input type="password" placeholder="@^#&%@&@" />
 
                     <label>Full Name</label>
-                    <input type="text" defaultValue="Adhalisla.aihd" />
+                    <input type="text" placeholder="Adhalisla.aihd" />
 
                     <label>Email</label>
-                    <input type="email" defaultValue="Adhalisla.aihd@gmail.com" />
+                    <input type="email" placeholder="Adhalisla.aihd@gmail.com" />
 
                     <label>Contact</label>
-                    <input type="text" defaultValue="992688585" />
+                    <input type="text" placeholder="992688585" />
                 </form>
             </div>
 
