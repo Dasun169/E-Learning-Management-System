@@ -10,4 +10,5 @@ public interface CourseRegistrationService {
     List<CourseRegistration> getAllRegistrationsByUserName(String userName);
     boolean checkIfExists(String userName, String courseCode);
     String getUserNameByCourseCodeAndRole(String courseCode, String role);
+    void deleteRegistration(String userName, String role, String courseCode);
 }
