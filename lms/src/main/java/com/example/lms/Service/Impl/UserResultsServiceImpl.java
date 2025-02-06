@@ -33,4 +33,9 @@ public class UserResultsServiceImpl implements UserResultsService {
         }
         return null;
     }
+
+    @Override
+    public List<UserResults> createMultipleUserResults(List<UserResults> userResults) {
+        return userResultsRepository.insert(userResults); // Use insert for bulk operations
+    }
 }

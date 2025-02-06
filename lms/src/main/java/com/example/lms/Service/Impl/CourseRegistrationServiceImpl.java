@@ -45,4 +45,9 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
     public void deleteRegistration(String userName, String role, String courseCode) {
         courseRegistrationRepository.deleteByUserNameAndRoleAndCourseCode(userName, role, courseCode);
     }
+
+    @Override
+    public List<CourseRegistration> getAllRegistrationsByUserNameAndRole(String userName, String role) {
+        return courseRegistrationRepository.findAllByUserNameAndRole(userName, role);
+    }
 }

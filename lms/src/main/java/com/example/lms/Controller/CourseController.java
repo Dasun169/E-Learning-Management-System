@@ -133,4 +133,14 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/yearLevel/{courseCode}") // New endpoint
+    public ResponseEntity<String> getYearLevelByCourseCodeAlt(@PathVariable String courseCode) {
+        String yearLevel = courseService.getYearLevelByCourseCode(courseCode);
+        if (yearLevel != null) {
+            return ResponseEntity.ok(yearLevel);
+        } else {
+            return ResponseEntity.notFound().build(); // 404 if not found
+        }
+    }
 }

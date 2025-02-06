@@ -12,4 +12,5 @@ public interface CourseRegistrationRepository extends MongoRepository<CourseRegi
   boolean existsByUserNameAndCourseCode(String userName, String courseCode);
   CourseRegistration findByCourseCodeAndRole(String courseCode, String role);
   void deleteByUserNameAndRoleAndCourseCode(String userName, String role, String courseCode);
+  List<CourseRegistration> findAllByUserNameAndRole(String userName, String role);
 }
