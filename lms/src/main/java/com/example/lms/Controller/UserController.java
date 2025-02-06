@@ -74,4 +74,16 @@ public class UserController {
         User user = userService.getUserByRoleAndUserName(role, userName);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); 
     }
+
+    @DeleteMapping("/{userName}/{role}") // New DELETE endpoint
+    public ResponseEntity<String> deleteUserByUserNameAndRole(
+            @PathVariable String userName, @PathVariable String role) {
+
+        boolean deleted = userService.deleteUserByUserNameAndRole(userName, role);
+        if (deleted) {
+             return ResponseEntity.status(204).body("User account deleted successfully."); //204 No Content
+        } else {
+            return ResponseEntity.status(404).body("Error: User not found."); //404 Not Found
+        }
+    }
 }

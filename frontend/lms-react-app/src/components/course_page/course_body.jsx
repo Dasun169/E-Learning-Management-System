@@ -33,16 +33,16 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           );
         })
         .catch(() => {
-          toast.error("Still not updated by Lecturer.", {
-            className: "custom-toast",
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          // toast.error("Still not updated by Lecturer.", {
+          //   className: "custom-toast",
+          //   position: "top-center",
+          //   autoClose: 3000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          // });
         });
     }
   }, [courseCode]);
