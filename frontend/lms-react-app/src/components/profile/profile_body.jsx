@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./css files/profile_body.css";
 
 function ProfileBody() {
@@ -13,52 +15,59 @@ function ProfileBody() {
     fullName: "",
     email: "",
     contactNumber: "",
-    password: "",
-  });
+  }); // Removed password field as it's not being updated here
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (username && role) {
-      setLoading(true);
-      setError(null);
-
-      fetch(`http://localhost:8080/api/users/role/${role}/userName/${username}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setUserData(data);
-          setFormData({
-            username: data.userName,
-            fullName: data.fullName,
-            email: data.email,
-            contactNumber: data.contactNumber,
-            password: "",
-          });
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-          setError("Error fetching user data.");
-        })
-        .finally(() => setLoading(false));
+      fetchUserData();
     }
   }, [username, role]);
+
+  const fetchUserData = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/users/role/${role}/userName/${username}`
+      );
+      if (!response.ok) {
+        const errorData = await response.json(); // Try to get error message from server
+        const errorMessage =
+          errorData?.message || `HTTP error! status: ${response.status}`;
+        throw new Error(errorMessage);
+      }
+      const data = await response.json();
+      setUserData(data);
+      setFormData({
+        username: data.userName,
+        fullName: data.fullName,
+        email: data.email,
+        contactNumber: data.contactNumber,
+      });
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setError(error.message); // Set the actual error message
+      toast.error(error.message); // Display the error message in the toast
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const toggleEdit = () => {
-    setIsEditing(!isEditing);
+    setIsEditing(!isEditing); // Simplified toggle
+    if (isEditing) {
+      handleSubmit();
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     try {
       const response = await fetch(
         `http://localhost:8080/api/users/update?userName=${formData.username}&role=${role}&fullName=${formData.fullName}&contactNumber=${formData.contactNumber}&email=${formData.email}`,
@@ -67,59 +76,40 @@ function ProfileBody() {
           headers: {
             "Content-Type": "application/json",
           },
-          // No body needed for this API, data is sent as query parameters
         }
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json();
+        const errorMessage = errorData?.message || "Failed to update profile.";
+        toast.error(errorMessage);
+        return;
       }
 
-      // Update successful, refresh user data
-      fetch(`http://localhost:8080/api/users/role/${role}/userName/${username}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setUserData(data);
-          setFormData({
-            // Update form data with new API values
-            username: data.userName,
-            fullName: data.fullName,
-            email: data.email,
-            contactNumber: data.contactNumber,
-            password: "", // Password should not be retrieved or pre-filled
-          });
-        })
-        .catch((error) => {
-          console.error("Error fetching updated user data:", error);
-          setError("Error fetching updated user data.");
-        });
-
-      setIsEditing(false); // Close edit mode
-      alert("Profile updated successfully!"); // Or a toast notification
+      toast.success("Profile updated successfully!");
+      setIsEditing(false);
+      fetchUserData(); // Refresh user data after successful update
     } catch (error) {
       console.error("Error updating profile:", error);
-      setError("Error updating profile."); // Set error message to display
+      toast.error("Error updating profile.");
     }
   };
 
+  // ... rest of your component code (loading, error handling, JSX)
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div style={{ color: "red" }}>{error}</div>; // Display error message
+    return <div style={{ color: "red" }}>{error}</div>;
   }
 
   if (!userData) {
-    return <div>User data not available.</div>; // Handle cases where userData is still null
+    return <div>User data not available.</div>;
   }
 
   return (
+    // ... your JSX ...
     <div className="inside7">
       <div className="inside-inside7">
         <div className="profile-section7">
@@ -132,7 +122,7 @@ function ProfileBody() {
         </div>
         <div className="edit-section7">
           <button className="edit-btn7" onClick={toggleEdit}>
-            {isEditing ? "Edit Profile" : "Edit Profile"}
+            {isEditing ? "Save" : "Edit Profile"}
           </button>
 
           <h3>Edit Profile</h3>
@@ -141,26 +131,17 @@ function ProfileBody() {
             <input
               type="text"
               name="username"
-              value={isEditing ? formData.username : userData.userName} // Use userData for display
-              placeholder={userData.userName} // Use userData for placeholder
+              value={isEditing ? formData.username : userData?.userName || ""}
+              placeholder={userData?.userName || ""}
               onChange={handleChange}
               readOnly={!isEditing}
             />
-            {/* <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={isEditing ? formData.password : ""} // Password not displayed or pre-filled
-              placeholder="********"
-              onChange={handleChange}
-              readOnly={!isEditing}
-            /> */}
             <label>Full Name</label>
             <input
               type="text"
               name="fullName"
-              value={isEditing ? formData.fullName : userData.fullName}
-              placeholder={userData.fullName}
+              value={isEditing ? formData.fullName : userData?.fullName || ""}
+              placeholder={userData?.fullName || ""}
               onChange={handleChange}
               readOnly={!isEditing}
             />
@@ -168,19 +149,21 @@ function ProfileBody() {
             <input
               type="email"
               name="email"
-              value={isEditing ? formData.email : userData.email}
-              placeholder={userData.email}
+              value={isEditing ? formData.email : userData?.email || ""}
+              placeholder={userData?.email || ""}
               onChange={handleChange}
               readOnly={!isEditing}
             />
             <label>Contact</label>
             <input
               type="text"
-              name="contactNumber" // Match backend parameter name
+              name="contactNumber"
               value={
-                isEditing ? formData.contactNumber : userData.contactNumber
+                isEditing
+                  ? formData.contactNumber
+                  : userData?.contactNumber || ""
               }
-              placeholder={userData.contactNumber}
+              placeholder={userData?.contactNumber || ""}
               onChange={handleChange}
               readOnly={!isEditing}
             />
@@ -188,8 +171,7 @@ function ProfileBody() {
               <button type="submit" className="edit-btn7">
                 Save Changes
               </button>
-            )}{" "}
-            {/* Conditionally render save button */}
+            )}
           </form>
         </div>
       </div>
