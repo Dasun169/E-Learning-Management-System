@@ -168,3 +168,47 @@ button:hover {
 .edit-toggle-btn:hover {
   background-color: #0056b3;
 }
+
+.unenroll-btn {
+  padding: 8px 16px; /* Slightly larger padding */
+  font-size: 14px;
+  background-color: #0a58a7; /* Red color for unenrollment */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px; /* Add some space to the left */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.unenroll-btn:hover {
+  background-color: #004080; /* Darker red on hover */
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between; /* Keep space between title and button */
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.course-header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .course-header {
+    flex-direction: column; /* Stack title and button vertically */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .unenroll-btn {
+    margin-top: 10px; /* Add margin top on smaller screens */
+    margin-left: 0; /* Remove left margin */
+    width: 100%; /* Make the button full width */
+  }
+}

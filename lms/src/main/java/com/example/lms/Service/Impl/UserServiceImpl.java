@@ -64,4 +64,18 @@ public class UserServiceImpl implements UserService {
     public User getUserByRoleAndUserName(String role, String userName) {
         return userRepository.findByRoleAndUserName(role, userName); 
     }
+
+    @Override
+    public boolean deleteUserByUserNameAndRole(String userName, String role) {
+        if(userRepository.existsByUserNameAndRole(userName, role)){ //Check if user exists with userName and role.
+            try {
+                userRepository.deleteByUserNameAndRole(userName, role);
+                return true; // Successfully deleted
+            } catch (Exception e) {
+                return false; // Deletion failed (e.g., user not found)
+            }
+        }else{
+            return false; // User not found with userName and role.
+        }
+    }
 }

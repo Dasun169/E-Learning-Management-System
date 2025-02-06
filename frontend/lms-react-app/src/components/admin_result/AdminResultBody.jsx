@@ -63,7 +63,7 @@ const ResultBody = () => {
 
       <div className="main-content">
         <div className="result-container">
-          <table className="result-table1">
+          <table>
             <thead>
               <tr>
                 <th>Course Code</th>
@@ -81,6 +81,7 @@ const ResultBody = () => {
                     <input
                       type="text"
                       value={course.code}
+                      className="input-field5"
                       onChange={(e) =>
                         handleEdit(index, "code", e.target.value)
                       }

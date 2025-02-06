@@ -66,20 +66,20 @@
   margin-left: 5px;
 }
 
-.result-table1 {
+.result-container table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-.result-table1 th,
-.result-table1 td {
+.result-container th,
+.result-container td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
 }
 
-.result-table1 th {
+.result-container th {
   background-color: #f2f2f2;
 }
 
@@ -148,7 +148,7 @@
   background-color: #c82333;
 }
 
-input {
+.input-field5 {
   width: 90%;
   padding: 5px;
   border-color: white;
