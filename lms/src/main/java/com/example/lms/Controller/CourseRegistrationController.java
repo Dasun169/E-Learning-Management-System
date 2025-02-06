@@ -49,4 +49,10 @@ public class CourseRegistrationController {
         return courseRegistrationService.checkIfExists(userName, courseCode);
     }
 
+    @GetMapping("/single/{courseCode}/{role}")
+    public ResponseEntity<String> getUserNameByCourseAndRole(
+            @PathVariable String courseCode, @PathVariable String role) {
+        String userName = courseRegistrationService.getUserNameByCourseCodeAndRole(courseCode, role);
+        return ResponseEntity.ok(userName);
+    }
 }
