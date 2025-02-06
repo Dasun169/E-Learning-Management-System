@@ -10,4 +10,5 @@ public interface CourseRegistrationRepository extends MongoRepository<CourseRegi
   List<CourseRegistration> findAllByUserName(String userName);
   List<CourseRegistration> findAllByCourseCode(String courseCode);
   boolean existsByUserNameAndCourseCode(String userName, String courseCode);
+  CourseRegistration findByCourseCodeAndRole(String courseCode, String role);
 }
