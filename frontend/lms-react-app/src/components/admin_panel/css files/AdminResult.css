@@ -1,0 +1,74 @@
+/* admin-result.css */
+.admin-result-container {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  border-radius: 8px; /* Optional rounded corners */
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.admin-result-container h2 {
+  text-align: center;
+}
+
+.search-area {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.search-area input {
+  flex-grow: 1; /* Input takes up available space */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 30px;
+  margin-left: 50px;
+}
+
+.search-area button {
+  padding: 1px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 50px;
+}
+
+.result-table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.result-table th,
+.result-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left; /* Align text to the left */
+}
+
+.result-table input {
+  width: 100%; /* Input takes full width of the cell */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.submit-area {
+  text-align: center;
+}
+
+.submit-area button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Green */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
