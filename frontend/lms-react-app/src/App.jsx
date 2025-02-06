@@ -12,6 +12,7 @@ import ElecPhyNew from "./components/Home_page_inside_1/ELEC_PHY";
 import MathsNew from "./components/Home_page_inside_1/MATHS";
 import ResultPage from "./components/result/result";
 import AdminResult from "./components/admin_result/AdminResult";
+import Profile from "./components/profile/profile";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/MathsNew" element={<MathsNew />} />
         <Route path="/ResultPage" element={<ResultPage />} />
         <Route path="/AdminResult" element={<AdminResult />} />
+        <Route path="/Profile" element={<Profile />} />
       </Routes>
     </Router>
   );
