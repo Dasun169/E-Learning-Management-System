@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css files/ELEC_PHY_body.css";
+import { useNavigate } from "react-router-dom";
 
 const backgroundImages = [
   "https://th.bing.com/th/id/OIP.4n767ii5z9sdzFjJNEm7vgHaHa?rs=1&pid=ImgDetMain",
@@ -13,13 +14,36 @@ const backgroundImages = [
   "https://static.vecteezy.com/system/resources/previews/000/365/303/original/cubes-retro-pattern-vector.jpg",
 ];
 
-const ElecPhy = ({ userName }) => {
+const ElecPhy = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const navigate = useNavigate();
+
+  const handleCourseClick = (isEnrolled, course) => {
+    if (isEnrolled) {
+      navigate("/CoursePage", {
+        state: {
+          userName: userName,
+          courseCode: course.courseCode,
+          courseName: course.courseName,
+          role: role,
+        },
+      });
+    } else {
+      navigate("/FullEnrollment", {
+        state: {
+          userName: userName,
+          courseName: course.courseName,
+          courseCode: course.courseCode,
+          yearLevel: course.yearLevel,
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchAllCourses = async () => {
@@ -140,7 +164,11 @@ const ElecPhy = ({ userName }) => {
               const isEnrolled = enrolledCourses.includes(course.courseCode);
 
               return (
-                <div key={index} className="course-card1">
+                <div
+                  key={index}
+                  className="course-card1"
+                  onClick={() => handleCourseClick(isEnrolled, course)}
+                >
                   <div
                     className="course-thumbnail1"
                     style={{
@@ -152,7 +180,7 @@ const ElecPhy = ({ userName }) => {
                   <div className="course-info1">
                     <h3>{course.courseCode}</h3>
                     <p>{course.courseName}</p>
-                    <span>{course.yearLevel}</span>
+                    <span>Year Level:{course.yearLevel}</span>
                   </div>
                   {!isEnrolled && (
                     <button className="enrllment1">
