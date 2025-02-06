@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Course {
 
     @Id
-    private long id;
+    private String id;
     private String courseName;
     private String description;
     private String courseCode;
@@ -15,11 +15,11 @@ public class Course {
     private String yearLevel;
     private String enrollmentKey;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

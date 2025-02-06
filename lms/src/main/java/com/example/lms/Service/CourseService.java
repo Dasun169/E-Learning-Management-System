@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface CourseService {
     Course createCourse(Course course);
-    Course getCourseById(long id);
+    //Course getCourseById(long id);
     List<Course> getAllCourses();
-    Course updateCourse(long id, Course course);
+    //Course updateCourse(long id, Course course);
     boolean doesCourseExistByCourseCode(String courseCode);
     void deleteCourseByCourseCode(String courseCode);
     Course getCourseByCourseCode(String courseCode);
@@ -17,5 +17,4 @@ public interface CourseService {
     String getDescriptionByCourseCode(String courseCode);
     List<Course> getCoursesByNamePrefix(String courseNamePrefix);
     List<Course> getCoursesByCodePrefixAndYearLevel(String courseCodePrefix, String yearLevel);
-
 }

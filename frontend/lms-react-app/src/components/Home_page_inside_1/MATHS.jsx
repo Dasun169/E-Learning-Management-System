@@ -7,11 +7,12 @@ import Maths from "./MATHS_body.jsx";
 const MathsNew = () => {
   const location = useLocation();
   const userName = location.state?.username || "Guest"; // Default to "Guest" if userName is not provided
+  const role = location.state?.role || "Student";
 
   return (
     <div className="student-home-container">
       <Header />
-      <Maths userName={userName} />
+      <Maths userName={userName} role={role} />
       <Footer />
     </div>
   );

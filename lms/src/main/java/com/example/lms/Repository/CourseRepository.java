@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-public interface CourseRepository extends MongoRepository<Course, Long> {
+public interface CourseRepository extends MongoRepository<Course, String> {
   Course findByCourseCode(String courseCode); 
   void deleteByCourseCode(String courseCode); 
 
