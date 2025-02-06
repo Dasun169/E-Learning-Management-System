@@ -34,11 +34,11 @@ public class CourseController {
         return ResponseEntity.ok(createdCourse);
     }
 
-    @GetMapping({ "/{id}" })
-    public ResponseEntity<Course> getCourseById(@PathVariable long id) {
-        Course course = this.courseService.getCourseById(id);
-        return course != null ? ResponseEntity.ok(course) : ResponseEntity.notFound().build();
-    }
+    // @GetMapping({ "/{id}" })
+    // public ResponseEntity<Course> getCourseById(@PathVariable long id) {
+    //     Course course = this.courseService.getCourseById(id);
+    //     return course != null ? ResponseEntity.ok(course) : ResponseEntity.notFound().build();
+    // }
 
     @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
@@ -46,11 +46,11 @@ public class CourseController {
         return ResponseEntity.ok(course);
     }
 
-    @PutMapping({ "/{id}" })
-    public ResponseEntity<Course> updateCourse(@PathVariable long id, @RequestBody Course course) {
-        Course updatedCourse = this.courseService.updateCourse(id, course);
-        return updatedCourse != null ? ResponseEntity.ok(updatedCourse) : ResponseEntity.notFound().build();
-    }
+    // @PutMapping({ "/{id}" })
+    // public ResponseEntity<Course> updateCourse(@PathVariable long id, @RequestBody Course course) {
+    //     Course updatedCourse = this.courseService.updateCourse(id, course);
+    //     return updatedCourse != null ? ResponseEntity.ok(updatedCourse) : ResponseEntity.notFound().build();
+    // }
 
     @GetMapping("/exists/{courseCode}")
     public ResponseEntity<String> checkIfCourseExists(@PathVariable String courseCode) {
@@ -114,4 +114,13 @@ public class CourseController {
         return courses.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(courses);
     }
 
+    @GetMapping("/by-code/{courseCode}") // New endpoint
+    public ResponseEntity<Course> getCourseByCode(@PathVariable String courseCode) {
+        Course course = courseService.getCourseByCourseCode(courseCode);
+        if (course != null) {
+            return ResponseEntity.ok(course);
+        } else {
+            return ResponseEntity.notFound().build(); // 404 if not found
+        }
+    }
 }
