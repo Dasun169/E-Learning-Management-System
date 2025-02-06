@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/enrollment.css";
+import { useNavigate } from "react-router-dom";
 
 function Enrollment({ userName, courseName, courseCode, yearLevel }) {
   const [lecturerName, setLecturerName] = useState("Loading...");
@@ -10,6 +11,8 @@ function Enrollment({ userName, courseName, courseCode, yearLevel }) {
   const [enrollmentError, setEnrollmentError] = useState("");
   const [isEnrolling, setIsEnrolling] = useState(false);
   const role = "student";
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLecturerName = async () => {
@@ -79,6 +82,11 @@ function Enrollment({ userName, courseName, courseCode, yearLevel }) {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
+            onClose: () => {
+              navigate("/StudentHome", {
+                state: { username: userName, role: "student" },
+              });
+            },
           });
           setEnrollmentKeyInput("");
         } else {
