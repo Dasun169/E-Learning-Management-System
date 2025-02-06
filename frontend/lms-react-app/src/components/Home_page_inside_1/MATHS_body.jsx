@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css files/MATHS_body.css";
+import { useNavigate } from "react-router-dom";
 
 const backgroundImages = [
   "https://th.bing.com/th/id/OIP.4n767ii5z9sdzFjJNEm7vgHaHa?rs=1&pid=ImgDetMain",
@@ -13,32 +14,55 @@ const backgroundImages = [
   "https://static.vecteezy.com/system/resources/previews/000/365/303/original/cubes-retro-pattern-vector.jpg",
 ];
 
-const Maths = ({ userName }) => {
+const Maths = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const navigate = useNavigate();
+
+  const handleCourseClick = (isEnrolled, course) => {
+    if (isEnrolled) {
+      navigate("/CoursePage", {
+        state: {
+          userName: userName,
+          courseCode: course.courseCode,
+          courseName: course.courseName,
+          role: role,
+        },
+      });
+    } else {
+      navigate("/FullEnrollment", {
+        state: {
+          userName: userName,
+          courseName: course.courseName,
+          courseCode: course.courseCode,
+          yearLevel: course.yearLevel,
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchAllCourses = async () => {
       try {
-        const pmatResponse = await fetch(
+        const elecResponse = await fetch(
           "http://localhost:8080/api/courses/search-by-name/PMAT"
         );
-        const pmatCourses = await pmatResponse.json();
+        const elecCourses = await elecResponse.json();
 
-        const amatResponse = await fetch(
+        const physResponse = await fetch(
           "http://localhost:8080/api/courses/search-by-name/AMAT"
         );
-        const amatCourses = await amatResponse.json();
+        const physCourses = await physResponse.json();
 
-        const data = [...pmatCourses, ...amatCourses];
-        setCourses(data);
-        setFilteredCourses(data);
+        const allCourses = [...elecCourses, ...physCourses];
+        setCourses(allCourses);
+        setFilteredCourses(allCourses);
 
-        const enrolledStatusPromises = data.map(async (course) => {
+        const enrolledStatusPromises = allCourses.map(async (course) => {
           const response = await fetch(
             `http://localhost:8080/api/courseRegistrations/exists/${userName}/${course.courseCode}`
           );
@@ -46,7 +70,7 @@ const Maths = ({ userName }) => {
         });
 
         const enrolledStatuses = await Promise.all(enrolledStatusPromises);
-        const enrolledCourseCodes = data
+        const enrolledCourseCodes = allCourses
           .filter((_, index) => enrolledStatuses[index])
           .map((course) => course.courseCode);
 
@@ -138,7 +162,11 @@ const Maths = ({ userName }) => {
               const isEnrolled = enrolledCourses.includes(course.courseCode);
 
               return (
-                <div key={index} className="course-card2">
+                <div
+                  key={index}
+                  className="course-card2"
+                  onClick={() => handleCourseClick(isEnrolled, course)}
+                >
                   <div
                     className="course-thumbnail2"
                     style={{
@@ -150,7 +178,7 @@ const Maths = ({ userName }) => {
                   <div className="course-info2">
                     <h3>{course.courseCode}</h3>
                     <p>{course.courseName}</p>
-                    <span>{course.yearLevel}</span>
+                    <span>Year Level:{course.yearLevel}</span>
                   </div>
                   {!isEnrolled && (
                     <button className="enrllment2">
