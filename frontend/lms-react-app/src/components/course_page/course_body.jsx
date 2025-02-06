@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/course_body.css";
+import { useNavigate } from "react-router-dom";
 
 function CourseBody({ userName, courseCode, courseName, role }) {
   const [introduction, setIntroduction] = useState(
@@ -179,6 +180,40 @@ function CourseBody({ userName, courseCode, courseName, role }) {
       );
   };
 
+  const navigate = useNavigate();
+
+  const handleUnenroll = async () => {
+    try {
+      const unenrollResponse = await axios.delete(
+        `http://localhost:8080/api/courseRegistrations/${userName}/${role}/${courseCode}` // Corrected API endpoint
+      );
+
+      if (unenrollResponse.status === 204) {
+        toast.success(`Successfully unenrolled : ${courseName}!`, {
+          className: "custom-toast",
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          onClose: () => {
+            navigate("/StudentHome", {
+              state: { username: userName, role: role },
+            });
+          },
+        });
+      } else {
+        toast.error("Unenrollment failed. Please try again.");
+        console.error("Unenrollment failed:", unenrollResponse);
+      }
+    } catch (error) {
+      console.error("Unenrollment error:", error);
+      toast.error("An error occurred during unenrollment.");
+    }
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -194,6 +229,10 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           <h1>
             {courseCode}: {courseName}
           </h1>
+          <button className="unenroll-btn" onClick={handleUnenroll}>
+            {" "}
+            Unenroll Me
+          </button>
         </header>
         <section className="course-introduction">
           <h1>Course Description</h1>
