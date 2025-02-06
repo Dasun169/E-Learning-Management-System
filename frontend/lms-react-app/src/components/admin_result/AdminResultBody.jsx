@@ -63,7 +63,7 @@ const ResultBody = () => {
 
       <div className="main-content">
         <div className="result-container">
-          <table className="result-table">
+          <table className="result-table1">
             <thead>
               <tr>
                 <th>Course Code</th>
