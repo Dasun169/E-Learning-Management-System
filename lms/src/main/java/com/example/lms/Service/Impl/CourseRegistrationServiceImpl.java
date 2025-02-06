@@ -34,4 +34,10 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
     public boolean checkIfExists(String userName, String courseCode) {
         return courseRegistrationRepository.existsByUserNameAndCourseCode(userName, courseCode);
     }
+
+    @Override
+    public String getUserNameByCourseCodeAndRole(String courseCode, String role) {
+        CourseRegistration registration = courseRegistrationRepository.findByCourseCodeAndRole(courseCode, role);
+        return registration != null ? registration.getUserName() : null;
+    }
 }
