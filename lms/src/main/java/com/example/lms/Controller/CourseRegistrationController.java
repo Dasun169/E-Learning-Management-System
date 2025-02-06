@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +55,12 @@ public class CourseRegistrationController {
             @PathVariable String courseCode, @PathVariable String role) {
         String userName = courseRegistrationService.getUserNameByCourseCodeAndRole(courseCode, role);
         return ResponseEntity.ok(userName);
+    }
+
+    @DeleteMapping("/{userName}/{role}/{courseCode}")  // DELETE request
+    public ResponseEntity<Void> deleteRegistration(
+            @PathVariable String userName, @PathVariable String role, @PathVariable String courseCode) {
+        courseRegistrationService.deleteRegistration(userName, role, courseCode);
+        return ResponseEntity.noContent().build(); // 204 No Content on successful deletion
     }
 }
