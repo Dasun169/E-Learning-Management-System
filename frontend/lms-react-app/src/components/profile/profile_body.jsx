@@ -7,7 +7,7 @@ function ProfileBody() {
         <div className="inside-inside">
             <div className="profile-section">
                 <img src="./Images/ProPic.png" alt="Profile Icon" className="profile-img" />
-                <h2>Dilshan Madhuksha</h2>
+                <h2>S.T.D Madhuksha</h2>
                 <nav>
                     <a href="#">Your Courses</a>
                     <a href="#">Course Enrollment</a>
@@ -18,7 +18,7 @@ function ProfileBody() {
           <h3>Edit Profile</h3>
           <form>
             <label>User Name</label>
-            <input type="text" defaultValue="Dilshan Madhuksha" />
+            <input type="text" defaultValue="S.T.D Madhuksha" />
 
             <label>Password</label>
             <input type="password" defaultValue="@^#&%@&@" />
