@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css files/STAT_CS_body.css";
+import { useNavigate } from "react-router-dom";
 
 const backgroundImages = [
   "https://th.bing.com/th/id/OIP.4n767ii5z9sdzFjJNEm7vgHaHa?rs=1&pid=ImgDetMain",
@@ -13,13 +14,36 @@ const backgroundImages = [
   "https://static.vecteezy.com/system/resources/previews/000/365/303/original/cubes-retro-pattern-vector.jpg",
 ];
 
-const StatCs = ({ userName }) => {
+const StatCs = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]); // FIXED: Added missing state
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const navigate = useNavigate();
+
+  const handleCourseClick = (isEnrolled, course) => {
+    if (isEnrolled) {
+      navigate("/CoursePage", {
+        state: {
+          userName: userName,
+          courseCode: course.courseCode,
+          courseName: course.courseName,
+          role: role,
+        },
+      });
+    } else {
+      navigate("/FullEnrollment", {
+        state: {
+          userName: userName,
+          courseName: course.courseName,
+          courseCode: course.courseCode,
+          yearLevel: course.yearLevel,
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchAllCourses = async () => {
@@ -147,7 +171,11 @@ const StatCs = ({ userName }) => {
               const isEnrolled = enrolledCourses.includes(course.courseCode); // FIXED: Check enrollment
 
               return (
-                <div key={index} className="course-card">
+                <div
+                  key={index}
+                  className="course-card"
+                  onClick={() => handleCourseClick(isEnrolled, course)}
+                >
                   <div
                     className="course-thumbnail"
                     style={{
@@ -159,7 +187,7 @@ const StatCs = ({ userName }) => {
                   <div className="course-info">
                     <h3>{course.courseCode}</h3>
                     <p>{course.courseName}</p>
-                    <span>{course.yearLevel}</span>
+                    <span>Year Level:{course.yearLevel}</span>
                   </div>
                   {!isEnrolled && ( // FIXED: Hide button if enrolled
                     <button className="enrllment">
