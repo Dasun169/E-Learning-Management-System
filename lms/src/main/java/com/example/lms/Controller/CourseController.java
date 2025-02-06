@@ -123,4 +123,14 @@ public class CourseController {
             return ResponseEntity.notFound().build(); // 404 if not found
         }
     }
+
+    @GetMapping("/enrollment-key/{courseCode}")
+    public ResponseEntity<String> getEnrollmentKeyAlt(@PathVariable String courseCode) {
+        String enrollmentKey = courseService.getEnrollmentKeyByCourseCodeAlt(courseCode);
+        if (enrollmentKey != null) {
+            return ResponseEntity.ok(enrollmentKey);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
