@@ -46,3 +46,46 @@
   border: 1px solid #ccc;
   font-size: 1rem;
 }
+
+.profile-icon {
+  cursor: pointer; /* Make the icon clickable */
+  position: relative; /* For positioning the dropdown */
+  display: flex; /* Use flexbox to center the image */
+  align-items: center; /* Vertically center */
+  margin-right: 30px;
+}
+
+.profile-img1 {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  border-radius: 50%; /* Make it circular */
+  object-fit: cover; /* Prevent image distortion */
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%; /* Position below the icon */
+  right: 0; /* Align to the right */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  z-index: 1; /* Ensure it's on top */
+  width: 160px;
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  color: #000;
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0;
+}
