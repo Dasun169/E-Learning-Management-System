@@ -189,7 +189,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
       );
 
       if (unenrollResponse.status === 204) {
-        toast.success(`Successfully unenrolled from ${courseName}!`, {
+        toast.success(`Successfully unenrolled : ${courseName}!`, {
           className: "custom-toast",
           position: "top-center",
           autoClose: 3000,
