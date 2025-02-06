@@ -29,18 +29,28 @@ const LecturerRegistration = () => {
       );
 
       if (checkLecturerResponse.status === 200) {
+        const lecturerData = checkLecturerResponse.data; // Get lecturer data
+        const lecturerUserName = lecturerData.userName; // Extract userName
+
         const checkCourseResponse = await axios.get(
-          `http://localhost:8080/api/courses/exists/${courseCode}`
+          `http://localhost:8080/api/courses/by-code/${courseCode}` // Use /by-code endpoint
         );
 
         if (checkCourseResponse.status === 200) {
+          const courseData = checkCourseResponse.data;
+          const courseName = courseData.courseName;
+          const yearLevel = courseData.yearLevel;
+
           const registrationData = {
-            lecturerId,
-            courseCode,
+            userName: lecturerUserName,
+            role: "lecturer",
+            courseName: courseName,
+            courseCode: courseCode,
+            yearType: yearLevel,
           };
 
           const registerLecturerResponse = await axios.post(
-            "http://localhost:8080/api/lecturerRegistration/save",
+            "http://localhost:8080/api/courseRegistrations",
             registrationData,
             {
               headers: {
