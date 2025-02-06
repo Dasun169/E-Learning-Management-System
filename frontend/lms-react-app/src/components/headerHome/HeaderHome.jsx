@@ -7,7 +7,7 @@ const HeaderHome = ({ username, role }) => {
   const navigate = useNavigate();
 
   const goToHomePageInside = () => {
-    navigate("/HomePageInside", { state: { username } });
+    navigate("/HomePageInside", { state: { username, role } });
   };
 
   const goToResultPage = () => {
