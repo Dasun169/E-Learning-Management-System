@@ -40,4 +40,9 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
         CourseRegistration registration = courseRegistrationRepository.findByCourseCodeAndRole(courseCode, role);
         return registration != null ? registration.getUserName() : null;
     }
+
+    @Override
+    public void deleteRegistration(String userName, String role, String courseCode) {
+        courseRegistrationRepository.deleteByUserNameAndRoleAndCourseCode(userName, role, courseCode);
+    }
 }
