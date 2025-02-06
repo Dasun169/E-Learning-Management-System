@@ -37,64 +37,62 @@ function ProfileBody() {
                 </nav>
             </div>
             <div className="edit-section">
-            <button className="edit-btn" onClick={toggleEdit}>
-                {isEditing ? "Save" : "Edit Profile"}
-            </button>
+                <button className="edit-btn" onClick={toggleEdit}>
+                    {isEditing ? "Save" : "Edit Profile"}
+                </button>
 
-            <h3>Edit Profile</h3>
-            <form onSubmit={handleSubmit}>
-                <label>User Name</label>
-                <input 
-                type="text"
-                name="username"
-                value={isEditing ? formData.username : ""}
-                placeholder={!isEditing ? formData.username : ""}
-                onChange={handleChange}
-                readOnly={!isEditing}
-                />
+                <h3>Edit Profile</h3>
+                <form onSubmit={handleSubmit}>
+                    <label>User Name</label>
+                    <input 
+                    type="text"
+                    name="username"
+                    value={isEditing ? formData.username : ""}
+                    placeholder={!isEditing ? formData.username : ""}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                    />
 
-                <label>Password</label>
-                <input 
-                type="password"
-                name="password"
-                value={isEditing ? formData.password : ""}
-                placeholder={!isEditing ? "********" : ""}
-                onChange={handleChange}
-                readOnly={!isEditing}
-                />
+                    <label>Password</label>
+                    <input 
+                    type="password"
+                    name="password"
+                    value={isEditing ? formData.password : ""}
+                    placeholder={!isEditing ? "********" : ""}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                    />
 
-                <label>Full Name</label>
-                <input 
-                type="text"
-                name="fullName"
-                value={isEditing ? formData.fullName : ""}
-                placeholder={!isEditing ? formData.fullName : ""}
-                onChange={handleChange}
-                readOnly={!isEditing}
-                />
+                    <label>Full Name</label>
+                    <input 
+                    type="text"
+                    name="fullName"
+                    value={isEditing ? formData.fullName : ""}
+                    placeholder={!isEditing ? formData.fullName : ""}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                    />
 
-                <label>Email</label>
-                <input 
-                type="email"
-                name="email"
-                value={isEditing ? formData.email : ""}
-                placeholder={!isEditing ? formData.email : ""}
-                onChange={handleChange}
-                readOnly={!isEditing}
-                />
+                    <label>Email</label>
+                    <input 
+                    type="email"
+                    name="email"
+                    value={isEditing ? formData.email : ""}
+                    placeholder={!isEditing ? formData.email : ""}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                    />
 
-                <label>Contact</label>
-                <input 
-                type="text"
-                name="contact"
-                value={isEditing ? formData.contact : ""}
-                placeholder={!isEditing ? formData.contact : ""}
-                onChange={handleChange}
-                readOnly={!isEditing}
-                />
-
-                {isEditing && <button type="submit">Save Changes</button>}
-            </form>
+                    <label>Contact</label>
+                    <input 
+                    type="text"
+                    name="contact"
+                    value={isEditing ? formData.contact : ""}
+                    placeholder={!isEditing ? formData.contact : ""}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                    />
+                </form>
             </div>
 
         </div>
