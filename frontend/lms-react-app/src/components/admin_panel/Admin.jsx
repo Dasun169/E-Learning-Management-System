@@ -8,6 +8,7 @@ import GetAllCourses from "./GetAllCourses";
 import GetAllLecturers from "./GetAllLecturers";
 import Register from "./Registration";
 import AdminResultBody from "../admin_result/AdminResultBody";
+import AdminResult from "./AdminResult";
 import "./css files/Admin.css";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
@@ -112,10 +113,10 @@ function Admin() {
               </li>
               <li>
                 <a
-                  href="#adminResultBody"
+                  href="#adminResult"
                   onClick={(e) => {
                     e.preventDefault();
-                    setActiveForm("adminResultBody");
+                    setActiveForm("adminResult");
                   }}
                 >
                   Add Results
@@ -316,6 +317,7 @@ function Admin() {
             {activeForm === "getAllCourses" && <GetAllCourses />}
             {activeForm === "getAllLecturers" && <GetAllLecturers />}
             {activeForm === "adminResultBody" && <AdminResultBody />}
+            {activeForm === "adminResult" && <AdminResult />}
           </div>
         </div>
       </div>
