@@ -15,25 +15,25 @@ function ProfileBody() {
                 </nav>
             </div>
             <div className="edit-section">
-          <h3>Edit Profile</h3>
-          <form>
-            <label>User Name</label>
-            <input type="text" defaultValue="S.T.D Madhuksha" />
+                <button className="edit-btn">Edit Profile</button> {/* Moved to Top-Right */}
 
-            <label>Password</label>
-            <input type="password" defaultValue="@^#&%@&@" />
+                <h3>Edit Profile</h3>
+                <form>
+                    <label>User Name</label>
+                    <input type="text" defaultValue="S.T.D Madhuksha" />
 
-            <label>Full Name</label>
-            <input type="text" defaultValue="Adhalisla.aihd" />
+                    <label>Password</label>
+                    <input type="password" defaultValue="@^#&%@&@" />
 
-            <label>Email</label>
-            <input type="email" defaultValue="Adhalisla.aihd@gmail.com" />
+                    <label>Full Name</label>
+                    <input type="text" defaultValue="Adhalisla.aihd" />
 
-            <label>Contact</label>
-            <input type="text" defaultValue="992688585" />
+                    <label>Email</label>
+                    <input type="email" defaultValue="Adhalisla.aihd@gmail.com" />
 
-            <button type="submit">Edit Profile</button>
-            </form>
+                    <label>Contact</label>
+                    <input type="text" defaultValue="992688585" />
+                </form>
             </div>
 
         </div>
