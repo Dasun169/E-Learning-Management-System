@@ -21,7 +21,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           );
         })
         .catch(() => {
-          setIntroduction("Failed to load course description.");
+          setIntroduction("No course description updated.");
         });
 
       axios
@@ -32,7 +32,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           );
         })
         .catch(() => {
-          toast.error("Failed to load sections.", {
+          toast.error("Still not updated by Lecturer.", {
             className: "custom-toast",
             position: "top-center",
             autoClose: 3000,
