@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./css files/body.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Body = ({ username, role, fullName }) => {
   const [courses, setCourses] = useState([]); // To store all courses
@@ -11,6 +11,7 @@ const Body = ({ username, role, fullName }) => {
   const [searchQuery, setSearchQuery] = useState(""); // Track the search query input
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Array of image URLs for the background
   const backgroundImages = [
@@ -24,6 +25,19 @@ const Body = ({ username, role, fullName }) => {
     "https://th.bing.com/th/id/OIP.5kgX68tPcDwHccBbonGfkAHaHq?rs=1&pid=ImgDetMain",
     "https://static.vecteezy.com/system/resources/previews/000/365/303/original/cubes-retro-pattern-vector.jpg",
   ];
+
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      navigate("/");
+    };
+
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, [navigate]);
 
   // Fetch courses when the page loads
   useEffect(() => {
