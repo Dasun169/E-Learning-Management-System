@@ -63,7 +63,7 @@ function Admin() {
                     setActiveForm("deleteLecturer");
                   }}
                 >
-                  Delete a User
+                  Delete a Lecturer
                 </a>
               </li>
               <li>
