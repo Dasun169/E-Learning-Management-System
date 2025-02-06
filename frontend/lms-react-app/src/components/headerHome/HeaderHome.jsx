@@ -24,7 +24,7 @@ const HeaderHome = ({ username, role }) => {
   };
 
   const updateProfile = () => {
-    console.log("Update profile clicked");
+    navigate("/Profile", { state: { username, role } });
     setShowDropdown(false);
   };
 

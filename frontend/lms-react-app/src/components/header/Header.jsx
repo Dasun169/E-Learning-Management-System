@@ -12,9 +12,9 @@ function Header() {
         />
       </div>
 
-      <div className="navbar-search">
+      {/* <div className="navbar-search">
         <input type="text" placeholder="Search..." className="search-input" />
-      </div>
+      </div> */}
     </nav>
   );
 }
