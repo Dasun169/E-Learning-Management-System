@@ -89,3 +89,54 @@
 .dropdown li:hover {
   background-color: #f0f0f0;
 }
+
+@media screen and (max-width: 412px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .navbar-logo1-img {
+    width: 150px; /* Reduce logo size */
+    margin: 10px auto;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .nav-button {
+    width: 90%; /* Make buttons full-width */
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .profile-icon {
+    margin: 10px 0;
+  }
+
+  .profile-img1 {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dropdown {
+    width: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  .dropdown ul {
+    padding: 5px;
+  }
+
+  .dropdown li {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
