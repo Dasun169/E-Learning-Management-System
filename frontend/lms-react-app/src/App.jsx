@@ -18,11 +18,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/Home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/StudentHome" element={<StudentHome />} />
-        <Route path="/" element={<FullEnrollment />} />
+        <Route path="/FullEnrollment" element={<FullEnrollment />} />
         <Route path="/CoursePage" element={<CoursePage />} />
         <Route path="/HomePageInside" element={<HomePageInside />} />
         <Route path="/ElecPhyNew" element={<ElecPhyNew />} />

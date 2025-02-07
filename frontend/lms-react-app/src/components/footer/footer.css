@@ -72,3 +72,29 @@
 .footer-bottom p {
   font-size: 0.6rem;
 }
+
+@media screen and (max-width: 412px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-section-logo img {
+    width: 120px;
+    height: 120px;
+    margin: auto;
+  }
+
+  .footer h3 {
+    font-size: 1rem;
+    margin: 20px 0;
+  }
+
+  .footer p {
+    font-size: 0.7rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.6rem;
+  }
+}
