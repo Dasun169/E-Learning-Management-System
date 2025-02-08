@@ -3,10 +3,11 @@
   width: 80%;
   margin: 0 auto;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  box-shadow: 3px 4px 10px rgba(23, 19, 143, 0.7); /* Optional shadow */
   border-radius: 8px; /* Optional rounded corners */
-  height: 300px;
+  height: 330px;
   overflow-y: scroll;
+  margin-top: -20px;
 }
 
 .admin-result-container h2 {
