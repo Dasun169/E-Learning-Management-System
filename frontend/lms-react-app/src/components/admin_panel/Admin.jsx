@@ -80,17 +80,6 @@ function Admin() {
               </li>
               <li>
                 <a
-                  href="#lecturerRegistration"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveForm("lecturerRegistration");
-                  }}
-                >
-                  Lecturer Registration
-                </a>
-              </li>
-              <li>
-                <a
                   href="#getAllCourses"
                   onClick={(e) => {
                     e.preventDefault();
@@ -278,10 +267,10 @@ function Admin() {
               <div className="add-course add-box">
                 <div className="course-logo1">
                   <a
-                    href="#lecturerRegistration"
+                    href="#adminResult"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveForm("lecturerRegistration");
+                      setActiveForm("adminResult");
                     }}
                   >
                     <img src="./Images/journals.svg" alt="" />
@@ -290,13 +279,13 @@ function Admin() {
                 <div className="course-title1">
                   <span id="course-text1">
                     <a
-                      href="#lecturerRegistration"
+                      href="#adminResult"
                       onClick={(e) => {
                         e.preventDefault();
-                        setActiveForm("lecturerRegistration");
+                        setActiveForm("adminResult");
                       }}
                     >
-                      Lecturer Registration
+                      Add Result
                     </a>
                   </span>
                 </div>
@@ -312,7 +301,6 @@ function Admin() {
             {activeForm === "course" && <Course />}
             {activeForm === "deleteLecturer" && <DeleteLecturer />}
             {activeForm === "deleteCourse" && <DeleteCourse />}
-            {activeForm === "lecturerRegistration" && <LecturerRegistration />}
             {activeForm === "register" && <Register />}
             {activeForm === "getAllCourses" && <GetAllCourses />}
             {activeForm === "getAllLecturers" && <GetAllLecturers />}
