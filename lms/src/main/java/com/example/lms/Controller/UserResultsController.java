@@ -31,9 +31,13 @@ public class UserResultsController {
         return ResponseEntity.ok(userResultsService.getUserResultsByUserName(userName));
     }
 
-    @PutMapping("/update/{userName}")
-    public ResponseEntity<UserResults> updateUserResult(@PathVariable String userName, @RequestParam String result) {
-        UserResults updatedResult = userResultsService.updateUserResult(userName, result);
+    @PutMapping("/update/{userName}/{courseCode}/{result}")
+    public ResponseEntity<UserResults> updateUserResult(
+            @PathVariable String userName,
+            @PathVariable String courseCode,
+            @PathVariable String result) {
+
+        UserResults updatedResult = userResultsService.updateUserResult(userName, courseCode, result);
         return updatedResult != null ? ResponseEntity.ok(updatedResult) : ResponseEntity.notFound().build();
     }
 }
