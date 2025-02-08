@@ -8,8 +8,8 @@ const AdminResult = () => {
   const [userName, setUserName] = useState("");
   const [userData, setUserData] = useState(null);
   const [courseRegistrations, setCourseRegistrations] = useState([]);
-  const [userResults, setUserResults] = useState([]); // Store results to be updated
-  const role = "student"; // Default role
+  const [userResults, setUserResults] = useState([]);
+  const role = "student";
 
   const handleSearch = async () => {
     if (!userName) {
@@ -44,7 +44,8 @@ const AdminResult = () => {
         setUserResults(
           registrationsResponse.data.map((reg) => ({
             ...reg,
-            result: "", // Initialize result as empty string
+            result: "",
+            yearType: reg.yearType,
           }))
         );
       } else {
@@ -153,8 +154,6 @@ const AdminResult = () => {
           <tbody>
             {courseRegistrations.map((registration, index) => (
               <tr key={registration.id}>
-                {" "}
-                {/* Important: Add a unique key */}
                 <td>{registration.courseCode}</td>
                 <td>{registration.courseName}</td>
                 <td>{registration.yearType}</td>

@@ -6,6 +6,6 @@ import java.util.List;
 public interface UserResultsService {
     UserResults createUserResult(UserResults userResult);
     List<UserResults> getUserResultsByUserName(String userName);
-    UserResults updateUserResult(String userName, String result);
+    UserResults updateUserResult(String userName, String courseCode, String result);
     List<UserResults> createMultipleUserResults(List<UserResults> userResults);
 }

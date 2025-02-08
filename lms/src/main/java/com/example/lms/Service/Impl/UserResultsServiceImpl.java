@@ -24,10 +24,9 @@ public class UserResultsServiceImpl implements UserResultsService {
     }
 
     @Override
-    public UserResults updateUserResult(String userName, String result) {
-        List<UserResults> results = userResultsRepository.findByUserName(userName);
-        if (!results.isEmpty()) {
-            UserResults userResult = results.get(0);
+    public UserResults updateUserResult(String userName, String courseCode, String result) {
+        UserResults userResult = userResultsRepository.findByUserNameAndCourseCode(userName, courseCode);
+        if (userResult != null) {
             userResult.setResult(result);
             return userResultsRepository.save(userResult);
         }

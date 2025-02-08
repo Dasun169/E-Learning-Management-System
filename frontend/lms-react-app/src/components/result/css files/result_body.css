@@ -66,20 +66,20 @@
   text-align: center;
 }
 
-table {
+.result-table8 {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-th,
-td {
+.result-table8 th,
+.result-table8 td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
 }
 
-th {
+.result-table8 th {
   background-color: #f2f2f2;
 }
 
@@ -155,10 +155,9 @@ input {
 }
 
 .course-body-btn-container {
-  /* CSS for the button container */
-  display: flex; /* or inline-flex if you want other elements on the same line */
-  justify-content: flex-end; /* Align button to the right */
-  margin-top: 10px; /* Add some top margin */
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .gpa-button-div {
@@ -179,26 +178,26 @@ input {
 }
 
 .course-body-btn1:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
 .show-gpa {
-  text-align: left; /* Align text to the left */
-  background-color: #f8f9fa; /* Optional light background color */
+  text-align: left;
+  background-color: #f8f9fa;
   margin-left: 22px;
 }
 
 .congratulations-overlay {
-  position: fixed; /* or absolute, depending on your layout */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it's on top */
+  z-index: 1000;
 }
 
 .congratulations-content {
