@@ -10,7 +10,9 @@ const GetAllLecturers = () => {
   useEffect(() => {
     const fetchLecturers = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/users");
+        const response = await axios.get(
+          "http://localhost:8080/api/users/role/lecturer"
+        );
         setLecturers(response.data);
         setLoading(false);
       } catch (err) {
@@ -50,9 +52,6 @@ const GetAllLecturers = () => {
                   </p>
                   <p>
                     <strong>Role:</strong> {lecturer.role}
-                  </p>
-                  <p>
-                    <strong>Status:</strong> {lecturer.status}
                   </p>
                 </div>
               ))
