@@ -80,6 +80,17 @@ function Admin() {
               </li>
               <li>
                 <a
+                  href="#lecturerRegistration"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("lecturerRegistration");
+                  }}
+                >
+                  Lecturer Registration
+                </a>
+              </li>
+              <li>
+                <a
                   href="#getAllCourses"
                   onClick={(e) => {
                     e.preventDefault();
@@ -301,6 +312,7 @@ function Admin() {
             {activeForm === "course" && <Course />}
             {activeForm === "deleteLecturer" && <DeleteLecturer />}
             {activeForm === "deleteCourse" && <DeleteCourse />}
+            {activeForm === "lecturerRegistration" && <LecturerRegistration />}
             {activeForm === "register" && <Register />}
             {activeForm === "getAllCourses" && <GetAllCourses />}
             {activeForm === "getAllLecturers" && <GetAllLecturers />}
