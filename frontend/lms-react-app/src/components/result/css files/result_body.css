@@ -153,3 +153,67 @@ input {
   padding: 5px;
   border-color: white;
 }
+
+.course-body-btn-container {
+  /* CSS for the button container */
+  display: flex; /* or inline-flex if you want other elements on the same line */
+  justify-content: flex-end; /* Align button to the right */
+  margin-top: 10px; /* Add some top margin */
+}
+
+.gpa-button-div {
+  margin-left: 22px;
+  margin-bottom: 25px;
+}
+
+.gpa-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 150px;
+  transition: background-color 0.3s ease;
+}
+
+.course-body-btn1:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.show-gpa {
+  text-align: left; /* Align text to the left */
+  background-color: #f8f9fa; /* Optional light background color */
+  margin-left: 22px;
+}
+
+.congratulations-overlay {
+  position: fixed; /* or absolute, depending on your layout */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top */
+}
+
+.congratulations-content {
+  background-color: #caddf6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.close-congratulations {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
