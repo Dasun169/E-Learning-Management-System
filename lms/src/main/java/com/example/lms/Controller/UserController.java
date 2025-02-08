@@ -2,6 +2,7 @@ package com.example.lms.Controller;
 
 import com.example.lms.Model.User;
 import com.example.lms.Service.UserService;
+import com.example.lms.Repository.UserRepository;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public UserController() {
 
     }
@@ -41,6 +45,13 @@ public class UserController {
         List<User> user = this.userService.getAllUsers();
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/role/{role}") 
+    public ResponseEntity<List<User>> getAllUsersByRole(@PathVariable String role) { 
+        List<User> users = this.userRepository.findByRole(role); 
+        return ResponseEntity.ok(users);
+    }
+    
 
     @PutMapping({ "/{id}" })
     public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user) {
