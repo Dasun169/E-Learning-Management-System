@@ -11,6 +11,13 @@ const Lecturer = () => {
   const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState("");
   const [profileImage, setProfileImage] = useState(null);
+  const [role, setRole] = useState("lecturer");
+
+  const [isUserNameValid, setIsUserNameValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isFullNameValid, setIsFullNameValid] = useState(false);
+  const [isContactNumberValid, setIsContactNumberValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
   const checkUserNameExists = async (userName) => {
     try {
@@ -27,6 +34,7 @@ const Lecturer = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
   const isValidContactNumber = (number) => {
     const contactRegex = /^\d{10}$/;
     return contactRegex.test(number);
@@ -89,7 +97,7 @@ const Lecturer = () => {
       profileImage: null,
       createdDate: currentDate.toISOString(),
       updatedDate: currentDate.toISOString(),
-      role: "lecturer",
+      role: role,
     };
 
     try {
@@ -147,11 +155,36 @@ const Lecturer = () => {
     }
   };
 
+  const handleUserNameChange = (e) => {
+    setUserName(e.target.value);
+    setIsUserNameValid(e.target.value.trim() !== "");
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setIsPasswordValid(e.target.value.trim() !== "");
+  };
+
+  const handleFullNameChange = (e) => {
+    setFullName(e.target.value);
+    setIsFullNameValid(e.target.value.trim() !== "");
+  };
+
+  const handleContactNumberChange = (e) => {
+    setContactNumber(e.target.value);
+    setIsContactNumberValid(isValidContactNumber(e.target.value));
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setIsEmailValid(isValidEmail(e.target.value));
+  };
+
   return (
     <>
       <ToastContainer />
       <div className="lecturer-table">
-        <h2>Lecturer Registration</h2>
+        <h2>User Registration</h2>
         <form onSubmit={handleSubmit}>
           <div className="div-table">
             <table>
@@ -164,9 +197,10 @@ const Lecturer = () => {
                     <input
                       type="text"
                       value={userName}
-                      onChange={(e) => setUserName(e.target.value)}
+                      onChange={handleUserNameChange}
                       placeholder="e.g: jhond20133"
                     />
+                    {isUserNameValid && <span className="span-right"> ✅</span>}
                   </td>
                 </tr>
                 <tr>
@@ -177,9 +211,25 @@ const Lecturer = () => {
                     <input
                       type="password"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={handlePasswordChange}
                       placeholder="e.g: ABCabc123!@#"
                     />
+                    {isPasswordValid && <span className="span-right"> ✅</span>}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Role:</label>
+                  </td>
+                  <td>
+                    <select
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                    >
+                      <option value="student">Student</option>
+                      <option value="lecturer">Lecturer</option>
+                      <option value="admin">Admin</option>
+                    </select>
                   </td>
                 </tr>
                 <tr>
@@ -190,9 +240,10 @@ const Lecturer = () => {
                     <input
                       type="text"
                       value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
+                      onChange={handleFullNameChange}
                       placeholder="e.g: John Doe"
                     />
+                    {isFullNameValid && <span className="span-right"> ✅</span>}
                   </td>
                 </tr>
                 <tr>
@@ -203,9 +254,12 @@ const Lecturer = () => {
                     <input
                       type="text"
                       value={contactNumber}
-                      onChange={(e) => setContactNumber(e.target.value)}
+                      onChange={handleContactNumberChange}
                       placeholder="e.g: 0123456789"
                     />
+                    {isContactNumberValid && (
+                      <span className="span-right"> ✅</span>
+                    )}
                   </td>
                 </tr>
                 <tr>
@@ -216,9 +270,10 @@ const Lecturer = () => {
                     <input
                       type="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={handleEmailChange}
                       placeholder="e.g: johndoe@example.com"
                     />
+                    {isEmailValid && <span className="span-right"> ✅</span>}
                   </td>
                 </tr>
                 <tr>
