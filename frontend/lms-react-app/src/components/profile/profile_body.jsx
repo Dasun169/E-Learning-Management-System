@@ -4,10 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/profile_body.css";
 
-function ProfileBody() {
-  const location = useLocation();
-  const { username, role } = location.state || {};
-
+function ProfileBody({ username, role }) {
   const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState(null);
   const [formData, setFormData] = useState({

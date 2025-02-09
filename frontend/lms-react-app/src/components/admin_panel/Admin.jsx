@@ -31,7 +31,7 @@ function Admin() {
                     setActiveForm("lecturer");
                   }}
                 >
-                  Add a Lecturer
+                  Add a User
                 </a>
               </li>
               <li>
@@ -42,7 +42,7 @@ function Admin() {
                     setActiveForm("register");
                   }}
                 >
-                  Add a Student
+                  Admin Profile
                 </a>
               </li>
               <li>
@@ -166,7 +166,7 @@ function Admin() {
                         setActiveForm("lecturer");
                       }}
                     >
-                      Add a Lecturer
+                      Add a User
                     </a>
                   </span>
                 </div>
@@ -192,7 +192,7 @@ function Admin() {
                         setActiveForm("register");
                       }}
                     >
-                      Add a Student
+                      Admin Profile
                     </a>
                   </span>
                 </div>
