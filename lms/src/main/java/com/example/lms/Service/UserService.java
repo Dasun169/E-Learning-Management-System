@@ -13,5 +13,5 @@ public interface UserService {
     User getUserById(long id);
     User getUserByRoleAndUserName(String role, String userName);
     boolean deleteUserByUserNameAndRole(String userName, String role);
-    User updateUserByUserNameAndRole(String userName, String role, String fullName, String contactNumber, String email);
+    User updateUserByUserNameAndRole(String userName, String role, String hashPassword, String fullName, String contactNumber, String email);
 }
