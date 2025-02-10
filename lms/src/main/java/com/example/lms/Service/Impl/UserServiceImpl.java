@@ -80,18 +80,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUserByUserNameAndRole(String userName, String role, String fullName, String contactNumber, String email) {
-        User user = userRepository.findByRoleAndUserName(role, userName);
+    public User updateUserByUserNameAndRole(String userName, String role, String hashPassword, String fullName, String contactNumber, String email) {
+        User user = userRepository.findByRoleAndUserName(role, userName); // Use the new method
+
         if (user != null) {
-            if (fullName != null) {
-                user.setFullName(fullName);
-            }
-            if (contactNumber != null) {
-                user.setContactNumber(contactNumber);
-            }
-            if (email != null) {
-                user.setEmail(email);
-            }
+            user.update(userName, role, hashPassword, fullName, email, contactNumber); // Use the update method in the User model
             return userRepository.save(user);
         }
         return null;

@@ -99,20 +99,21 @@ public class UserController {
         }
     }
 
-    @PutMapping("/update") // Changed to /update, using query parameters
+    @PutMapping("/update")
     public ResponseEntity<User> updateUserByUserNameAndRole(
-            @RequestParam String userName,       // userName as query parameter
-            @RequestParam String role,           // role as query parameter
-            @RequestParam(required = false) String fullName,     // fullName as query parameter (optional)
-            @RequestParam(required = false) String contactNumber, // contactNumber as query parameter (optional)
-            @RequestParam(required = false) String email) {      // email as query parameter (optional)
+            @RequestParam String userName,
+            @RequestParam String role,
+            @RequestParam(required = false) String hashPassword, // Add hashPassword
+            @RequestParam(required = false) String fullName,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String contactNumber) {
 
-        User updatedUser = userService.updateUserByUserNameAndRole(userName, role, fullName, contactNumber, email);
+        User updatedUser = userService.updateUserByUserNameAndRole(userName, role, hashPassword, fullName, contactNumber, email);
 
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
         } else {
-            return ResponseEntity.notFound().build(); // 404 if not found
+            return ResponseEntity.notFound().build();
         }
     }
 }

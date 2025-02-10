@@ -15,8 +15,7 @@ public class User {
     private String hashPassword;
     private String fullName;
     private String contactNumber;
-    private String email; // Added email field
-    private byte[] profileImage;
+    private String email; 
     private String role;
 
     @CreatedDate
@@ -24,6 +23,27 @@ public class User {
 
     @LastModifiedDate
     private LocalDateTime updatedDate;
+
+    public void update(String userName, String role, String hashPassword, String fullName, String email, String contactNumber) {
+        if (userName != null) {
+            this.setUserName(userName);
+        }
+        if (role != null) {
+            this.setRole(role);
+        }
+        if (hashPassword != null) {
+            this.setHashPassword(hashPassword);
+        }
+        if (fullName != null) {
+            this.setFullName(fullName);
+        }
+        if (email != null) {
+            this.setEmail(email);
+        }
+        if (contactNumber != null) {
+            this.setContactNumber(contactNumber);
+        }
+    }
 
     public long getId() {
         return id;
@@ -63,14 +83,6 @@ public class User {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
-    }
-
-    public byte[] getProfileImage() {
-        return profileImage;
-    }
-
-    public void setProfileImage(byte[] profileImage) {
-        this.profileImage = profileImage;
     }
 
     public String getRole() {
