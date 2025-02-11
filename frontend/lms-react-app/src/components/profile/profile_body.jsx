@@ -104,8 +104,8 @@ function ProfileBody({ username, role }) {
             alt="Profile"
             className="profile-img7"
           />
-          <h3>User Name : {userData.userName}</h3>
-          <h3>Full Name : {userData.fullName}</h3>
+          <h3>User Name : {formData.username}</h3>
+          <h3>Full Name : {formData.fullName}</h3>
         </div>
 
         <div className="edit-section7">

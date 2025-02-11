@@ -1,8 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Header from "../header/Header.jsx";
-import Footer from "../footer/Footer.jsx";
-import ElecPhy from "./ELEC_PHY_body.jsx";
+import Header from "../headerHome/HeaderHome";
+import Footer from "../footer/Footer";
+import ElecPhy from "./ELEC_PHY_body";
 
 const ElecPhyNew = () => {
   const location = useLocation();
@@ -11,7 +11,7 @@ const ElecPhyNew = () => {
 
   return (
     <div className="student-home-container">
-      <Header />
+      <Header username={userName} role={role} />
       <ElecPhy userName={userName} role={role} />
       <Footer />
     </div>
