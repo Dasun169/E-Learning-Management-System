@@ -37,6 +37,7 @@ const ElecPhy = ({ userName, role }) => {
       navigate("/FullEnrollment", {
         state: {
           userName: userName,
+          role: role,
           courseName: course.courseName,
           courseCode: course.courseCode,
           yearLevel: course.yearLevel,
