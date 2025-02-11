@@ -1,8 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Header from "../header/Header.jsx";
-import Footer from "../footer/Footer.jsx";
-import StatCs from "./STAT_CS_body.jsx";
+import Header from "../headerHome/HeaderHome";
+import Footer from "../footer/Footer";
+import StatCs from "./STAT_CS_body";
 
 const StatCsNew = () => {
   const location = useLocation();
@@ -11,7 +11,7 @@ const StatCsNew = () => {
 
   return (
     <div className="student-home-container">
-      <Header />
+      <Header username={userName} role={role} />
       <StatCs userName={userName} role={role} />
       <Footer />
     </div>
