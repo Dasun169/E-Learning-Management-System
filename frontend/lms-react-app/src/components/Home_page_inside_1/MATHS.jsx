@@ -1,8 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Header from "../header/Header.jsx";
-import Footer from "../footer/Footer.jsx";
-import Maths from "./MATHS_body.jsx";
+import Header from "../headerHome/HeaderHome";
+import Footer from "../footer/Footer";
+import Maths from "./MATHS_body";
 
 const MathsNew = () => {
   const location = useLocation();
@@ -11,7 +11,7 @@ const MathsNew = () => {
 
   return (
     <div className="student-home-container">
-      <Header />
+      <Header username={userName} role={role} />
       <Maths userName={userName} role={role} />
       <Footer />
     </div>
