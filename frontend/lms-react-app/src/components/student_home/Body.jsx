@@ -139,7 +139,6 @@ const Body = ({ username, role, fullName }) => {
                     handleCourseClick(course.courseCode, course.courseName)
                   }
                 >
-                  {/* Set a sequential background image for the course thumbnail */}
                   <div
                     className="course-thumbnail"
                     style={{
