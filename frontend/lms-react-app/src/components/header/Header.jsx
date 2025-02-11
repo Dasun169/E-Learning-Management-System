@@ -11,10 +11,6 @@ function Header() {
           alt="logo"
         />
       </div>
-
-      {/* <div className="navbar-search">
-        <input type="text" placeholder="Search..." className="search-input" />
-      </div> */}
     </nav>
   );
 }
