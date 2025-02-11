@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./headerHome.css";
-import HomePageInside from "../home_page_inside/home_page_inside";
 
 const HeaderHome = ({ username, role }) => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const profileIconRef = useRef(null);
+  const logoRef = useRef(null);
 
   const goToHomePageInside = () => {
     navigate("/HomePageInside", { state: { username, role } });
@@ -15,7 +15,7 @@ const HeaderHome = ({ username, role }) => {
   };
 
   const goToResultPage = () => {
-    navigate("/ResultPage", { state: { username } });
+    navigate("/ResultPage", { state: { username, role } });
     setShowDropdown(false);
   };
 
@@ -26,6 +26,10 @@ const HeaderHome = ({ username, role }) => {
   const updateProfile = () => {
     navigate("/Profile", { state: { username, role } });
     setShowDropdown(false);
+  };
+
+  const goToStudentHome = () => {
+    navigate("/studentHome", { state: { username, role, fromHeader: true } }); // Navigate to studentHome
   };
 
   useEffect(() => {
@@ -50,7 +54,12 @@ const HeaderHome = ({ username, role }) => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo1">
+      <div
+        className="navbar-logo1"
+        onClick={goToStudentHome}
+        ref={logoRef}
+        style={{ cursor: "pointer" }}
+      >
         <img
           className="navbar-logo1-img"
           src="./Images/studentHome/logoWithText.png"
