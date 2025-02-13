@@ -160,7 +160,7 @@ const AdminResult = () => {
                 <td>
                   <input
                     type="text"
-                    value={userResults[index].result} // Bind to the correct result
+                    value={userResults[index].result} 
                     onChange={(e) => handleResultChange(index, e.target.value)}
                     placeholder="Enter Result"
                   />
@@ -170,7 +170,7 @@ const AdminResult = () => {
           </tbody>
         </table>
       )}
-      {courseRegistrations.length > 0 && ( // Only show button if there are registrations
+      {courseRegistrations.length > 0 && ( 
         <div className="submit-area">
           <button onClick={handleSubmit}>Update Results</button>
         </div>
