@@ -153,3 +153,16 @@ nav a:hover {
     margin-bottom: 10px;
   }
 }
+
+.input-with-validation {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.validation-icon {
+  position: absolute;
+  right: 1px;
+  font-size: 18px;
+  pointer-events: none;
+}
