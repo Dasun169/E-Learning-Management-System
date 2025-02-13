@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/lecturer.css";
 
-const Lecturer = () => {
+const Lecturer = ({ loggedInUserRole }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -19,6 +19,7 @@ const Lecturer = () => {
   const [isContactNumberValid, setIsContactNumberValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
 
+  // Function to check if username exists
   const checkUserNameExists = async (userName) => {
     try {
       const response = await axios.get(
@@ -30,16 +31,19 @@ const Lecturer = () => {
     }
   };
 
+  // Email validation
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  // Contact number validation
   const isValidContactNumber = (number) => {
     const contactRegex = /^\d{10}$/;
     return contactRegex.test(number);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -112,7 +116,7 @@ const Lecturer = () => {
       );
 
       if (response.status === 200 || response.status === 201) {
-        toast.success("Lecturer added successfully!", {
+        toast.success("User added successfully!", {
           className: "custom-toast",
           position: "top-center",
           autoClose: 2000,
@@ -129,7 +133,7 @@ const Lecturer = () => {
         setEmail("");
         setProfileImage(null);
       } else {
-        toast.error("Failed to add lecturer.", {
+        toast.error("Failed to add user.", {
           className: "custom-toast",
           position: "top-center",
           autoClose: 3000,
@@ -141,8 +145,8 @@ const Lecturer = () => {
         });
       }
     } catch (error) {
-      console.error("Error registering lecturer:", error);
-      toast.error("Failed to add lecturer.", {
+      console.error("Error registering user:", error);
+      toast.error("Failed to add user.", {
         className: "custom-toast",
         position: "top-center",
         autoClose: 3000,
@@ -155,6 +159,7 @@ const Lecturer = () => {
     }
   };
 
+  // Handle input changes
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
     setIsUserNameValid(e.target.value.trim() !== "");
@@ -178,6 +183,28 @@ const Lecturer = () => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setIsEmailValid(isValidEmail(e.target.value));
+  };
+
+  // Render dropdown options based on logged-in user's role
+  const renderRoleOptions = () => {
+    if (loggedInUserRole === "administrator") {
+      return (
+        <>
+          <option value="student">Student</option>
+          <option value="lecturer">Lecturer</option>
+          <option value="administrator">Administrator</option>
+          <option value="admin">Admin</option>
+        </>
+      );
+    } else if (loggedInUserRole === "admin") {
+      return (
+        <>
+          <option value="student">Student</option>
+          <option value="lecturer">Lecturer</option>
+        </>
+      );
+    }
+    return null;
   };
 
   return (
@@ -226,9 +253,7 @@ const Lecturer = () => {
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
                     >
-                      <option value="student">Student</option>
-                      <option value="lecturer">Lecturer</option>
-                      <option value="admin">Admin</option>
+                      {renderRoleOptions()}
                     </select>
                   </td>
                 </tr>
@@ -278,7 +303,7 @@ const Lecturer = () => {
                 </tr>
                 <tr>
                   <td colSpan={2} id="submit-button">
-                    <button type="submit">Add a Lecturer</button>
+                    <button type="submit">Add a User</button>
                   </td>
                 </tr>
               </tbody>
