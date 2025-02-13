@@ -34,23 +34,11 @@ public class CourseController {
         return ResponseEntity.ok(createdCourse);
     }
 
-    // @GetMapping({ "/{id}" })
-    // public ResponseEntity<Course> getCourseById(@PathVariable long id) {
-    //     Course course = this.courseService.getCourseById(id);
-    //     return course != null ? ResponseEntity.ok(course) : ResponseEntity.notFound().build();
-    // }
-
     @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
         List<Course> course = this.courseService.getAllCourses();
         return ResponseEntity.ok(course);
     }
-
-    // @PutMapping({ "/{id}" })
-    // public ResponseEntity<Course> updateCourse(@PathVariable long id, @RequestBody Course course) {
-    //     Course updatedCourse = this.courseService.updateCourse(id, course);
-    //     return updatedCourse != null ? ResponseEntity.ok(updatedCourse) : ResponseEntity.notFound().build();
-    // }
 
     @GetMapping("/exists/{courseCode}")
     public ResponseEntity<String> checkIfCourseExists(@PathVariable String courseCode) {
@@ -62,7 +50,6 @@ public class CourseController {
         }
     }
 
-    // Endpoint to delete a course by courseCode
     @DeleteMapping("/delete/{courseCode}")
     public ResponseEntity<String> deleteCourse(@PathVariable String courseCode) {
         try {
@@ -114,13 +101,13 @@ public class CourseController {
         return courses.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(courses);
     }
 
-    @GetMapping("/by-code/{courseCode}") // New endpoint
+    @GetMapping("/by-code/{courseCode}")
     public ResponseEntity<Course> getCourseByCode(@PathVariable String courseCode) {
         Course course = courseService.getCourseByCourseCode(courseCode);
         if (course != null) {
             return ResponseEntity.ok(course);
         } else {
-            return ResponseEntity.notFound().build(); // 404 if not found
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -134,13 +121,13 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/yearLevel/{courseCode}") // New endpoint
+    @GetMapping("/yearLevel/{courseCode}")
     public ResponseEntity<String> getYearLevelByCourseCodeAlt(@PathVariable String courseCode) {
         String yearLevel = courseService.getYearLevelByCourseCode(courseCode);
         if (yearLevel != null) {
             return ResponseEntity.ok(yearLevel);
         } else {
-            return ResponseEntity.notFound().build(); // 404 if not found
+            return ResponseEntity.notFound().build();
         }
     }
 }

@@ -46,12 +46,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/role/{role}") 
-    public ResponseEntity<List<User>> getAllUsersByRole(@PathVariable String role) { 
-        List<User> users = this.userRepository.findByRole(role); 
+    @GetMapping("/role/{role}")
+    public ResponseEntity<List<User>> getAllUsersByRole(@PathVariable String role) {
+        List<User> users = this.userRepository.findByRole(role);
         return ResponseEntity.ok(users);
     }
-    
 
     @PutMapping({ "/{id}" })
     public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user) {
@@ -61,19 +60,19 @@ public class UserController {
 
     @GetMapping("/{userName}")
     public ResponseEntity<User> getUserByUserName(@PathVariable String userName) {
-        User user = userService.getUserByUserName(userName); 
-        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); 
+        User user = userService.getUserByUserName(userName);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build();
     }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<User> getUserById(@PathVariable long id) {
-        User user = userService.getUserById(id); 
-        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); 
+        User user = userService.getUserById(id);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build();
     }
 
     @DeleteMapping("/{userName}")
     public ResponseEntity<String> deleteUserByUserName(@PathVariable String userName) {
-        boolean deleted = userService.deleteUserByUserName(userName); 
+        boolean deleted = userService.deleteUserByUserName(userName);
         if (deleted) {
             return ResponseEntity.status(204).body("Lecturer account deleted successfully.");
         } else {
@@ -84,7 +83,7 @@ public class UserController {
     @GetMapping("/role/{role}/userName/{userName}")
     public ResponseEntity<User> getUserByRoleAndUserName(@PathVariable String role, @PathVariable String userName) {
         User user = userService.getUserByRoleAndUserName(role, userName);
-        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build(); 
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(404).build();
     }
 
     @DeleteMapping("/{userName}/{role}") // New DELETE endpoint
@@ -93,9 +92,9 @@ public class UserController {
 
         boolean deleted = userService.deleteUserByUserNameAndRole(userName, role);
         if (deleted) {
-             return ResponseEntity.status(204).body("User account deleted successfully."); //204 No Content
+            return ResponseEntity.status(204).body("User account deleted successfully.");
         } else {
-            return ResponseEntity.status(404).body("Error: User not found."); //404 Not Found
+            return ResponseEntity.status(404).body("Error: User not found.");
         }
     }
 
@@ -103,12 +102,13 @@ public class UserController {
     public ResponseEntity<User> updateUserByUserNameAndRole(
             @RequestParam String userName,
             @RequestParam String role,
-            @RequestParam(required = false) String hashPassword, // Add hashPassword
+            @RequestParam(required = false) String hashPassword,
             @RequestParam(required = false) String fullName,
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String contactNumber) {
 
-        User updatedUser = userService.updateUserByUserNameAndRole(userName, role, hashPassword, fullName, contactNumber, email);
+        User updatedUser = userService.updateUserByUserNameAndRole(userName, role, hashPassword, fullName,
+                contactNumber, email);
 
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);

@@ -29,11 +29,10 @@ const LecturerRegistration = () => {
       );
 
       if (checkLecturerResponse.status === 200) {
-        const lecturerData = checkLecturerResponse.data; // Get lecturer data
-        const lecturerUserName = lecturerData.userName; // Extract userName
-
+        const lecturerData = checkLecturerResponse.data;
+        const lecturerUserName = lecturerData.userName; 
         const checkCourseResponse = await axios.get(
-          `http://localhost:8080/api/courses/by-code/${courseCode}` // Use /by-code endpoint
+          `http://localhost:8080/api/courses/by-code/${courseCode}` 
         );
 
         if (checkCourseResponse.status === 200) {
@@ -105,7 +104,7 @@ const LecturerRegistration = () => {
         });
       }
     } catch (err) {
-      // Handle errors (e.g., unable to check lecturer or course)
+      
       if (err.response && err.response.status === 404) {
         setError("Error: Lecturer or course not found.");
       } else {

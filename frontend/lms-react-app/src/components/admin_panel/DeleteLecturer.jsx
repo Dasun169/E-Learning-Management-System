@@ -60,7 +60,7 @@ const DeleteLecturer = () => {
         progress: undefined,
       });
     } finally {
-      //setLoading(false); // Set loading to false after the request finishes
+     
     }
   };
 

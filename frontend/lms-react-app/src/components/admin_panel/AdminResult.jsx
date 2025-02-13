@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./css files/AdminResult.css"; // Create this CSS file
+import "./css files/AdminResult.css"; 
 
 const AdminResult = () => {
   const [userName, setUserName] = useState("");
@@ -32,15 +32,15 @@ const AdminResult = () => {
       );
 
       if (userResponse.data) {
-        // Check if user exists
-        setUserData(userResponse.data); // Store user data (you might not need all of it)
+        
+        setUserData(userResponse.data); )
 
         const registrationsResponse = await axios.get(
           `http://localhost:8080/api/courseRegistrations/user/${userName}/${role}`
         );
         setCourseRegistrations(registrationsResponse.data);
 
-        // Initialize userResults with retrieved data and empty result
+       
         setUserResults(
           registrationsResponse.data.map((reg) => ({
             ...reg,
@@ -91,7 +91,7 @@ const AdminResult = () => {
     try {
       const response = await axios.post(
         "http://localhost:8080/api/userResults/bulk",
-        userResults, // Send the array of user results
+        userResults,
         {
           headers: {
             "Content-Type": "application/json",
@@ -110,10 +110,10 @@ const AdminResult = () => {
           draggable: true,
           progress: undefined,
         });
-        // Optionally clear the form or fetch data again
-        setCourseRegistrations([]); // Clear table, or you can refetch data
+        
+        setCourseRegistrations([]); 
         setUserResults([]);
-        setUserName(""); // Clear username input
+        setUserName(""); 
         setUserData(null);
       } else {
         toast.error("Failed to update results.");
@@ -127,12 +127,12 @@ const AdminResult = () => {
   return (
     <div className="admin-result-container">
       {" "}
-      {/* Added container for styling */}
+      {}
       <ToastContainer />
       <h2>Student Results Management</h2>
       <div className="search-area">
         {" "}
-        {/* Area for username search */}
+        {}
         <input
           type="text"
           placeholder="Enter User Name"
@@ -160,7 +160,7 @@ const AdminResult = () => {
                 <td>
                   <input
                     type="text"
-                    value={userResults[index].result} // Bind to the correct result
+                    value={userResults[index].result} 
                     onChange={(e) => handleResultChange(index, e.target.value)}
                     placeholder="Enter Result"
                   />
@@ -170,7 +170,7 @@ const AdminResult = () => {
           </tbody>
         </table>
       )}
-      {courseRegistrations.length > 0 && ( // Only show button if there are registrations
+      {courseRegistrations.length > 0 && ( 
         <div className="submit-area">
           <button onClick={handleSubmit}>Update Results</button>
         </div>

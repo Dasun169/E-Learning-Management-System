@@ -67,7 +67,7 @@
   margin-bottom: 15px;
 }
 
-/* Responsive styling */
+
 @media (max-width: 768px) {
   .courses-list {
     grid-template-columns: 1fr;

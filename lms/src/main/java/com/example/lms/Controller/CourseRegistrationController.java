@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping({"/api/courseRegistrations"})
+@RequestMapping({ "/api/courseRegistrations" })
 @CrossOrigin(origins = "http://localhost:5173")
 public class CourseRegistrationController {
 
     @Autowired
     private CourseRegistrationService courseRegistrationService;
 
-    public CourseRegistrationController(){
+    public CourseRegistrationController() {
     }
 
     @PostMapping
@@ -57,19 +57,19 @@ public class CourseRegistrationController {
         return ResponseEntity.ok(userName);
     }
 
-    @DeleteMapping("/{userName}/{role}/{courseCode}")  // DELETE request
+    @DeleteMapping("/{userName}/{role}/{courseCode}")
     public ResponseEntity<Void> deleteRegistration(
             @PathVariable String userName, @PathVariable String role, @PathVariable String courseCode) {
         courseRegistrationService.deleteRegistration(userName, role, courseCode);
-        return ResponseEntity.noContent().build(); // 204 No Content on successful deletion
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/user/{userName}/{role}") // Using PathVariables
+    @GetMapping("/user/{userName}/{role}")
     public ResponseEntity<List<CourseRegistration>> getRegistrationsByUserNameAndRole(
-            @PathVariable String userName,  // userName as PathVariable
-            @PathVariable String role) {     // role as PathVariable
-
-        List<CourseRegistration> registrations = courseRegistrationService.getAllRegistrationsByUserNameAndRole(userName, role);
+            @PathVariable String userName,
+            @PathVariable String role) {
+        List<CourseRegistration> registrations = courseRegistrationService
+                .getAllRegistrationsByUserNameAndRole(userName, role);
         return ResponseEntity.ok(registrations);
     }
 }

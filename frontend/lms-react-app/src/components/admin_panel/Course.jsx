@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./css files/course.css";
 
 const Course = () => {
-  const [id, setId] = useState(""); // State for ID
+  const [id, setId] = useState(""); 
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [lecturerId, setLecturerId] = useState("");
@@ -94,19 +94,7 @@ const Course = () => {
         <form onSubmit={handleSubmit}>
           <table>
             <tbody>
-              {/* <tr>
-                <td>
-                  <label>Course ID:</label>
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                    placeholder="Enter Course ID"
-                  />
-                </td>
-              </tr> */}
+              {}
               <tr>
                 <td>
                   <label>Course Name:</label>
