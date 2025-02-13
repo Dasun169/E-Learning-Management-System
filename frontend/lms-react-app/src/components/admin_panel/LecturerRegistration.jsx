@@ -104,7 +104,7 @@ const LecturerRegistration = () => {
         });
       }
     } catch (err) {
-      // Handle errors (e.g., unable to check lecturer or course)
+      
       if (err.response && err.response.status === 404) {
         setError("Error: Lecturer or course not found.");
       } else {
