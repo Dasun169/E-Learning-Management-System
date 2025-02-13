@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "users") 
+@Document(collection = "users")
 public class User {
 
     @Id
@@ -15,7 +15,7 @@ public class User {
     private String hashPassword;
     private String fullName;
     private String contactNumber;
-    private String email; 
+    private String email;
     private String role;
 
     @CreatedDate
@@ -24,7 +24,8 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedDate;
 
-    public void update(String userName, String role, String hashPassword, String fullName, String email, String contactNumber) {
+    public void update(String userName, String role, String hashPassword, String fullName, String email,
+            String contactNumber) {
         if (userName != null) {
             this.setUserName(userName);
         }
@@ -86,18 +87,18 @@ public class User {
     }
 
     public String getRole() {
-        return role; 
+        return role;
     }
 
     public void setRole(String role) {
-        this.role = role; 
+        this.role = role;
     }
 
-    public String getEmail() { // Getter for email
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) { // Setter for email
+    public void setEmail(String email) {
         this.email = email;
     }
 
