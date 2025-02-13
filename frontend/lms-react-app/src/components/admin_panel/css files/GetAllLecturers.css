@@ -3,7 +3,7 @@
   margin: 0 auto;
   margin-top: -10px;
   height: 280px; 
-  overflow-y: scroll; /* Make it scrollable if the content overflows */
+  overflow-y: scroll; 
   background-color: rgb(255, 255, 255);
   box-shadow: 3px 4px 10px rgba(23, 19, 143, 0.7);
   border-radius: 10px;
