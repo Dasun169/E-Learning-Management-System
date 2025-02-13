@@ -17,7 +17,7 @@ const DeleteCourse = () => {
   const handleDeleteCourse = async (e) => {
     e.preventDefault();
 
-    // Validate input
+    
     if (!courseCode) {
       setError("Course Code is required.");
       return;
@@ -54,13 +54,13 @@ const DeleteCourse = () => {
       }
     } catch (err) {
       if (err.response && err.response.status === 404) {
-        //setError(`Error: Course with code ${courseCode} not found.`);
+       
       } else {
-        //setError("Error: Unable to delete the course.");
+        
       }
       setMessage("");
 
-      // Show error toast
+      
       toast.error(error || "Error: Unable to delete the course.", {
         className: "custom-toast",
         position: "top-center",
