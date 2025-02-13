@@ -195,7 +195,7 @@ function Admin() {
                         setActiveForm("register");
                       }}
                     >
-                      Admin Profile
+                      Update Admin
                     </a>
                   </span>
                 </div>
@@ -312,7 +312,7 @@ function Admin() {
 
           <div className="details-display">
             {activeForm === "lecturer" && (
-              <Lecturer loggedInUserRole={role} /> // Pass the role as a prop
+              <Lecturer loggedInUserRole={role} userName={username} /> // Pass the role as a prop
             )}
             {activeForm === "course" && <Course />}
             {activeForm === "deleteLecturer" && <DeleteLecturer />}
