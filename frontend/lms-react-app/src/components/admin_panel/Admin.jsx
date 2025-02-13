@@ -12,9 +12,12 @@ import AdminResult from "./AdminResult";
 import "./css files/Admin.css";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Admin() {
   const [activeForm, setActiveForm] = useState(null);
+  const location = useLocation();
+  const { username, role } = location.state || {};
 
   return (
     <>
@@ -192,7 +195,7 @@ function Admin() {
                         setActiveForm("register");
                       }}
                     >
-                      Admin Profile
+                      Update Admin
                     </a>
                   </span>
                 </div>
@@ -308,7 +311,9 @@ function Admin() {
           </div>
 
           <div className="details-display">
-            {activeForm === "lecturer" && <Lecturer />}
+            {activeForm === "lecturer" && (
+              <Lecturer loggedInUserRole={role} userName={username} /> // Pass the role as a prop
+            )}
             {activeForm === "course" && <Course />}
             {activeForm === "deleteLecturer" && <DeleteLecturer />}
             {activeForm === "deleteCourse" && <DeleteCourse />}

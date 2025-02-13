@@ -37,8 +37,10 @@ function Home() {
         });
 
         setTimeout(() => {
-          if (role === "admin") {
-            navigate("/Admin");
+          if (role === "admin" || role === "administrator") {
+            navigate("/Admin", {
+              state: { username: username, role: role },
+            });
           } else {
             navigate("/StudentHome", {
               state: { username: username, role: role },
@@ -123,6 +125,7 @@ function Home() {
               >
                 <option value="student">Student</option>
                 <option value="lecturer">Lecturer</option>
+                <option value="administrator">Administrator</option>
                 <option value="admin">Admin</option>
               </select>
 
