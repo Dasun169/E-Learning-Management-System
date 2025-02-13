@@ -117,7 +117,7 @@ function Registration() {
         setPassword("");
         setFullName("");
         setContactNumber("");
-        setEmail(""); // Clear email field
+        setEmail(""); 
         setProfileImage(null);
       } else {
         toast.error("Failed to register student.", {
