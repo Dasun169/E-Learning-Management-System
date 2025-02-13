@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/lecturer.css";
 
-const Lecturer = ({ loggedInUserRole }) => {
+const Lecturer = ({ loggedInUserRole, username }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -19,7 +19,6 @@ const Lecturer = ({ loggedInUserRole }) => {
   const [isContactNumberValid, setIsContactNumberValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
 
-  // Function to check if username exists
   const checkUserNameExists = async (userName) => {
     try {
       const response = await axios.get(
@@ -37,10 +36,19 @@ const Lecturer = ({ loggedInUserRole }) => {
     return emailRegex.test(email);
   };
 
+  const isValidFullName = (fullName) => {
+    const fullNameRegex = /^[a-zA-Z\s\-']+$/;
+    return fullNameRegex.test(fullName);
+  };
+
   // Contact number validation
   const isValidContactNumber = (number) => {
     const contactRegex = /^\d{10}$/;
     return contactRegex.test(number);
+  };
+
+  const isValidPassword = (password) => {
+    return password.length > 8; // More than 8 characters
   };
 
   // Handle form submission
@@ -167,12 +175,12 @@ const Lecturer = ({ loggedInUserRole }) => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setIsPasswordValid(e.target.value.trim() !== "");
+    setIsPasswordValid(isValidPassword(e.target.value));
   };
 
   const handleFullNameChange = (e) => {
     setFullName(e.target.value);
-    setIsFullNameValid(e.target.value.trim() !== "");
+    setIsFullNameValid(isValidFullName(e.target.value)); // Validate on change
   };
 
   const handleContactNumberChange = (e) => {
@@ -227,7 +235,11 @@ const Lecturer = ({ loggedInUserRole }) => {
                       onChange={handleUserNameChange}
                       placeholder="e.g: jhond20133"
                     />
-                    {isUserNameValid && <span className="span-right"> ✅</span>}
+                    {isUserNameValid ? (
+                      <span className="span-right"> ✅</span>
+                    ) : (
+                      <span className="span-right"> ❌</span> // Show cross if invalid
+                    )}
                   </td>
                 </tr>
                 <tr>
@@ -241,7 +253,11 @@ const Lecturer = ({ loggedInUserRole }) => {
                       onChange={handlePasswordChange}
                       placeholder="e.g: ABCabc123!@#"
                     />
-                    {isPasswordValid && <span className="span-right"> ✅</span>}
+                    {isPasswordValid ? (
+                      <span className="span-right"> ✅</span>
+                    ) : (
+                      <span className="span-right"> ❌</span> // Show cross if invalid
+                    )}
                   </td>
                 </tr>
                 <tr>
@@ -268,7 +284,11 @@ const Lecturer = ({ loggedInUserRole }) => {
                       onChange={handleFullNameChange}
                       placeholder="e.g: John Doe"
                     />
-                    {isFullNameValid && <span className="span-right"> ✅</span>}
+                    {isFullNameValid ? (
+                      <span className="span-right"> ✅</span>
+                    ) : (
+                      <span className="span-right"> ❌</span> // Show cross if invalid
+                    )}
                   </td>
                 </tr>
                 <tr>
@@ -282,8 +302,10 @@ const Lecturer = ({ loggedInUserRole }) => {
                       onChange={handleContactNumberChange}
                       placeholder="e.g: 0123456789"
                     />
-                    {isContactNumberValid && (
+                    {isContactNumberValid ? (
                       <span className="span-right"> ✅</span>
+                    ) : (
+                      <span className="span-right"> ❌</span> // Show cross if invalid
                     )}
                   </td>
                 </tr>
@@ -298,7 +320,11 @@ const Lecturer = ({ loggedInUserRole }) => {
                       onChange={handleEmailChange}
                       placeholder="e.g: johndoe@example.com"
                     />
-                    {isEmailValid && <span className="span-right"> ✅</span>}
+                    {isEmailValid ? (
+                      <span className="span-right"> ✅</span>
+                    ) : (
+                      <span className="span-right"> ❌</span> // Show cross if invalid
+                    )}
                   </td>
                 </tr>
                 <tr>
