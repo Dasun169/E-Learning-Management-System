@@ -18,6 +18,30 @@ function ProfileBody({ username, role }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [isFullNameValid, setIsFullNameValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isContactNumberValid, setIsContactNumberValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+  const isValidFullName = (fullName) => {
+    const fullNameRegex = /^[a-zA-Z\s\-']+$/;
+    return fullNameRegex.test(fullName);
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isValidContactNumber = (number) => {
+    const contactRegex = /^\d{10}$/;
+    return contactRegex.test(number);
+  };
+
+  const isValidPassword = (password) => {
+    return password.length >= 8;
+  };
+
   useEffect(() => {
     if (username && role) {
       fetchUserData();
@@ -52,11 +76,40 @@ function ProfileBody({ username, role }) {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setFormData({ ...formData, [name]: value });
+
+    // Real-time validation
+    switch (name) {
+      case "fullName":
+        setIsFullNameValid(isValidFullName(value));
+        break;
+      case "email":
+        setIsEmailValid(isValidEmail(value));
+        break;
+      case "contactNumber":
+        setIsContactNumberValid(isValidContactNumber(value));
+        break;
+      case "hashPassword":
+        setIsPasswordValid(isValidPassword(value));
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !isFullNameValid ||
+      !isEmailValid ||
+      !isContactNumberValid ||
+      !isPasswordValid
+    ) {
+      toast.error("Please correct the invalid fields.");
+      return;
+    }
     try {
       const response = await fetch(
         `http://localhost:8080/api/users/update?userName=${formData.username}` +
@@ -119,37 +172,70 @@ function ProfileBody({ username, role }) {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Full Name</label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
+              <div className="input-with-validation">
+                {" "}
+                {/* Wrap input and icon */}
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                />
+                {isEditing && (
+                  <span className="validation-icon">
+                    {isFullNameValid ? "✅" : "❌"}
+                  </span>
+                )}
+              </div>
+
               <label>Password</label>
-              <input
-                type="password"
-                name="hashPassword"
-                value={formData.hashPassword}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
+              <div className="input-with-validation">
+                <input
+                  type="password"
+                  name="hashPassword"
+                  value={formData.hashPassword}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                />
+                {isEditing && (
+                  <span className="validation-icon">
+                    {isPasswordValid ? "✅" : "❌"}
+                  </span>
+                )}
+              </div>
+
               <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
+              <div className="input-with-validation">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                />
+                {isEditing && (
+                  <span className="validation-icon">
+                    {isEmailValid ? "✅" : "❌"}
+                  </span>
+                )}
+              </div>
+
               <label>Contact Number</label>
-              <input
-                type="text"
-                name="contactNumber"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
+              <div className="input-with-validation">
+                <input
+                  type="text"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                />
+                {isEditing && (
+                  <span className="validation-icon">
+                    {isContactNumberValid ? "✅" : "❌"}
+                  </span>
+                )}
+              </div>
             </div>
 
             {isEditing && (
