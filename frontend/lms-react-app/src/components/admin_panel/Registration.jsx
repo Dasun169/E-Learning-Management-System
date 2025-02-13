@@ -9,7 +9,7 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [email, setEmail] = useState(""); // Added state for email
+  const [email, setEmail] = useState(""); 
   const [profileImage, setProfileImage] = useState(null);
 
   const checkUserNameExists = async (userName) => {
@@ -112,7 +112,7 @@ function Registration() {
           draggable: true,
         });
 
-        // Reset form fields
+        
         setUserName("");
         setPassword("");
         setFullName("");
