@@ -220,7 +220,7 @@ function Registration() {
                 </tr>
                 <tr>
                   <td colSpan={2} id="submit-button">
-                    <button type="submit">Add a Student</button>
+                    <button type="submit">Update Admin</button>
                   </td>
                 </tr>
               </tbody>
