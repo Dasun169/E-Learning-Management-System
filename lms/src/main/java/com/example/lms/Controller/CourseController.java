@@ -107,7 +107,7 @@ public class CourseController {
         if (course != null) {
             return ResponseEntity.ok(course);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // 404 if not found
         }
     }
 
@@ -121,13 +121,13 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/yearLevel/{courseCode}")
+    @GetMapping("/yearLevel/{courseCode}") // New endpoint
     public ResponseEntity<String> getYearLevelByCourseCodeAlt(@PathVariable String courseCode) {
         String yearLevel = courseService.getYearLevelByCourseCode(courseCode);
         if (yearLevel != null) {
             return ResponseEntity.ok(yearLevel);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // 404 if not found
         }
     }
 }

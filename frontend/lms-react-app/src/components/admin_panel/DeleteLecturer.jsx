@@ -4,12 +4,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/deleteLecturer.css";
 
-const DeleteLecturer = () => {
+const DeleteLecturer = ({ loggedInUserRole, adminUserName }) => {
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const lecturer = "lecturer";
+  const [selectedRole, setSelectedRole] = useState("lecturer");
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -24,17 +24,32 @@ const DeleteLecturer = () => {
     setMessage("");
 
     try {
+      const canDeleteRole = (targetRole) => {
+        if (loggedInUserRole === "administrator") {
+          return true; // Admin can delete any role
+        } else if (loggedInUserRole === "admin") {
+          return targetRole !== "administrator" && targetRole !== "admin"; // Admin can't delete other admins or administrators
+        }
+        return false; // Other roles cannot delete
+      };
+
+      if (!canDeleteRole(selectedRole)) {
+        throw new Error(
+          `You do not have permission to delete a ${selectedRole}.`
+        );
+      }
+
       const checkResponse = await axios.get(
-        `http://localhost:8080/api/users/role/${lecturer}/userName/${userName}`
+        `http://localhost:8080/api/users/role/${selectedRole}/userName/${userName}`
       );
 
       if (checkResponse.status === 200) {
         const deleteResponse = await axios.delete(
-          `http://localhost:8080/api/users/${userName}/${lecturer}`
+          `http://localhost:8080/api/users/${userName}/${selectedRole}`
         );
 
         if (deleteResponse.status === 204) {
-          toast.success("Lecturer deleted successfully!", {
+          toast.success(`${selectedRole} deleted successfully!`, {
             className: "custom-toast",
             position: "top-center",
             autoClose: 2000,
@@ -49,7 +64,7 @@ const DeleteLecturer = () => {
         }
       }
     } catch (err) {
-      toast.error(error || "Error: Unable to delete the lecturer.", {
+      toast.error(error || `Error: Unable to delete the ${selectedRole}.`, {
         className: "custom-toast",
         position: "top-center",
         autoClose: 3000,
@@ -85,6 +100,24 @@ const DeleteLecturer = () => {
                       placeholder="ex: jhond20133"
                       disabled={loading}
                     />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Role:</label>
+                  </td>
+                  <td>
+                    <select
+                      value={selectedRole}
+                      onChange={(e) => setSelectedRole(e.target.value)}
+                      disabled={loading}
+                    >
+                      <option value="student">Student</option>
+                      <option value="lecturer">Lecturer</option>
+                      {loggedInUserRole === "administrator" && (
+                        <option value="admin">Admin</option>
+                      )}
+                    </select>
                   </td>
                 </tr>
                 {error && (

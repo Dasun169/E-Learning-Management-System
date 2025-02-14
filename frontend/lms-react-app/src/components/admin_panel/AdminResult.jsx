@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./css files/AdminResult.css"; 
+import "./css files/AdminResult.css";
 
-const AdminResult = () => {
+const AdminResult = ({ loggedInUserRole, adminUserName }) => {
   const [userName, setUserName] = useState("");
   const [userData, setUserData] = useState(null);
   const [courseRegistrations, setCourseRegistrations] = useState([]);
@@ -32,15 +32,13 @@ const AdminResult = () => {
       );
 
       if (userResponse.data) {
-        
-        setUserData(userResponse.data); )
+        setUserData(userResponse.data);
 
         const registrationsResponse = await axios.get(
           `http://localhost:8080/api/courseRegistrations/user/${userName}/${role}`
         );
         setCourseRegistrations(registrationsResponse.data);
 
-       
         setUserResults(
           registrationsResponse.data.map((reg) => ({
             ...reg,
@@ -110,10 +108,38 @@ const AdminResult = () => {
           draggable: true,
           progress: undefined,
         });
-        
-        setCourseRegistrations([]); 
+
+        try {
+          await axios.post(
+            "http://localhost:8080/api/adminHistory",
+            null, // No body needed for @RequestParam
+            {
+              params: {
+                userName: adminUserName, // Username of the admin performing the action
+                role: loggedInUserRole, // Role of the admin
+                action: `Updated results for student : '${userName}' successfully`,
+              },
+            }
+          );
+          console.log("Admin history updated successfully");
+        } catch (historyError) {
+          console.error("Error updating admin history:", historyError);
+          toast.error("Failed to update admin history. Please contact admin.", {
+            // Inform user but don't prevent success message
+            className: "custom-toast",
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+
+        setCourseRegistrations([]); // Clear table, or you can refetch data
         setUserResults([]);
-        setUserName(""); 
+        setUserName("");
         setUserData(null);
       } else {
         toast.error("Failed to update results.");
@@ -126,13 +152,9 @@ const AdminResult = () => {
 
   return (
     <div className="admin-result-container">
-      {" "}
-      {}
       <ToastContainer />
       <h2>Student Results Management</h2>
       <div className="search-area">
-        {" "}
-        {}
         <input
           type="text"
           placeholder="Enter User Name"
@@ -160,7 +182,7 @@ const AdminResult = () => {
                 <td>
                   <input
                     type="text"
-                    value={userResults[index].result} 
+                    value={userResults[index].result}
                     onChange={(e) => handleResultChange(index, e.target.value)}
                     placeholder="Enter Result"
                   />
@@ -170,7 +192,7 @@ const AdminResult = () => {
           </tbody>
         </table>
       )}
-      {courseRegistrations.length > 0 && ( 
+      {courseRegistrations.length > 0 && (
         <div className="submit-area">
           <button onClick={handleSubmit}>Update Results</button>
         </div>

@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/deleteCourse.css";
 
-const DeleteCourse = () => {
+const DeleteCourse = ({ loggedInUserRole, adminUserName }) => {
   const [courseCode, setCourseCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
