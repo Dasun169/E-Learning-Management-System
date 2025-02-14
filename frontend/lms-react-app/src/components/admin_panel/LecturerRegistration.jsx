@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/lecturerRegistration.css";
 
-const LecturerRegistration = () => {
+const LecturerRegistration = ({ loggedInUserRole, adminUserName }) => {
   const [lecturerId, setLecturerId] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [loading, setLoading] = useState(false);
