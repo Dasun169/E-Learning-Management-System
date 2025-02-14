@@ -18,6 +18,7 @@ function Admin() {
   const [activeForm, setActiveForm] = useState(null);
   const location = useLocation();
   const { username, role } = location.state || {};
+  const adminUserName = username;
 
   return (
     <>
@@ -312,17 +313,39 @@ function Admin() {
 
           <div className="details-display">
             {activeForm === "lecturer" && (
-              <Lecturer loggedInUserRole={role} userName={username} /> // Pass the role as a prop
+              <Lecturer loggedInUserRole={role} adminUserName={adminUserName} />
             )}
-            {activeForm === "course" && <Course />}
-            {activeForm === "deleteLecturer" && <DeleteLecturer />}
-            {activeForm === "deleteCourse" && <DeleteCourse />}
-            {activeForm === "lecturerRegistration" && <LecturerRegistration />}
+            {activeForm === "course" && (
+              <Course loggedInUserRole={role} adminUserName={adminUserName} />
+            )}
+            {activeForm === "deleteLecturer" && (
+              <DeleteLecturer
+                loggedInUserRole={role}
+                adminUserName={adminUserName}
+              />
+            )}
+            {activeForm === "deleteCourse" && (
+              <DeleteCourse
+                loggedInUserRole={role}
+                adminUserName={adminUserName}
+              />
+            )}
+            {activeForm === "lecturerRegistration" && (
+              <LecturerRegistration
+                loggedInUserRole={role}
+                adminUserName={adminUserName}
+              />
+            )}
+            {activeForm === "adminResult" && (
+              <AdminResult
+                loggedInUserRole={role}
+                adminUserName={adminUserName}
+              />
+            )}
             {activeForm === "register" && <Register />}
             {activeForm === "getAllCourses" && <GetAllCourses />}
             {activeForm === "getAllLecturers" && <GetAllLecturers />}
             {activeForm === "adminResultBody" && <AdminResultBody />}
-            {activeForm === "adminResult" && <AdminResult />}
           </div>
         </div>
       </div>
