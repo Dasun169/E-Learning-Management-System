@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/lecturer.css";
 
-const Lecturer = ({ loggedInUserRole, username }) => {
+const Lecturer = ({ loggedInUserRole, adminUserName }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -193,7 +193,6 @@ const Lecturer = ({ loggedInUserRole, username }) => {
     setIsEmailValid(isValidEmail(e.target.value));
   };
 
-  // Render dropdown options based on logged-in user's role
   const renderRoleOptions = () => {
     if (loggedInUserRole === "administrator") {
       return (
