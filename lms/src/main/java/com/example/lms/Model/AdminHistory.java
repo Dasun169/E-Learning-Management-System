@@ -11,7 +11,7 @@ public class AdminHistory {
   @Id
   private String id;
   private String userName;
-  String role;
+  private String role;
   private String action;
   private LocalDateTime actionTime;
 
@@ -38,6 +38,14 @@ public class AdminHistory {
 
     public LocalDateTime getActionTime() {
         return actionTime;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setId(String id) {
