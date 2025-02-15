@@ -9,6 +9,7 @@ import GetAllLecturers from "./GetAllLecturers";
 import Register from "./Registration";
 import AdminResultBody from "../admin_result/AdminResultBody";
 import AdminResult from "./AdminResult";
+import AdminHistory from "./AdminHistory";
 import "./css files/Admin.css";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
@@ -25,7 +26,7 @@ function Admin() {
       <div className="container">
         <div className="left-nav-bar div1">
           <h1>DashBoard</h1>
-          <div className="nav-bar">
+          <div className="nav-bar5">
             <ul>
               <li>
                 <a
@@ -124,6 +125,17 @@ function Admin() {
                   }}
                 >
                   Add Results
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#adminHistory"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("adminHistory");
+                  }}
+                >
+                  LMS Activity
                 </a>
               </li>
             </ul>
@@ -346,6 +358,7 @@ function Admin() {
             {activeForm === "getAllCourses" && <GetAllCourses />}
             {activeForm === "getAllLecturers" && <GetAllLecturers />}
             {activeForm === "adminResultBody" && <AdminResultBody />}
+            {activeForm === "adminHistory" && <AdminHistory />}
           </div>
         </div>
       </div>

@@ -110,17 +110,13 @@ const AdminResult = ({ loggedInUserRole, adminUserName }) => {
         });
 
         try {
-          await axios.post(
-            "http://localhost:8080/api/adminHistory",
-            null, // No body needed for @RequestParam
-            {
-              params: {
-                userName: adminUserName, // Username of the admin performing the action
-                role: loggedInUserRole, // Role of the admin
-                action: `Updated results for student : '${userName}' successfully`,
-              },
-            }
-          );
+          await axios.post("http://localhost:8080/api/adminHistory", null, {
+            params: {
+              userName: adminUserName,
+              role: loggedInUserRole,
+              action: `Updated results : '${userName}' successfully`,
+            },
+          });
           console.log("Admin history updated successfully");
         } catch (historyError) {
           console.error("Error updating admin history:", historyError);

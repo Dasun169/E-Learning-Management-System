@@ -21,6 +21,6 @@ public class AdminHistoryServiceImpl implements AdminHistoryService {
 
     @Override
     public List<AdminHistory> getAdminHistoryByDateAsc() {
-        return adminHistoryRepository.findAllByOrderByActionTimeAsc();
+        return adminHistoryRepository.findAllByOrderByActionTimeDesc();
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AdminHistoryRepository extends MongoRepository<AdminHistory, String> {
-    List<AdminHistory> findAllByOrderByActionTimeAsc(); 
+    List<AdminHistory> findAllByOrderByActionTimeDesc(); 
 }

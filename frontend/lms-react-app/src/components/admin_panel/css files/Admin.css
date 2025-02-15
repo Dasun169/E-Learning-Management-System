@@ -41,20 +41,20 @@ body {
   height: 25px;
 }
 
-.nav-bar {
+.nav-bar5 {
   margin-top: 30px;
 }
 
-.nav-bar a {
+.nav-bar5 a {
   text-decoration: none;
   color: #004080;
 }
 
-.nav-bar ul {
+.nav-bar5 ul {
   list-style-type: none;
 }
 
-.nav-bar li {
+.nav-bar5 li {
   height: 40px;
   border: #004080 solid 1px;
   border-radius: 1cap;
@@ -63,7 +63,16 @@ body {
   margin-bottom: 5px;
 }
 
-.nav-bar a {
+.nav-bar5 li:hover {
+  background-color: #004080;
+  color: white;
+}
+
+.nav-bar5 a:hover {
+  color: white;
+}
+
+.nav-bar5 a {
   display: flex;
   justify-content: center;
   padding-top: 7px;
