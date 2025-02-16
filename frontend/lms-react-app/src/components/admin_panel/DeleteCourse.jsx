@@ -17,7 +17,6 @@ const DeleteCourse = ({ loggedInUserRole, adminUserName }) => {
   const handleDeleteCourse = async (e) => {
     e.preventDefault();
 
-    
     if (!courseCode) {
       setError("Course Code is required.");
       return;
@@ -49,18 +48,40 @@ const DeleteCourse = ({ loggedInUserRole, adminUserName }) => {
             progress: undefined,
           });
 
+          try {
+            await axios.post("http://localhost:8080/api/adminHistory", null, {
+              params: {
+                userName: adminUserName,
+                role: loggedInUserRole,
+                action: `Deleted course: '${courseCode}' successfully`,
+              },
+            });
+          } catch (historyError) {
+            console.error("Error updating admin history:", historyError);
+            toast.error(
+              "Failed to update admin history. Please contact admin.",
+              {
+                className: "custom-toast",
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              }
+            );
+          }
+
           setCourseCode("");
         }
       }
     } catch (err) {
       if (err.response && err.response.status === 404) {
-       
       } else {
-        
       }
       setMessage("");
 
-      
       toast.error(error || "Error: Unable to delete the course.", {
         className: "custom-toast",
         position: "top-center",
