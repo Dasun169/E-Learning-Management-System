@@ -60,6 +60,32 @@ const DeleteLecturer = ({ loggedInUserRole, adminUserName }) => {
             progress: undefined,
           });
 
+          try {
+            await axios.post("http://localhost:8080/api/adminHistory", null, {
+              params: {
+                userName: adminUserName,
+                role: loggedInUserRole,
+                action: `Deleted ${selectedRole}: '${userName}' successfully`, // Updated action message
+              },
+            });
+            console.log("Admin history updated successfully");
+          } catch (historyError) {
+            console.error("Error updating admin history:", historyError);
+            toast.error(
+              "Failed to update admin history. Please contact admin.",
+              {
+                className: "custom-toast",
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              }
+            );
+          }
+
           setUserName("");
         }
       }
@@ -75,7 +101,6 @@ const DeleteLecturer = ({ loggedInUserRole, adminUserName }) => {
         progress: undefined,
       });
     } finally {
-     
     }
   };
 
