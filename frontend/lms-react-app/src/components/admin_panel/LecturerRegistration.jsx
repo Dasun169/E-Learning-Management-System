@@ -30,9 +30,9 @@ const LecturerRegistration = ({ loggedInUserRole, adminUserName }) => {
 
       if (checkLecturerResponse.status === 200) {
         const lecturerData = checkLecturerResponse.data;
-        const lecturerUserName = lecturerData.userName; 
+        const lecturerUserName = lecturerData.userName;
         const checkCourseResponse = await axios.get(
-          `http://localhost:8080/api/courses/by-code/${courseCode}` 
+          `http://localhost:8080/api/courses/by-code/${courseCode}`
         );
 
         if (checkCourseResponse.status === 200) {
@@ -73,6 +73,32 @@ const LecturerRegistration = ({ loggedInUserRole, adminUserName }) => {
               progress: undefined,
             });
 
+            try {
+              await axios.post("http://localhost:8080/api/adminHistory", null, {
+                params: {
+                  userName: adminUserName,
+                  role: loggedInUserRole,
+                  action: `Registered lecturer: '${lecturerUserName}' for course '${courseCode}' successfully`,
+                },
+              });
+              console.log("Admin history updated successfully");
+            } catch (historyError) {
+              console.error("Error updating admin history:", historyError);
+              toast.error(
+                "Failed to update admin history. Please contact admin.",
+                {
+                  className: "custom-toast",
+                  position: "top-center",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                }
+              );
+            }
+
             setMessage("Lecturer registered successfully.");
             setLecturerId("");
             setCourseCode("");
@@ -104,7 +130,6 @@ const LecturerRegistration = ({ loggedInUserRole, adminUserName }) => {
         });
       }
     } catch (err) {
-      
       if (err.response && err.response.status === 404) {
         setError("Error: Lecturer or course not found.");
       } else {
