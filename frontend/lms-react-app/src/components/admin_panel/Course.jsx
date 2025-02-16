@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/course.css";
 
-const Course = () => {
+const Course = ({ loggedInUserRole, adminUserName }) => {
   const [id, setId] = useState(""); // State for ID
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
@@ -51,6 +51,32 @@ const Course = () => {
           progress: undefined,
         });
 
+        try {
+          await axios.post("http://localhost:8080/api/adminHistory", null, {
+            params: {
+              userName: adminUserName,
+              role: loggedInUserRole,
+              action: `Added course: '${courseName}' (${courseCode}) successfully`,
+            },
+          });
+          console.log("Admin history updated successfully");
+        } catch (historyError) {
+          console.error("Error updating admin history:", historyError);
+          toast.error(
+            "Failed to update admin history. Please contact administrator.",
+            {
+              className: "custom-toast",
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            }
+          );
+        }
+
         setId("");
         setCourseName("");
         setCourseCode("");
@@ -87,7 +113,6 @@ const Course = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="course-table">
         <ToastContainer />
         <h2>Course Registration</h2>
