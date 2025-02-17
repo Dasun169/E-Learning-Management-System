@@ -49,17 +49,33 @@ const Maths = ({ userName, role }) => {
   useEffect(() => {
     const fetchAllCourses = async () => {
       try {
-        const elecResponse = await fetch(
-          "http://localhost:8080/api/courses/search-by-name/PMAT"
-        );
-        const elecCourses = await elecResponse.json();
+        const fetchPromises = [
+          fetch("http://localhost:8080/api/courses/search-by-name/PMAT"),
+          fetch("http://localhost:8080/api/courses/search-by-name/AMAT"),
+          fetch("http://localhost:8080/api/courses/search-by-name/CMSK"),
+        ];
 
-        const physResponse = await fetch(
-          "http://localhost:8080/api/courses/search-by-name/AMAT"
-        );
-        const physCourses = await physResponse.json();
+        const results = await Promise.allSettled(fetchPromises);
 
-        const allCourses = [...elecCourses, ...physCourses];
+        const allCourses = [];
+        for (const result of results) {
+          if (result.status === "fulfilled") {
+            try {
+              const text = await result.value.text();
+              if (text) {
+                const courses = JSON.parse(text);
+                allCourses.push(...courses);
+              } else {
+                console.warn("Empty response body from API");
+              }
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError, result.value);
+            }
+          } else {
+            console.error(`Error fetching courses: ${result.reason}`);
+          }
+        }
+
         setCourses(allCourses);
         setFilteredCourses(allCourses);
 
@@ -77,7 +93,7 @@ const Maths = ({ userName, role }) => {
 
         setEnrolledCourses(enrolledCourseCodes);
       } catch (error) {
-        console.error("Error fetching courses:", error);
+        console.error("Error in fetchAllCourses:", error);
       }
     };
 
@@ -96,10 +112,14 @@ const Maths = ({ userName, role }) => {
           const response = await fetch(
             `http://localhost:8080/api/courses/search-by-code/${selectedCategory}/${selectedLevel}`
           );
-          if (!response.ok)
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          const data = await response.json();
-          setFilteredCourses(data);
+
+          if (response.ok) {
+            const data = await response.json();
+            setFilteredCourses(data);
+          } else {
+            console.error(`HTTP error! Status: ${response.status}`);
+            setFilteredCourses([]);
+          }
         } catch (error) {
           console.error("Error fetching filtered courses:", error);
           setFilteredCourses([]);
@@ -154,6 +174,7 @@ const Maths = ({ userName, role }) => {
             <option value="">Select Category</option>
             <option value="PMAT">PMAT</option>
             <option value="AMAT">AMAT</option>
+            <option value="CMSK">CMSK</option>
           </select>
         </div>
         <div className="courses2">
