@@ -4,6 +4,7 @@ import Course from "./Course";
 import DeleteLecturer from "./DeleteLecturer";
 import DeleteCourse from "./DeleteCourse";
 import LecturerRegistration from "./LecturerRegistration";
+import DeleteRegistration from "./DeleteRegistration";
 import GetAllCourses from "./GetAllCourses";
 import GetAllLecturers from "./GetAllLecturers";
 import Register from "./Registration";
@@ -69,7 +70,7 @@ function Admin() {
                     setActiveForm("deleteLecturer");
                   }}
                 >
-                  Delete a Lecturer
+                  Delete a User
                 </a>
               </li>
               <li>
@@ -92,6 +93,17 @@ function Admin() {
                   }}
                 >
                   Lecturer Registration
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#deleteRegistration"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveForm("deleteRegistration");
+                  }}
+                >
+                  Delete Registration
                 </a>
               </li>
               <li>
@@ -344,6 +356,12 @@ function Admin() {
             )}
             {activeForm === "lecturerRegistration" && (
               <LecturerRegistration
+                loggedInUserRole={role}
+                adminUserName={adminUserName}
+              />
+            )}
+            {activeForm === "deleteRegistration" && (
+              <DeleteRegistration
                 loggedInUserRole={role}
                 adminUserName={adminUserName}
               />

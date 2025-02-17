@@ -10,6 +10,12 @@ import HomePageInside from "./components/home_page_inside/home_page_inside";
 import StatCsNew from "./components/Home_page_inside_1/STAT_CS";
 import ElecPhyNew from "./components/Home_page_inside_1/ELEC_PHY";
 import MathsNew from "./components/Home_page_inside_1/MATHS";
+import ChemNew from "./components/Home_page_inside_1/CHEM_New";
+import ZoolNew from "./components/Home_page_inside_1/ZOOL";
+import MicroNew from "./components/Home_page_inside_1/MICRO";
+import SENew from "./components/Home_page_inside_1/SE";
+import SportsNew from "./components/Home_page_inside_1/SPORT";
+import IM from "./components/Home_page_inside_1/IM";
 import ResultPage from "./components/result/result";
 import AdminResult from "./components/admin_result/AdminResult";
 import Profile from "./components/profile/profile";
@@ -28,6 +34,12 @@ function App() {
         <Route path="/ElecPhyNew" element={<ElecPhyNew />} />
         <Route path="/StatCsNew" element={<StatCsNew />} />
         <Route path="/MathsNew" element={<MathsNew />} />
+        <Route path="/ChemNew" element={<ChemNew />} />
+        <Route path="/ZoolNew" element={<ZoolNew />} />
+        <Route path="/MicroNew" element={<MicroNew />} />
+        <Route path="/SENew" element={<SENew />} />
+        <Route path="/SportsNew" element={<SportsNew />} />
+        <Route path="/IM" element={<IM />} />
         <Route path="/ResultPage" element={<ResultPage />} />
         <Route path="/AdminResult" element={<AdminResult />} />
         <Route path="/Profile" element={<Profile />} />

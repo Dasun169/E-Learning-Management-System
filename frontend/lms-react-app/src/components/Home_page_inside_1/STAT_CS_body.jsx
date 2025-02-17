@@ -49,26 +49,37 @@ const StatCs = ({ userName, role }) => {
   useEffect(() => {
     const fetchAllCourses = async () => {
       try {
-        const statResponse = await fetch(
-          "http://localhost:8080/api/courses/search-by-name/STAT"
-        );
-        const statCourses = await statResponse.json();
+        const fetchPromises = [
+          fetch("http://localhost:8080/api/courses/search-by-name/STAT"),
+          fetch("http://localhost:8080/api/courses/search-by-name/COSC"),
+          fetch("http://localhost:8080/api/courses/search-by-name/COST"),
+          fetch("http://localhost:8080/api/courses/search-by-name/CMSK"),
+        ];
 
-        const coscResponse = await fetch(
-          "http://localhost:8080/api/courses/search-by-name/COSC"
-        );
-        const coscCourses = await coscResponse.json();
+        const results = await Promise.allSettled(fetchPromises);
 
-        const costResponse = await fetch(
-          "http://localhost:8080/api/courses/search-by-name/COST"
-        );
-        const costCourses = await costResponse.json();
+        const allCourses = [];
+        for (const result of results) {
+          if (result.status === "fulfilled") {
+            try {
+              const text = await result.value.text();
+              if (text) {
+                const courses = JSON.parse(text);
+                allCourses.push(...courses);
+              } else {
+                console.warn("Empty response body from API");
+              }
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError, result.value);
+            }
+          } else {
+            console.error(`Error fetching courses: ${result.reason}`);
+          }
+        }
 
-        const allCourses = [...statCourses, ...coscCourses, ...costCourses];
         setCourses(allCourses);
         setFilteredCourses(allCourses);
 
-        // Fetch enrolled courses
         const enrolledStatusPromises = allCourses.map(async (course) => {
           const response = await fetch(
             `http://localhost:8080/api/courseRegistrations/exists/${userName}/${course.courseCode}`
@@ -83,7 +94,7 @@ const StatCs = ({ userName, role }) => {
 
         setEnrolledCourses(enrolledCourseCodes);
       } catch (error) {
-        console.error("Error fetching courses:", error);
+        console.error("Error in fetchAllCourses:", error);
       }
     };
 
@@ -163,6 +174,7 @@ const StatCs = ({ userName, role }) => {
             <option value="STAT">STAT</option>
             <option value="COSC">COSC</option>
             <option value="COST">COST</option>
+            <option value="CMSK">CMSK</option>
           </select>
         </div>
         <div className="courses">

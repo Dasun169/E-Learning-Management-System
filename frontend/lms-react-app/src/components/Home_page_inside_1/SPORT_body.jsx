@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./css files/MATHS_body.css";
+import "./css files/STAT_CS_body.css";
 import { useNavigate } from "react-router-dom";
 
 const backgroundImages = [
@@ -14,10 +14,10 @@ const backgroundImages = [
   "https://static.vecteezy.com/system/resources/previews/000/365/303/original/cubes-retro-pattern-vector.jpg",
 ];
 
-const Maths = ({ userName, role }) => {
+const Sport_New = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [enrolledCourses, setEnrolledCourses] = useState([]); // FIXED: Added missing state
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -50,8 +50,7 @@ const Maths = ({ userName, role }) => {
     const fetchAllCourses = async () => {
       try {
         const fetchPromises = [
-          fetch("http://localhost:8080/api/courses/search-by-name/PMAT"),
-          fetch("http://localhost:8080/api/courses/search-by-name/AMAT"),
+          fetch("http://localhost:8080/api/courses/search-by-name/BSSS"),
           fetch("http://localhost:8080/api/courses/search-by-name/CMSK"),
         ];
 
@@ -112,14 +111,10 @@ const Maths = ({ userName, role }) => {
           const response = await fetch(
             `http://localhost:8080/api/courses/search-by-code/${selectedCategory}/${selectedLevel}`
           );
-
-          if (response.ok) {
-            const data = await response.json();
-            setFilteredCourses(data);
-          } else {
-            console.error(`HTTP error! Status: ${response.status}`);
-            setFilteredCourses([]);
-          }
+          if (!response.ok)
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          const data = await response.json();
+          setFilteredCourses(data);
         } catch (error) {
           console.error("Error fetching filtered courses:", error);
           setFilteredCourses([]);
@@ -147,10 +142,10 @@ const Maths = ({ userName, role }) => {
   };
 
   return (
-    <div className="dashboard2">
-      <section className="course-overview2">
+    <div className="dashboard">
+      <section className="course-overview">
         <h2>Course Enrollment - {userName}</h2>
-        <div className="search-sort2">
+        <div className="search-sort">
           <input
             type="text"
             placeholder="Search Courses"
@@ -158,6 +153,7 @@ const Maths = ({ userName, role }) => {
             onChange={handleSearch}
           />
           <select
+            className="search-sort-select"
             value={selectedLevel}
             onChange={(e) => setSelectedLevel(e.target.value)}
           >
@@ -168,42 +164,42 @@ const Maths = ({ userName, role }) => {
             <option value="4">Level IV</option>
           </select>
           <select
+            className="search-sort-select"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
             <option value="">Select Category</option>
-            <option value="PMAT">PMAT</option>
-            <option value="AMAT">AMAT</option>
+            <option value="BSSS">BSSS</option>
             <option value="CMSK">CMSK</option>
           </select>
         </div>
-        <div className="courses2">
+        <div className="courses">
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course, index) => {
               const imageIndex = index % backgroundImages.length;
-              const isEnrolled = enrolledCourses.includes(course.courseCode);
+              const isEnrolled = enrolledCourses.includes(course.courseCode); // FIXED: Check enrollment
 
               return (
                 <div
                   key={index}
-                  className="course-card2"
+                  className="course-card"
                   onClick={() => handleCourseClick(isEnrolled, course)}
                 >
                   <div
-                    className="course-thumbnail2"
+                    className="course-thumbnail"
                     style={{
                       backgroundImage: `url(${backgroundImages[imageIndex]})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   ></div>
-                  <div className="course-info2">
+                  <div className="course-info">
                     <h3>{course.courseCode}</h3>
                     <p>{course.courseName}</p>
                     <span>Year Level:{course.yearLevel}</span>
                   </div>
-                  {!isEnrolled && (
-                    <button className="enrllment2">
+                  {!isEnrolled && ( // FIXED: Hide button if enrolled
+                    <button className="enrllment">
                       <img src="./Images/lock.png" alt="lock" />
                     </button>
                   )}
@@ -219,4 +215,4 @@ const Maths = ({ userName, role }) => {
   );
 };
 
-export default Maths;
+export default Sport_New;
