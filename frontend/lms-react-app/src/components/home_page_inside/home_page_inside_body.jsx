@@ -35,45 +35,33 @@ function HomePageInsideBody() {
             </button>
           </li>
           <li>
-            <button onClick={() => navigateTo("/industrial-management")}>
+            <button onClick={() => navigateTo("/IM")}>
               Department of Industrial Management
             </button>
           </li>
           <li>
-            <button onClick={() => navigateTo("/chemistry")}>
+            <button onClick={() => navigateTo("/ChemNew")}>
               Department of Chemistry
             </button>
           </li>
           <li>
-            <button
-              onClick={() => navigateTo("/zoology-environmental-management")}
-            >
+            <button onClick={() => navigateTo("/ZoolNew")}>
               Department of Zoology and Environmental Management
             </button>
           </li>
           <li>
-            <button onClick={() => navigateTo("/plant-molecular-biology")}>
-              Department of Plant and Molecular Biology
-            </button>
-          </li>
-          <li>
-            <button onClick={() => navigateTo("/microbiology")}>
+            <button onClick={() => navigateTo("/MicroNew")}>
               Department of Microbiology
             </button>
           </li>
           <li>
-            <button onClick={() => navigateTo("/software-engineering-unit")}>
-              Software Engineering Teaching Unit
+            <button onClick={() => navigateTo("/SENew")}>
+              Software Engineering
             </button>
           </li>
           <li>
-            <button onClick={() => navigateTo("/sports-exercise-science")}>
-              Sports & Exercise Science Unit
-            </button>
-          </li>
-          <li>
-            <button onClick={() => navigateTo("/miscellaneous")}>
-              Miscellaneous
+            <button onClick={() => navigateTo("/SportsNew")}>
+              Sports Science
             </button>
           </li>
         </ul>
