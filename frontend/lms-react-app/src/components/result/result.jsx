@@ -11,16 +11,11 @@ function ResultPage() {
   const { username, role } = location.state || {};
 
   useEffect(() => {
-    // This effect runs when the component mounts AND when the location changes
     const handleNavigation = (event) => {
       if (event.state && event.state.fromResultPage) {
-        // Check if we came from ResultPage
-        // If the user went back from ResultPage, we don't need to do anything.
-        // The StudentHome component will receive the correct state automatically.
         return;
       }
       if (!event.state || !event.state.fromResultPage) {
-        // If the user did not came from ResultPage, then navigate to Student Home page.
         navigate("/studentHome", { state: { username, role } });
       }
     };
@@ -30,7 +25,7 @@ function ResultPage() {
     return () => {
       window.removeEventListener("popstate", handleNavigation);
     };
-  }, [navigate, username, role]); // Add navigate, username, and role to the dependency array
+  }, [navigate, username, role]);
 
   return (
     <div className="result-page-inside-container">
