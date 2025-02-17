@@ -1,0 +1,87 @@
+.deleteRegistration-table {
+  width: 80%;
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 3px 4px 10px rgba(23, 19, 143, 0.7);
+  border-radius: 1cap;
+  height: 330px;
+  overflow-y: scroll;
+}
+
+.div-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.deleteRegistration-table h2 {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding-top: 20px;
+}
+
+.deleteRegistration-table table {
+  width: 100%;
+  margin-left: auto; /* Adjust margin as needed */
+  margin-right: auto; /* To center the table */
+}
+
+.deleteRegistration-table label {
+  /* Style the labels */
+  display: block; /* Makes labels stack above inputs */
+}
+
+.deleteRegistration-table input,
+.deleteRegistration-table select {
+  /* Style both inputs and select */
+  width: 100%; /* Makes inputs take full width of container */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.deleteRegistration-table button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 25%; /* Or adjust as needed */
+}
+
+.deleteRegistration-table button:hover {
+  background-color: #0056b3;
+}
+
+#submit-button {
+  text-align: center;
+}
+
+/* Custom Toast Styles */
+.custom-toast {
+  background-color: #f8d7da !important; /* Use !important to override default toastify styles */
+  color: #721c24 !important;
+  font-size: 16px !important;
+}
+
+.custom-toast-success {
+  background-color: #d4edda !important;
+  color: #155724 !important;
+}
+
+/* Optional: Add some spacing around the table cells */
+.deleteRegistration-table td {
+  padding: 8px; /* Adjust padding as needed */
+}
+
+/* Optional: Style error messages */
+.deleteRegistration-table .error-message {
+  color: red;
+  margin-top: 5px;
+}
