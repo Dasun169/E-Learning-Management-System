@@ -29,7 +29,7 @@ const HeaderHome = ({ username, role }) => {
   };
 
   const goToStudentHome = () => {
-    navigate("/studentHome", { state: { username, role, fromHeader: true } }); // Navigate to studentHome
+    navigate("/studentHome", { state: { username, role, fromHeader: true } });
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const HeaderHome = ({ username, role }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [showDropdown]); // Add showDropdown to dependency array
+  }, [showDropdown]);
 
   return (
     <nav className="navbar">
@@ -69,6 +69,9 @@ const HeaderHome = ({ username, role }) => {
 
       {role === "student" && (
         <div className="navbar-links">
+          <button className="nav-button" onClick={goToStudentHome}>
+            Home Page
+          </button>
           <button className="nav-button" onClick={goToHomePageInside}>
             Course Enrollment
           </button>
@@ -92,8 +95,12 @@ const HeaderHome = ({ username, role }) => {
           <div className="dropdown" ref={dropdownRef}>
             <ul>
               <li onClick={updateProfile}>Update Profile</li>
-              <li onClick={goToHomePageInside}>Course Enrollment</li>
-              <li onClick={goToResultPage}>See Results</li>
+              {role === "student" && (
+                <>
+                  <li onClick={goToHomePageInside}>Course Enrollment</li>
+                  <li onClick={goToResultPage}>See Results</li>
+                </>
+              )}
             </ul>
           </div>
         )}
