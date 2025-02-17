@@ -49,17 +49,33 @@ const ElecPhy = ({ userName, role }) => {
   useEffect(() => {
     const fetchAllCourses = async () => {
       try {
-        const elecResponse = await fetch(
-          "http://localhost:8080/api/courses/search-by-name/ELEC"
-        );
-        const elecCourses = await elecResponse.json();
+        const fetchPromises = [
+          fetch("http://localhost:8080/api/courses/search-by-name/ELEC"),
+          fetch("http://localhost:8080/api/courses/search-by-name/PHYS"),
+          fetch("http://localhost:8080/api/courses/search-by-name/CMSK"),
+        ];
 
-        const physResponse = await fetch(
-          "http://localhost:8080/api/courses/search-by-name/PHYS"
-        );
-        const physCourses = await physResponse.json();
+        const results = await Promise.allSettled(fetchPromises);
 
-        const allCourses = [...elecCourses, ...physCourses];
+        const allCourses = [];
+        for (const result of results) {
+          if (result.status === "fulfilled") {
+            try {
+              const text = await result.value.text();
+              if (text) {
+                const courses = JSON.parse(text);
+                allCourses.push(...courses);
+              } else {
+                console.warn("Empty response body from API");
+              }
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError, result.value);
+            }
+          } else {
+            console.error(`Error fetching courses: ${result.reason}`);
+          }
+        }
+
         setCourses(allCourses);
         setFilteredCourses(allCourses);
 
@@ -77,7 +93,7 @@ const ElecPhy = ({ userName, role }) => {
 
         setEnrolledCourses(enrolledCourseCodes);
       } catch (error) {
-        console.error("Error fetching courses:", error);
+        console.error("Error in fetchAllCourses:", error);
       }
     };
 
@@ -156,6 +172,7 @@ const ElecPhy = ({ userName, role }) => {
             <option value="">Select Category</option>
             <option value="ELEC">ELEC</option>
             <option value="PHYS">PHYS</option>
+            <option value="CMSK">CMSK</option>
           </select>
         </div>
         <div className="courses1">
