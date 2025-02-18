@@ -39,13 +39,24 @@ const AdminResult = ({ loggedInUserRole, adminUserName }) => {
         );
         setCourseRegistrations(registrationsResponse.data);
 
-        setUserResults(
-          registrationsResponse.data.map((reg) => ({
-            ...reg,
-            result: "",
-            yearType: reg.yearType,
-          }))
+        const resultsResponse = await axios.get(
+          `http://localhost:8080/api/userResults/userName/${userName}`
         );
+        const existingResults = resultsResponse.data;
+
+        // Initialize userResults with default values
+        const initializedResults = registrationsResponse.data.map((reg) => {
+          const existingResult = existingResults.find(
+            (result) => result.courseCode === reg.courseCode
+          );
+          return {
+            ...reg,
+            result: existingResult ? existingResult.result : "",
+            yearType: reg.yearType,
+          };
+        });
+
+        setUserResults(initializedResults);
       } else {
         toast.error("User not found.", {
           className: "custom-toast",
@@ -87,59 +98,68 @@ const AdminResult = ({ loggedInUserRole, adminUserName }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/userResults/bulk",
-        userResults,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      for (const result of userResults) {
+        if (result.result.trim() !== "") {
+          const exists = await axios.get(
+            `http://localhost:8080/api/userResults/exists/${userName}/${result.courseCode}`
+          );
 
-      if (response.status === 200 || response.status === 201) {
-        toast.success("Results updated successfully!", {
+          if (exists.data) {
+            // Update existing result using PUT
+            await axios.put(
+              `http://localhost:8080/api/userResults/update/${userName}/${result.courseCode}/${result.result}`
+            );
+          } else {
+            // Create new result using POST
+            await axios.post("http://localhost:8080/api/userResults", {
+              userName: userName,
+              courseCode: result.courseCode,
+              courseName: result.courseName,
+              yearLevel: result.yearType,
+              result: result.result,
+            });
+          }
+        }
+      }
+
+      toast.success("Results updated successfully!", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      try {
+        await axios.post("http://localhost:8080/api/adminHistory", null, {
+          params: {
+            userName: adminUserName,
+            role: loggedInUserRole,
+            action: `Updated results : '${userName}' successfully`,
+          },
+        });
+        console.log("Admin history updated successfully");
+      } catch (historyError) {
+        console.error("Error updating admin history:", historyError);
+        toast.error("Failed to update admin history. Please contact admin.", {
           className: "custom-toast",
           position: "top-center",
-          autoClose: 2000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
         });
-
-        try {
-          await axios.post("http://localhost:8080/api/adminHistory", null, {
-            params: {
-              userName: adminUserName,
-              role: loggedInUserRole,
-              action: `Updated results : '${userName}' successfully`,
-            },
-          });
-          console.log("Admin history updated successfully");
-        } catch (historyError) {
-          console.error("Error updating admin history:", historyError);
-          toast.error("Failed to update admin history. Please contact admin.", {
-            // Inform user but don't prevent success message
-            className: "custom-toast",
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-
-        setCourseRegistrations([]); // Clear table, or you can refetch data
-        setUserResults([]);
-        setUserName("");
-        setUserData(null);
-      } else {
-        toast.error("Failed to update results.");
       }
+
+      setCourseRegistrations([]);
+      setUserResults([]);
+      setUserName("");
+      setUserData(null);
     } catch (error) {
       console.error("Error updating results:", error);
       toast.error("Failed to update results.");
@@ -178,7 +198,7 @@ const AdminResult = ({ loggedInUserRole, adminUserName }) => {
                 <td>
                   <input
                     type="text"
-                    value={userResults[index].result}
+                    value={userResults[index]?.result || ""}
                     onChange={(e) => handleResultChange(index, e.target.value)}
                     placeholder="Enter Result"
                   />
