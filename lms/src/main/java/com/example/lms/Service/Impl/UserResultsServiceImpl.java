@@ -37,4 +37,14 @@ public class UserResultsServiceImpl implements UserResultsService {
     public List<UserResults> createMultipleUserResults(List<UserResults> userResults) {
         return userResultsRepository.insert(userResults); // Use insert for bulk operations
     }
+
+    @Override
+    public boolean checkIfExists(String userName, String courseCode) {
+        return userResultsRepository.existsByUserNameAndCourseCode(userName, courseCode);
+    }
+
+    @Override
+    public UserResults getUserResultByUserNameAndCourseCode(String userName, String courseCode) {
+        return userResultsRepository.findByUserNameAndCourseCode(userName, courseCode);
+    }
 }

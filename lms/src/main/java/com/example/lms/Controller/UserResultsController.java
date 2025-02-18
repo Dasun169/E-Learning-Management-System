@@ -40,4 +40,22 @@ public class UserResultsController {
         UserResults updatedResult = userResultsService.updateUserResult(userName, courseCode, result);
         return updatedResult != null ? ResponseEntity.ok(updatedResult) : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/exists/{userName}/{courseCode}")  // New endpoint
+    public boolean checkExistence(@PathVariable String userName, @PathVariable String courseCode) {
+        return userResultsService.checkIfExists(userName, courseCode);
+    }
+
+    @GetMapping("/result/{userName}/{courseCode}")  // New endpoint
+    public ResponseEntity<UserResults> getUserResult(
+            @PathVariable String userName,
+            @PathVariable String courseCode) {
+
+        UserResults userResult = userResultsService.getUserResultByUserNameAndCourseCode(userName, courseCode);
+        if (userResult != null) {
+            return ResponseEntity.ok(userResult); // Return the entire UserResults object
+        } else {
+            return ResponseEntity.notFound().build(); // Return 404 if not found
+        }
+    }
 }
