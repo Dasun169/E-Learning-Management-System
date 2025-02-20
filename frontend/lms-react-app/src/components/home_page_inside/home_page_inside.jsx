@@ -13,7 +13,7 @@ const HomePageInside = () => {
   useEffect(() => {
     const handleNavigation = (event) => {
       if (event.state && event.state.fromHomePageInside) {
-        return; // Already handled by StudentHome receiving the state
+        return; 
       }
 
       if (!event.state || !event.state.fromHomePageInside) {
