@@ -6,7 +6,7 @@ import ElecPhy from "./ELEC_PHY_body";
 
 const ElecPhyNew = () => {
   const location = useLocation();
-  const userName = location.state?.username || "Guest"; // Default to "Guest" if userName is not provided
+  const userName = location.state?.username || "Guest"; 
   const role = location.state?.role || "Student";
 
   return (
