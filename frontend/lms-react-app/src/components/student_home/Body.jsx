@@ -4,16 +4,16 @@ import "./css files/body.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Body = ({ username, role, fullName }) => {
-  const [courses, setCourses] = useState([]); // To store all courses
-  const [filteredCourses, setFilteredCourses] = useState([]); // To store filtered courses based on user input
+  const [courses, setCourses] = useState([]); 
+  const [filteredCourses, setFilteredCourses] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState(""); // Track the search query input
+  const [searchQuery, setSearchQuery] = useState(""); 
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Array of image URLs for the background
+ 
   const backgroundImages = [
     "https://th.bing.com/th/id/OIP.4n767ii5z9sdzFjJNEm7vgHaHa?rs=1&pid=ImgDetMain",
     "https://img.freepik.com/free-vector/simple-pattern-background_1319-147.jpg",
@@ -39,16 +39,16 @@ const Body = ({ username, role, fullName }) => {
     };
   }, [navigate]);
 
-  // Fetch courses when the page loads
+  
   useEffect(() => {
-    console.log("Username:", username); // Check if username is available
+    console.log("Username:", username); 
     if (username) {
       const fetchCourses = async () => {
         try {
           const response = await axios.get(
             `http://localhost:8080/api/courseRegistrations/user/${username}`
           );
-          console.log(response.data); // Log the API response
+          console.log(response.data); 
           if (response.data) {
             setCourses(response.data);
             setFilteredCourses(response.data);
@@ -65,18 +65,18 @@ const Body = ({ username, role, fullName }) => {
     }
   }, [username]);
 
-  // Filter courses by partial course code
+ 
   const handleSearch = (e) => {
     const query = e.target.value;
-    setSearchQuery(query); // Update the search query state
+    setSearchQuery(query); 
 
-    // Filter courses based on the courseCode (partial match)
+    
     if (query === "") {
-      setFilteredCourses(courses); // If no input, show all courses
+      setFilteredCourses(courses); 
     } else {
       const filtered = courses.filter(
         (course) =>
-          course.courseCode.toLowerCase().startsWith(query.toLowerCase()) // Filter by start of courseCode
+          course.courseCode.toLowerCase().startsWith(query.toLowerCase()) 
       );
       setFilteredCourses(filtered);
     }
@@ -84,18 +84,18 @@ const Body = ({ username, role, fullName }) => {
 
   const handleCourseClick = (courseCode, courseName) => {
     console.log("Navigating with data:", {
-      userName: username, // Should log the username
+      userName: username, 
       role: role,
-      courseCode: courseCode, // Should log the selected course code
-      courseName: courseName, // Should log the selected course name
+      courseCode: courseCode, 
+      courseName: courseName, 
     });
 
     navigate("/CoursePage", {
       state: {
-        userName: username, // Pass username
+        userName: username, 
         role: role,
-        courseCode: courseCode, // Pass courseCode
-        courseName: courseName, // Pass courseName
+        courseCode: courseCode, 
+        courseName: courseName, 
       },
     });
   };
@@ -115,12 +115,12 @@ const Body = ({ username, role, fullName }) => {
       <section className="course-overview">
         <h2>Course Overview</h2>
         <div className="search-sort">
-          {/* Search input field */}
+          {}
           <input
             type="text"
             placeholder="Search by course code"
-            value={searchQuery} // Bind value to searchQuery state
-            onChange={handleSearch} // Update filtered courses as user types
+            value={searchQuery} 
+            onChange={handleSearch} 
           />
         </div>
         {loading && <p>Loading courses...</p>}
@@ -130,7 +130,7 @@ const Body = ({ username, role, fullName }) => {
             <p>No courses found. Please enroll first...!!</p>
           ) : (
             filteredCourses.map((course, index) => {
-              const imageIndex = index % backgroundImages.length; // Get the image index using modulo
+              const imageIndex = index % backgroundImages.length; 
               return (
                 <div
                   key={index}
