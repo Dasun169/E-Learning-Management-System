@@ -26,11 +26,11 @@ const DeleteLecturer = ({ loggedInUserRole, adminUserName }) => {
     try {
       const canDeleteRole = (targetRole) => {
         if (loggedInUserRole === "administrator") {
-          return true; // Admin can delete any role
+          return true; 
         } else if (loggedInUserRole === "admin") {
-          return targetRole !== "administrator" && targetRole !== "admin"; // Admin can't delete other admins or administrators
+          return targetRole !== "administrator" && targetRole !== "admin"; 
         }
-        return false; // Other roles cannot delete
+        return false;
       };
 
       if (!canDeleteRole(selectedRole)) {
@@ -65,7 +65,7 @@ const DeleteLecturer = ({ loggedInUserRole, adminUserName }) => {
               params: {
                 userName: adminUserName,
                 role: loggedInUserRole,
-                action: `Deleted ${selectedRole}: '${userName}' successfully`, // Updated action message
+                action: `Deleted ${selectedRole}: '${userName}' successfully`, 
               },
             });
             console.log("Admin history updated successfully");
