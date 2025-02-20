@@ -17,7 +17,7 @@ const backgroundImages = [
 const Sport_New = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [enrolledCourses, setEnrolledCourses] = useState([]); // FIXED: Added missing state
+  const [enrolledCourses, setEnrolledCourses] = useState([]); 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -177,7 +177,7 @@ const Sport_New = ({ userName, role }) => {
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course, index) => {
               const imageIndex = index % backgroundImages.length;
-              const isEnrolled = enrolledCourses.includes(course.courseCode); // FIXED: Check enrollment
+              const isEnrolled = enrolledCourses.includes(course.courseCode);
 
               return (
                 <div
@@ -198,7 +198,7 @@ const Sport_New = ({ userName, role }) => {
                     <p>{course.courseName}</p>
                     <span>Year Level:{course.yearLevel}</span>
                   </div>
-                  {!isEnrolled && ( // FIXED: Hide button if enrolled
+                  {!isEnrolled && ( 
                     <button className="enrllment">
                       <img src="./Images/lock.png" alt="lock" />
                     </button>
