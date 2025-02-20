@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./css files/course.css";
 
 const Course = ({ loggedInUserRole, adminUserName }) => {
-  const [id, setId] = useState(""); // State for ID
+  const [id, setId] = useState(""); 
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [lecturerId, setLecturerId] = useState("");
