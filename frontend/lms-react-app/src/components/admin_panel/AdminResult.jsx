@@ -105,12 +105,12 @@ const AdminResult = ({ loggedInUserRole, adminUserName }) => {
           );
 
           if (exists.data) {
-            // Update existing result using PUT
+            
             await axios.put(
               `http://localhost:8080/api/userResults/update/${userName}/${result.courseCode}/${result.result}`
             );
           } else {
-            // Create new result using POST
+            
             await axios.post("http://localhost:8080/api/userResults", {
               userName: userName,
               courseCode: result.courseCode,
