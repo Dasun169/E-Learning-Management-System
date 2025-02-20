@@ -17,7 +17,7 @@ const backgroundImages = [
 const Chem_New = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [enrolledCourses, setEnrolledCourses] = useState([]); // FIXED: Added missing state
+  const [enrolledCourses, setEnrolledCourses] = useState([]); 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -200,7 +200,7 @@ const Chem_New = ({ userName, role }) => {
                     <p>{course.courseName}</p>
                     <span>Year Level:{course.yearLevel}</span>
                   </div>
-                  {!isEnrolled && ( // FIXED: Hide button if enrolled
+                  {!isEnrolled && ( 
                     <button className="enrllment">
                       <img src="./Images/lock.png" alt="lock" />
                     </button>
