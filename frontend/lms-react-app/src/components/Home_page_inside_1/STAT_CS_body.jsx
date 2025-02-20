@@ -17,7 +17,7 @@ const backgroundImages = [
 const StatCs = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [enrolledCourses, setEnrolledCourses] = useState([]); // FIXED: Added missing state
+  const [enrolledCourses, setEnrolledCourses] = useState([]); 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
