@@ -32,7 +32,7 @@
 }
 
 .nav-button:hover {
-  background-color: #0063cc; /* Highlight on hover */
+  background-color: #0063cc; 
 }
 
 .navbar-search {
@@ -49,29 +49,29 @@
 }
 
 .profile-icon {
-  cursor: pointer; /* Make the icon clickable */
-  position: relative; /* For positioning the dropdown */
-  display: flex; /* Use flexbox to center the image */
-  align-items: center; /* Vertically center */
+  cursor: pointer; 
+  position: relative; 
+  display: flex; 
+  align-items: center; 
   margin-right: 30px;
 }
 
 .profile-img1 {
-  width: 40px; /* Adjust size as needed */
+  width: 40px;
   height: 40px;
-  border-radius: 50%; /* Make it circular */
-  object-fit: cover; /* Prevent image distortion */
+  border-radius: 50%; 
+  object-fit: cover; 
 }
 
 .dropdown {
   position: absolute;
-  top: 100%; /* Position below the icon */
-  right: 0; /* Align to the right */
+  top: 100%; 
+  right: 0; 
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  z-index: 1; /* Ensure it's on top */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+  z-index: 1;
   width: 160px;
 }
 
@@ -99,7 +99,7 @@
   }
 
   .navbar-logo1-img {
-    width: 150px; /* Reduce logo size */
+    width: 150px; 
     margin: 10px auto;
   }
 
@@ -111,7 +111,7 @@
   }
 
   .nav-button {
-    width: 90%; /* Make buttons full-width */
+    width: 90%; 
     padding: 10px;
     font-size: 0.9rem;
   }
