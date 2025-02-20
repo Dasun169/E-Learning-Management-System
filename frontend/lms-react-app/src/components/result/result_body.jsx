@@ -20,7 +20,7 @@ const ResultBody = () => {
       setLoading(true);
       setError(null);
 
-      // Fetch user details
+     
       fetch(`http://localhost:8080/api/users/${username}`)
         .then((response) => {
           if (!response.ok) {
@@ -34,7 +34,7 @@ const ResultBody = () => {
           setError("Error fetching user data.");
         });
 
-      // Fetch user results
+      
       fetch(`http://localhost:8080/api/userResults/userName/${username}`)
         .then((response) => {
           if (!response.ok) {
@@ -45,7 +45,7 @@ const ResultBody = () => {
         .then(async (data) => {
           setUserResults(data);
 
-          // Fetch year levels for each course
+          
           const yearLevelPromises = data.map(async (result) => {
             try {
               const yearLevelResponse = await fetch(
@@ -66,7 +66,7 @@ const ResultBody = () => {
                 `Error fetching year level for ${result.courseCode}:`,
                 error
               );
-              return { courseCode: result.courseCode, yearLevel: "N/A" }; // Default value
+              return { courseCode: result.courseCode, yearLevel: "N/A" }; 
             }
           });
 
@@ -91,7 +91,7 @@ const ResultBody = () => {
 
     userResults.forEach((result) => {
       const grade = result.result;
-      const credit = parseInt(result.courseCode.slice(-1)); // Get last digit as credit
+      const credit = parseInt(result.courseCode.slice(-1)); 
 
       let gradePoint = 0;
       switch (grade) {
@@ -135,7 +135,7 @@ const ResultBody = () => {
           gradePoint = 0.0;
           break;
         default:
-          console.warn(`Invalid grade: ${grade}`); // Handle invalid grades
+          console.warn(`Invalid grade: ${grade}`); 
       }
 
       totalGradePoints += gradePoint * credit;
@@ -150,7 +150,7 @@ const ResultBody = () => {
   };
 
   const handleGPAClick = () => {
-    const { gpa: calculatedGPA, totalCredits } = calculateGPA(); // Destructure returned object
+    const { gpa: calculatedGPA, totalCredits } = calculateGPA(); 
     setGpa(calculatedGPA);
     setShowGPA(true);
     setTotalCredits(totalCredits);
@@ -170,7 +170,7 @@ const ResultBody = () => {
 
     setCongratulationsMessage(message);
 
-    // Show congratulations component after 1 second
+   
     setTimeout(() => {
       setShowCongratulations(true);
     }, 1000);
