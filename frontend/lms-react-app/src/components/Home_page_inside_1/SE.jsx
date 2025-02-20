@@ -6,7 +6,7 @@ import SE from "./SE_body";
 
 const SENew = () => {
   const location = useLocation();
-  const userName = location.state?.username || "Guest"; // Default to "Guest" if userName is not provided
+  const userName = location.state?.username || "Guest"; 
   const role = location.state?.role || "Student";
 
   return (
