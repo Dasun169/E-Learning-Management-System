@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./css files/AdminHistory.css"; // Create this CSS file for styling
-
+import "./css files/AdminHistory.css";
 const AdminHistory = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
