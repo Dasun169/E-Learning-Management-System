@@ -30,7 +30,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
     }
   };
 
-  // Email validation
+
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -41,17 +41,17 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
     return fullNameRegex.test(fullName);
   };
 
-  // Contact number validation
+  
   const isValidContactNumber = (number) => {
     const contactRegex = /^\d{10}$/;
     return contactRegex.test(number);
   };
 
   const isValidPassword = (password) => {
-    return password.length > 8; // More than 8 characters
+    return password.length > 8; 
   };
 
-  // Handle form submission
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -191,7 +191,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
     }
   };
 
-  // Handle input changes
+ 
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
     setIsUserNameValid(e.target.value.trim() !== "");
@@ -204,7 +204,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
 
   const handleFullNameChange = (e) => {
     setFullName(e.target.value);
-    setIsFullNameValid(isValidFullName(e.target.value)); // Validate on change
+    setIsFullNameValid(isValidFullName(e.target.value)); 
   };
 
   const handleContactNumberChange = (e) => {
@@ -261,7 +261,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
                     {isUserNameValid ? (
                       <span className="span-right"> ✅</span>
                     ) : (
-                      <span className="span-right"> ❌</span> // Show cross if invalid
+                      <span className="span-right"> ❌</span> 
                     )}
                   </td>
                 </tr>
@@ -279,7 +279,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
                     {isPasswordValid ? (
                       <span className="span-right"> ✅</span>
                     ) : (
-                      <span className="span-right"> ❌</span> // Show cross if invalid
+                      <span className="span-right"> ❌</span> 
                     )}
                   </td>
                 </tr>
@@ -310,7 +310,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
                     {isFullNameValid ? (
                       <span className="span-right"> ✅</span>
                     ) : (
-                      <span className="span-right"> ❌</span> // Show cross if invalid
+                      <span className="span-right"> ❌</span> 
                     )}
                   </td>
                 </tr>
@@ -328,7 +328,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
                     {isContactNumberValid ? (
                       <span className="span-right"> ✅</span>
                     ) : (
-                      <span className="span-right"> ❌</span> // Show cross if invalid
+                      <span className="span-right"> ❌</span> 
                     )}
                   </td>
                 </tr>
@@ -346,7 +346,7 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
                     {isEmailValid ? (
                       <span className="span-right"> ✅</span>
                     ) : (
-                      <span className="span-right"> ❌</span> // Show cross if invalid
+                      <span className="span-right"> ❌</span> 
                     )}
                   </td>
                 </tr>
