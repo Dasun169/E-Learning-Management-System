@@ -17,7 +17,7 @@ const backgroundImages = [
 const IM_New = ({ userName, role }) => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [enrolledCourses, setEnrolledCourses] = useState([]); // FIXED: Added missing state
+  const [enrolledCourses, setEnrolledCourses] = useState([]); 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -179,7 +179,7 @@ const IM_New = ({ userName, role }) => {
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course, index) => {
               const imageIndex = index % backgroundImages.length;
-              const isEnrolled = enrolledCourses.includes(course.courseCode); // FIXED: Check enrollment
+              const isEnrolled = enrolledCourses.includes(course.courseCode); 
 
               return (
                 <div
