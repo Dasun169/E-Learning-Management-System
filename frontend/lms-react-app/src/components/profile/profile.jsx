@@ -12,7 +12,7 @@ function Profile() {
   useEffect(() => {
     const handleNavigation = (event) => {
       if (event.state && event.state.fromProfilePage) {
-        return; // Already handled by StudentHome receiving the state
+        return; 
       }
 
       if (!event.state || !event.state.fromProfilePage) {
