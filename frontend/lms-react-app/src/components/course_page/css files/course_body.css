@@ -1,4 +1,4 @@
-/* CSS Styles for Update Button */
+
 .update-btn {
   padding: 6px 12px;
   font-size: 14px;
@@ -154,7 +154,7 @@ button:hover {
   margin-top: 10px;
 }
 
-/* Edit Toggle Button */
+
 .edit-toggle-btn {
   padding: 8px 12px;
   font-size: 14px;
@@ -170,24 +170,23 @@ button:hover {
 }
 
 .unenroll-btn {
-  padding: 8px 16px; /* Slightly larger padding */
+  padding: 8px 16px; 
   font-size: 14px;
-  background-color: #0a58a7; /* Red color for unenrollment */
+  background-color: #0a58a7;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin-left: 10px; /* Add some space to the left */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  margin-left: 10px;
+  transition: background-color 0.3s ease; 
 }
 
 .unenroll-btn:hover {
-  background-color: #004080; /* Darker red on hover */
-}
+  background-color: #004080; 
 
 .course-header {
   display: flex;
-  justify-content: space-between; /* Keep space between title and button */
+  justify-content: space-between; 
   align-items: center;
   background-color: #007bff;
   color: white;
