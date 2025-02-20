@@ -6,8 +6,8 @@ import CourseBody from "./course_body";
 import Footer from "../footer/Footer";
 
 const CoursePage = () => {
-  const location = useLocation(); // Get location object
-  const { userName, courseCode, courseName, role } = location.state || {}; // Extract role
+  const location = useLocation(); 
+  const { userName, courseCode, courseName, role } = location.state || {}; 
 
   return (
     <div className="course-enrollment-container">
@@ -16,7 +16,7 @@ const CoursePage = () => {
         userName={userName}
         courseCode={courseCode}
         courseName={courseName}
-        role={role} // Pass role to CourseBody
+        role={role}
       />
       <Footer />
     </div>
