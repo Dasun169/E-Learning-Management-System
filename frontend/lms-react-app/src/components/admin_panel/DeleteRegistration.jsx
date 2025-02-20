@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./css files/deleteRegistration.css"; // Import your CSS file
+import "./css files/deleteRegistration.css"; 
 
 const DeleteRegistration = ({ loggedInUserRole, adminUserName }) => {
   const [userName, setUserName] = useState("");
   const [courseCode, setCourseCode] = useState("");
-  const [role, setRole] = useState("student"); // Default role
+  const [role, setRole] = useState("student"); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -33,13 +33,13 @@ const DeleteRegistration = ({ loggedInUserRole, adminUserName }) => {
       );
 
       if (checkResponse.data) {
-        // Check if the response is true
+       
         const deleteResponse = await axios.delete(
           `http://localhost:8080/api/courseRegistrations/${userName}/${role}/${courseCode}`
         );
 
         if (deleteResponse.status === 200 || deleteResponse.status === 204) {
-          // 204 No Content is also a success code
+          
           toast.success("Registration deleted successfully.", {
             className: "custom-toast",
             position: "top-center",
