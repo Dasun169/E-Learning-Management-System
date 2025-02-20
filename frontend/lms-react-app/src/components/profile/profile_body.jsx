@@ -80,7 +80,7 @@ function ProfileBody({ username, role }) {
 
     setFormData({ ...formData, [name]: value });
 
-    // Real-time validation
+   
     switch (name) {
       case "fullName":
         setIsFullNameValid(isValidFullName(value));
@@ -174,7 +174,7 @@ function ProfileBody({ username, role }) {
               <label>Full Name</label>
               <div className="input-with-validation">
                 {" "}
-                {/* Wrap input and icon */}
+                {}
                 <input
                   type="text"
                   name="fullName"
