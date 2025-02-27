@@ -14,6 +14,7 @@ function Home() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    //test commit
     try {
       console.log("Logging in with:", { username, role });
 
