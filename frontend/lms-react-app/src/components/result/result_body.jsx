@@ -241,6 +241,11 @@ const ResultBody = () => {
       {showCongratulations && (
         <div className="congratulations-overlay">
           <div className="congratulations-content">
+            <img
+              src="./Images/result/congratulations.gif"
+              alt="Congratulations"
+              className="congratulations-image"
+            />
             <p>{congratulationsMessage}</p>
             <button
               onClick={handleCloseCongratulations}

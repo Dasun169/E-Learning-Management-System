@@ -9,7 +9,7 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [profileImage, setProfileImage] = useState(null);
 
   const checkUserNameExists = async (userName) => {
@@ -112,12 +112,11 @@ function Registration() {
           draggable: true,
         });
 
-        
         setUserName("");
         setPassword("");
         setFullName("");
         setContactNumber("");
-        setEmail(""); 
+        setEmail("");
         setProfileImage(null);
       } else {
         toast.error("Failed to register student.", {

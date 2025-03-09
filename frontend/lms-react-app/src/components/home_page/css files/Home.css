@@ -11,17 +11,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("./Images/login/pic2.png");
+  background-image: url("./Images/login/bg3.jpg"); /* Background image */
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents repeating */
+  height: 100vh; /* Full viewport height */
+  position: relative; /* For positioning the overlay image */
 }
 
 .image-section img {
-  max-width: 80%;
-  height: 80%;
+  max-width: 60%;
+  height: auto; /* Maintains aspect ratio */
   transform: rotate(-5deg);
   animation: sway 3s infinite ease-in-out;
   transition: transform 0.3s ease;
+  position: relative; /* Ensures the image stays on top */
+  z-index: 1; /* Ensures the image is above the background */
 }
 
 @keyframes sway {
@@ -49,6 +55,18 @@
   max-width: 450px;
   margin-right: 150px;
   margin: 0 auto;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #heading1 {
@@ -176,4 +194,32 @@
   border-radius: 50%;
   align-items: center;
   margin-right: 10px;
+}
+
+/* Password input container */
+.password-input-container1 {
+  position: relative;
+  width: 90%;
+}
+
+/* Password input field */
+.password-input-container1 input {
+  width: 100%;
+}
+
+/* Eye icon button */
+.toggle-password-button1 {
+  position: absolute;
+  right: -10px;
+  top: 40%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #666; /* Icon color */
+}
+
+.toggle-password-button1:hover {
+  color: #000000; /* Icon color on hover */
 }

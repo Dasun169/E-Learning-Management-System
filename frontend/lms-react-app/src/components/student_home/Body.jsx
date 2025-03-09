@@ -45,6 +45,7 @@ const Body = ({ username, role, fullName }) => {
     if (username) {
       const fetchCourses = async () => {
         try {
+          await new Promise((resolve) => setTimeout(resolve, 3000));
           const response = await axios.get(
             `http://localhost:8080/api/courseRegistrations/user/${username}`
           );
@@ -123,7 +124,13 @@ const Body = ({ username, role, fullName }) => {
             onChange={handleSearch} // Update filtered courses as user types
           />
         </div>
-        {loading && <p>Loading courses...</p>}
+        {loading && (
+          <div className="skeleton-container">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="skeleton-card"></div>
+            ))}
+          </div>
+        )}
         {error && <p>{error}</p>}
         <div className="courses">
           {filteredCourses.length === 0 && !loading ? (
