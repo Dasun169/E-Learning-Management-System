@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import bcrypt from "bcryptjs"; // Import bcryptjs
 import "./css files/profile_body.css";
 
 function ProfileBody({ username, role }) {
@@ -13,8 +14,10 @@ function ProfileBody({ username, role }) {
     fullName: "",
     email: "",
     contactNumber: "",
-    hashPassword: "",
+    hashPassword: "", // Hashed password from the backend
   });
+  const [plainPassword, setPlainPassword] = useState(""); // Plain text password for editing
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -65,8 +68,9 @@ function ProfileBody({ username, role }) {
         fullName: data.fullName,
         email: data.email,
         contactNumber: data.contactNumber,
-        hashPassword: data.hashPassword,
+        hashPassword: data.hashPassword, // Hashed password from the backend
       });
+      setPlainPassword(data.hashPassword); // Set hashed password as plain text for editing
     } catch (error) {
       setError(error.message);
       toast.error(error.message);
@@ -78,29 +82,33 @@ function ProfileBody({ username, role }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData({ ...formData, [name]: value });
+    if (name === "hashPassword") {
+      // Update plain text password for editing
+      setPlainPassword(value);
+      setIsPasswordValid(isValidPassword(value));
+    } else {
+      setFormData({ ...formData, [name]: value });
 
-    // Real-time validation
-    switch (name) {
-      case "fullName":
-        setIsFullNameValid(isValidFullName(value));
-        break;
-      case "email":
-        setIsEmailValid(isValidEmail(value));
-        break;
-      case "contactNumber":
-        setIsContactNumberValid(isValidContactNumber(value));
-        break;
-      case "hashPassword":
-        setIsPasswordValid(isValidPassword(value));
-        break;
-      default:
-        break;
+      // Real-time validation
+      switch (name) {
+        case "fullName":
+          setIsFullNameValid(isValidFullName(value));
+          break;
+        case "email":
+          setIsEmailValid(isValidEmail(value));
+          break;
+        case "contactNumber":
+          setIsContactNumberValid(isValidContactNumber(value));
+          break;
+        default:
+          break;
+      }
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (
       !isFullNameValid ||
       !isEmailValid ||
@@ -110,11 +118,16 @@ function ProfileBody({ username, role }) {
       toast.error("Please correct the invalid fields.");
       return;
     }
+
     try {
+      // Hash the new password before sending it to the backend
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
+
       const response = await fetch(
         `http://localhost:8080/api/users/update?userName=${formData.username}` +
           `&role=${role}` +
-          `&hashPassword=${formData.hashPassword}` +
+          `&hashPassword=${hashedPassword}` + // Send the hashed password
           `&fullName=${formData.fullName}` +
           `&email=${formData.email}` +
           `&contactNumber=${formData.contactNumber}`,
@@ -141,7 +154,7 @@ function ProfileBody({ username, role }) {
       });
       setTimeout(() => {
         setIsEditing(false);
-        fetchUserData();
+        fetchUserData(); // Refresh user data
       }, 200);
     } catch (error) {
       toast.error(error.message);
@@ -173,8 +186,6 @@ function ProfileBody({ username, role }) {
             <div className="form-group">
               <label>Full Name</label>
               <div className="input-with-validation">
-                {" "}
-                {/* Wrap input and icon */}
                 <input
                   type="text"
                   name="fullName"
@@ -190,18 +201,27 @@ function ProfileBody({ username, role }) {
               </div>
 
               <label>Password</label>
-              <div className="input-with-validation">
+              <div className="password-input-container">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"} // Toggle input type
                   name="hashPassword"
-                  value={formData.hashPassword}
+                  value={plainPassword} // Display hashed password as plain text
                   onChange={handleChange}
                   readOnly={!isEditing}
+                  placeholder="Enter new password"
                 />
                 {isEditing && (
-                  <span className="validation-icon">
-                    {isPasswordValid ? "✅" : "❌"}
-                  </span>
+                  <button
+                    type="button"
+                    className="toggle-password-button"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    <i
+                      className={`fas ${
+                        showPassword ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                    ></i>
+                  </button>
                 )}
               </div>
 

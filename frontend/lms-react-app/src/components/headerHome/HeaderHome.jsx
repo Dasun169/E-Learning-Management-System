@@ -14,6 +14,11 @@ const HeaderHome = ({ username, role }) => {
     setShowDropdown(false);
   };
 
+  const goToLoginPage = () => {
+    navigate("/");
+    setShowDropdown(false);
+  };
+
   const goToResultPage = () => {
     navigate("/ResultPage", { state: { username, role } });
     setShowDropdown(false);
@@ -101,6 +106,7 @@ const HeaderHome = ({ username, role }) => {
                   <li onClick={goToResultPage}>See Results</li>
                 </>
               )}
+              <li onClick={goToLoginPage}>Logout</li>
             </ul>
           </div>
         )}

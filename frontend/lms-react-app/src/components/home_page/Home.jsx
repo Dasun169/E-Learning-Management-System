@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import bcrypt from "bcryptjs"; // Import bcryptjs
 import "./css files/Home.css";
 
 function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -17,6 +19,7 @@ function Home() {
     try {
       console.log("Logging in with:", { username, role });
 
+      // Fetch user data from the server
       const response = await axios.get(
         `http://localhost:8080/api/users/role/${role}/userName/${username}`
       );
@@ -24,7 +27,10 @@ function Home() {
       const user = response.data;
       console.log("User fetched:", user);
 
-      if (user.hashPassword === password) {
+      // Compare the entered password with the hashed password
+      const isPasswordValid = await bcrypt.compare(password, user.hashPassword);
+
+      if (isPasswordValid) {
         toast.success("Login successful!", {
           className: "custom-toast",
           position: "top-center",
@@ -101,16 +107,29 @@ function Home() {
               <label htmlFor="password" className="label">
                 Password :
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="input"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="password-input-container1">
+                <input
+                  type={showPassword ? "text" : "password"} // Toggle input type
+                  id="password"
+                  name="password"
+                  className="input"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-password-button1"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  <i
+                    className={`fas ${
+                      showPassword ? "fa-eye-slash" : "fa-eye"
+                    }`}
+                  ></i>
+                </button>
+              </div>
 
               <label htmlFor="role" className="label">
                 Role :

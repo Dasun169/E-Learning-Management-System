@@ -42,17 +42,6 @@ function Admin() {
               </li>
               <li>
                 <a
-                  href="#register"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveForm("register");
-                  }}
-                >
-                  Admin Profile
-                </a>
-              </li>
-              <li>
-                <a
                   href="#course"
                   onClick={(e) => {
                     e.preventDefault();
@@ -182,7 +171,7 @@ function Admin() {
                       setActiveForm("lecturer");
                     }}
                   >
-                    <img src="./Images/person-add.svg" alt="" />
+                    <img src="./Images/add-user.jpg" alt="" />
                   </a>
                 </div>
                 <div className="lecture-title">
@@ -199,32 +188,7 @@ function Admin() {
                   </span>
                 </div>
               </div>
-              <div className="add-course add-box">
-                <div className="course-logo">
-                  <a
-                    href="#register"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveForm("register");
-                    }}
-                  >
-                    <img src="./Images/person-add.svg" alt="" />
-                  </a>
-                </div>
-                <div className="course-title">
-                  <span id="course-text">
-                    <a
-                      href="#register"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setActiveForm("register");
-                      }}
-                    >
-                      Update Admin
-                    </a>
-                  </span>
-                </div>
-              </div>
+
               <div className="add-course add-box">
                 <div className="course-logo">
                   <a
@@ -234,7 +198,7 @@ function Admin() {
                       setActiveForm("course");
                     }}
                   >
-                    <img src="./Images/journals.svg" alt="" />
+                    <img src="./Images/add-course.jpg" alt="" />
                   </a>
                 </div>
                 <div className="course-title">
@@ -252,6 +216,32 @@ function Admin() {
                 </div>
               </div>
               <div className="add-course add-box">
+                <div className="course-logo1">
+                  <a
+                    href="#adminResult"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveForm("adminResult");
+                    }}
+                  >
+                    <img src="./Images/add-result.jpg" alt="" />
+                  </a>
+                </div>
+                <div className="course-title1">
+                  <span id="course-text1">
+                    <a
+                      href="#adminResult"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveForm("adminResult");
+                      }}
+                    >
+                      Add Result
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div className="add-course add-box">
                 <div className="course-logo">
                   <a
                     href="#deleteLecturer"
@@ -260,7 +250,7 @@ function Admin() {
                       setActiveForm("deleteLecturer");
                     }}
                   >
-                    <img src="./Images/journals.svg" alt="" />
+                    <img src="./Images/delete-user.jpg" alt="" />
                   </a>
                 </div>
                 <div className="course-title">
@@ -286,7 +276,7 @@ function Admin() {
                       setActiveForm("deleteCourse");
                     }}
                   >
-                    <img src="./Images/journals.svg" alt="" />
+                    <img src="./Images/course-delete.png" alt="" />
                   </a>
                 </div>
                 <div className="course-title">
@@ -306,25 +296,25 @@ function Admin() {
               <div className="add-course add-box">
                 <div className="course-logo1">
                   <a
-                    href="#adminResult"
+                    href="#adminHistory"
                     onClick={(e) => {
                       e.preventDefault();
-                      setActiveForm("adminResult");
+                      setActiveForm("adminHistory");
                     }}
                   >
-                    <img src="./Images/journals.svg" alt="" />
+                    <img src="./Images/user-activity.jpg" alt="" />
                   </a>
                 </div>
                 <div className="course-title1">
                   <span id="course-text1">
                     <a
-                      href="#adminResult"
+                      href="#adminHistory"
                       onClick={(e) => {
                         e.preventDefault();
-                        setActiveForm("adminResult");
+                        setActiveForm("adminHistory");
                       }}
                     >
-                      Add Result
+                      Admin History
                     </a>
                   </span>
                 </div>

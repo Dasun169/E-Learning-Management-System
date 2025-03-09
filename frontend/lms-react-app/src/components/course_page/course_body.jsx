@@ -17,14 +17,19 @@ function CourseBody({ userName, courseCode, courseName, role }) {
       axios
         .get(`http://localhost:8080/api/courses/description/${courseCode}`)
         .then((response) => {
-          setIntroduction(
-            response.data?.description || "No course description available."
-          );
+          if (response.data && response.data.description) {
+            console.log("Course description:", response.data.description);
+            setIntroduction(response.data.description); // Update the introduction state
+          } else {
+            setIntroduction("No course description updated yet."); // Fallback if no description is found
+          }
         })
-        .catch(() => {
-          setIntroduction("No course description updated.");
+        .catch((error) => {
+          console.error("Error fetching course description:", error);
+          setIntroduction("Failed to load course description."); // Fallback if the API call fails
         });
 
+      // Fetch course sections
       axios
         .get(`http://localhost:8080/api/modules/course/${courseCode}`)
         .then((response) => {
@@ -32,8 +37,9 @@ function CourseBody({ userName, courseCode, courseName, role }) {
             response.data.map((section) => ({ ...section, isNew: false }))
           );
         })
-        .catch(() => {
-          // toast.error("Still not updated by Lecturer.", {
+        .catch((error) => {
+          console.error("Error fetching course sections:", error);
+          // toast.error("Failed to load course sections.", {
           //   className: "custom-toast",
           //   position: "top-center",
           //   autoClose: 3000,
@@ -45,7 +51,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
           // });
         });
     }
-  }, [courseCode]);
+  }, [courseCode]); // Re-run this effect when courseCode changes
 
   const handleEditToggle = () => setIsEditing(!isEditing);
   const handleIntroductionChange = (e) => setIntroduction(e.target.value);

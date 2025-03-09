@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css files/lecturer.css";
+import bcrypt from "bcryptjs"; // Import bcryptjs
 
 const Lecturer = ({ loggedInUserRole, adminUserName }) => {
   const [userName, setUserName] = useState("");
@@ -98,11 +99,15 @@ const Lecturer = ({ loggedInUserRole, adminUserName }) => {
       return;
     }
 
+    // Hash the password before sending it
+    const saltRounds = 10; // You can adjust the number of salt rounds
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const currentDate = new Date();
 
     const userData = {
       userName,
-      hashPassword: password,
+      hashPassword: hashedPassword, // Use the hashed password
       fullName,
       contactNumber,
       email,
