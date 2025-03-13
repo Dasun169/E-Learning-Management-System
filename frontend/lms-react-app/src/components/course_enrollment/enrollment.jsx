@@ -143,15 +143,7 @@ function Enrollment({ userName, courseName, courseCode, yearLevel }) {
         </h1>
         <section className="body5">
           <div className="left5">
-            <h2>Enrolment options</h2>
-            <div className="lecture5">
-              <h3>Lecturer's Name: {lecturerName}</h3>
-            </div>
-            <div className="link5">
-              <a href="#">
-                {courseCode} - {courseName}
-              </a>
-            </div>
+            <h1>Enrollment options</h1>
           </div>
 
           <div className="right5">
@@ -170,7 +162,7 @@ function Enrollment({ userName, courseName, courseCode, yearLevel }) {
                 <p style={{ color: "red" }}>{enrollmentError}</p>
               )}
               <button onClick={handleEnroll} disabled={isEnrolling}>
-                {isEnrolling ? "Enrolling..." : "Enrol Me"}
+                {isEnrolling ? "Enrolling..." : "Enroll Me"}
               </button>
             </div>
           </div>

@@ -6,9 +6,8 @@ import java.util.List;
 
 public interface CourseService {
     Course createCourse(Course course);
-    //Course getCourseById(long id);
+    List<Course> createCoursesBatch(List<Course> courses);
     List<Course> getAllCourses();
-    //Course updateCourse(long id, Course course);
     boolean doesCourseExistByCourseCode(String courseCode);
     void deleteCourseByCourseCode(String courseCode);
     Course getCourseByCourseCode(String courseCode);

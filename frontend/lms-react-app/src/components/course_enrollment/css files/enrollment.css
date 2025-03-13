@@ -36,17 +36,17 @@
   background-image: url(./Images/enroll.jpg);
   background-size: cover;
   background-position: center;
-  opacity: 90%; 
-
+  opacity: 90%;
 }
 
-.left5 h2 {
-  font-size: 25px;
+.left5 h1 {
   font-weight: bold;
   margin-bottom: 80px;
   margin-left: 20px;
   font-weight: bold;
   color: #fff;
+  justify-content: center;
+  align-items: center;
 }
 
 .left5 .lecture5 {
@@ -54,8 +54,8 @@
   background-color: #ffffff;
   display: flex;
   border-radius: 5px;
-  box-shadow: 0px 4px 4px  #ffffff; 
-  opacity: 80%; 
+  box-shadow: 0px 4px 4px #ffffff;
+  opacity: 80%;
 }
 
 .left5 .lecture5 h3 {
@@ -66,7 +66,6 @@
   margin-top: 10px;
   opacity: none;
 }
-
 
 .left5 .link5 a {
   font-size: 16px;
@@ -119,25 +118,17 @@
 }
 
 .enrollment-option5 button {
-  height: 35px;
-  width: 120px;
-  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  background-color: #6c63ff;
-  color: white;
-  font-size: 12px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 150px;
+  transition: background-color 0.3s ease;
 }
 
 .enrollment-option5 button:hover {
-  color: #5248c8;
-  background-color: white;
-  transform: scale(1.05);
-  border: 1px solid #5248c8;
-  font-size: 12px;
-}
-
-.enrollment-option5 button:active {
-  transform: scale(0.95);
+  background-color: #0056b3;
 }

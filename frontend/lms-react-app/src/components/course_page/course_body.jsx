@@ -14,44 +14,59 @@ function CourseBody({ userName, courseCode, courseName, role }) {
 
   useEffect(() => {
     if (courseCode) {
+      // Fetch course description
       axios
         .get(`http://localhost:8080/api/courses/description/${courseCode}`)
         .then((response) => {
           if (response.data && response.data.description) {
-            console.log("Course description:", response.data.description);
-            setIntroduction(response.data.description); // Update the introduction state
+            setIntroduction(response.data.description);
           } else {
-            setIntroduction("No course description updated yet."); // Fallback if no description is found
+            setIntroduction("No course description updated yet.");
           }
         })
         .catch((error) => {
           console.error("Error fetching course description:", error);
-          setIntroduction("Failed to load course description."); // Fallback if the API call fails
+          setIntroduction("Failed to load course description.");
         });
 
       // Fetch course sections
       axios
         .get(`http://localhost:8080/api/modules/course/${courseCode}`)
         .then((response) => {
-          setSections(
-            response.data.map((section) => ({ ...section, isNew: false }))
+          const sectionsWithFiles = response.data.map((section) => ({
+            ...section,
+            isNew: false,
+            isEditing: false,
+            fileUrl: "", // Initialize fileUrl
+          }));
+
+          // Fetch files for each section
+          const fetchFilesForSections = sectionsWithFiles.map((section) =>
+            axios
+              .get(
+                `http://localhost:8080/api/aws/files/${courseCode}/${section.header}`
+              )
+              .then((fileResponse) => {
+                if (fileResponse.data.length > 0) {
+                  section.fileUrl = fileResponse.data[0].fileUrl; // Assign the first file URL
+                }
+                return section;
+              })
+              .catch((error) => {
+                console.error("Error fetching files for section:", error);
+                return section;
+              })
           );
+
+          Promise.all(fetchFilesForSections).then((updatedSections) => {
+            setSections(updatedSections);
+          });
         })
         .catch((error) => {
           console.error("Error fetching course sections:", error);
-          // toast.error("Failed to load course sections.", {
-          //   className: "custom-toast",
-          //   position: "top-center",
-          //   autoClose: 3000,
-          //   hideProgressBar: false,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          // });
         });
     }
-  }, [courseCode]); // Re-run this effect when courseCode changes
+  }, [courseCode]);
 
   const handleEditToggle = () => setIsEditing(!isEditing);
   const handleIntroductionChange = (e) => setIntroduction(e.target.value);
@@ -95,6 +110,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
         createdDate: new Date().toISOString(),
         isEditing: true,
         isNew: true,
+        fileUrl: "",
       },
     ]);
   };
@@ -103,6 +119,76 @@ function CourseBody({ userName, courseCode, courseName, role }) {
     const updatedSections = [...sections];
     updatedSections[index][field] = value;
     setSections(updatedSections);
+  };
+
+  const handleFileChange = (e, index) => {
+    const file = e.target.files[0];
+    if (file) {
+      const updatedSections = [...sections];
+      updatedSections[index].file = file;
+      setSections(updatedSections);
+    }
+  };
+
+  const handleUploadFile = async (index) => {
+    const section = sections[index];
+    if (!section.file) {
+      toast.error("Please select a file to upload.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", section.file);
+    formData.append("courseCode", courseCode);
+    formData.append("header", section.header);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/aws/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const updatedSections = [...sections];
+      updatedSections[index].fileUrl = response.data.fileUrl;
+      setSections(updatedSections);
+
+      toast.success("File uploaded successfully!", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      toast.error("Failed to upload file.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   const handleSaveSection = (index) => {
@@ -126,6 +212,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
         courseCode,
         header: section.header,
         description: section.description,
+        fileUrl: section.fileUrl,
       })
       .then((response) => {
         const updatedSections = [...sections];
@@ -191,7 +278,7 @@ function CourseBody({ userName, courseCode, courseName, role }) {
   const handleUnenroll = async () => {
     try {
       const unenrollResponse = await axios.delete(
-        `http://localhost:8080/api/courseRegistrations/${userName}/${role}/${courseCode}` // Corrected API endpoint
+        `http://localhost:8080/api/courseRegistrations/${userName}/${role}/${courseCode}`
       );
 
       if (unenrollResponse.status === 204) {
@@ -284,12 +371,31 @@ function CourseBody({ userName, courseCode, courseName, role }) {
                     }
                     rows="2"
                   />
+                  <input
+                    type="file"
+                    onChange={(e) => handleFileChange(e, index)}
+                  />
+                  <button
+                    onClick={() => handleUploadFile(index)}
+                    className="update-button"
+                  >
+                    Upload File
+                  </button>
                 </>
               ) : (
                 <>
                   <h3>{formatDate(section.createdDate)}</h3>
                   <h3>{section.header}</h3>
                   <p>{section.description}</p>
+                  {section.fileUrl && (
+                    <a
+                      href={section.fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Download File
+                    </a>
+                  )}
                 </>
               )}
               <div className="section-buttons">

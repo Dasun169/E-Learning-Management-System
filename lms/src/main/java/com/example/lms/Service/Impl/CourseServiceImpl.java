@@ -22,30 +22,20 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.save(course);
     }
 
-    // @Override
-    // public Course getCourseById(long id) {
-    //     Optional<Course> course = courseRepository.findById(id);
-    //     return course.orElse(null);
-    // }
+    @Override
+    public List<Course> createCoursesBatch(List<Course> courses) {
+        return courseRepository.saveAll(courses); // Batch saving
+    }
 
     @Override
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
-    // @Override
-    // public Course updateCourse(long id, Course course) {
-    //     if (courseRepository.existsById(id)) {
-    //         course.setId(id);
-    //         return courseRepository.save(course);
-    //     }
-    //     return null;
-    // }
-
     @Override
     public boolean doesCourseExistByCourseCode(String courseCode) {
         Course course = courseRepository.findByCourseCode(courseCode);
-        return course != null; // Returns true if the course exists
+        return course != null; 
     }
 
     @Override
