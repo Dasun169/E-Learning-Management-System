@@ -34,6 +34,12 @@ public class CourseController {
         return ResponseEntity.ok(createdCourse);
     }
 
+    @PostMapping("/batch")
+    public ResponseEntity<List<Course>> createCoursesBatch(@RequestBody List<Course> courses) {
+        List<Course> createdCourses = this.courseService.createCoursesBatch(courses);
+        return ResponseEntity.ok(createdCourses);
+    }
+
     @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
         List<Course> course = this.courseService.getAllCourses();

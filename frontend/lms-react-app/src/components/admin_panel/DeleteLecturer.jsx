@@ -108,7 +108,7 @@ const DeleteLecturer = ({ loggedInUserRole, adminUserName }) => {
     <>
       <ToastContainer />
       <div className="deleteLecturer-table">
-        <h2>Delete Lecturer Account</h2>
+        <h2>Delete User Account</h2>
         <form onSubmit={handleDelete}>
           <div className="div-table">
             <table>

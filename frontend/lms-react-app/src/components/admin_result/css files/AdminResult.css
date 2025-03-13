@@ -1,4 +1,4 @@
-/* .admin-result-container {
+.admin-result-container {
   width: 80%;
   margin: 0 auto;
   background-color: #fff;
@@ -73,6 +73,7 @@
   margin-bottom: 20px;
 }
 
+/* Style the dropdown to display options horizontally */
 select {
   width: 100%;
   padding: 8px;
@@ -80,6 +81,7 @@ select {
   border: 1px solid #ccc;
 }
 
+/* Custom dropdown styling */
 .custom-dropdown {
   position: relative;
   display: inline-block;
@@ -103,4 +105,4 @@ select {
   right: 10px;
   transform: translateY(-50%);
   pointer-events: none;
-} */
+}
