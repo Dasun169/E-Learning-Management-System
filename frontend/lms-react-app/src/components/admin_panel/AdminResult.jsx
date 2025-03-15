@@ -11,6 +11,23 @@ const AdminResult = ({ loggedInUserRole, adminUserName }) => {
   const [userResults, setUserResults] = useState([]);
   const role = "student";
 
+  // List of possible results
+  const resultOptions = [
+    "A+",
+    "A",
+    "A-",
+    "B+",
+    "B",
+    "B-",
+    "C+",
+    "C",
+    "C-",
+    "D+",
+    "D",
+    "D-",
+    "E",
+  ];
+
   const handleSearch = async () => {
     if (!userName) {
       toast.error("Please enter a user name.", {
@@ -196,12 +213,17 @@ const AdminResult = ({ loggedInUserRole, adminUserName }) => {
                 <td>{registration.courseName}</td>
                 <td>{registration.yearType}</td>
                 <td>
-                  <input
-                    type="text"
+                  <select
                     value={userResults[index]?.result || ""}
                     onChange={(e) => handleResultChange(index, e.target.value)}
-                    placeholder="Enter Result"
-                  />
+                  >
+                    <option value="">Select Result</option>
+                    {resultOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
                 </td>
               </tr>
             ))}

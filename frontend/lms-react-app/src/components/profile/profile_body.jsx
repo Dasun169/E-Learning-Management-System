@@ -70,7 +70,7 @@ function ProfileBody({ username, role }) {
         contactNumber: data.contactNumber,
         hashPassword: data.hashPassword, // Hashed password from the backend
       });
-      setPlainPassword(data.hashPassword); // Set hashed password as plain text for editing
+      //setPlainPassword(data.hashPassword); // Set hashed password as plain text for editing
     } catch (error) {
       setError(error.message);
       toast.error(error.message);
@@ -109,13 +109,36 @@ function ProfileBody({ username, role }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!plainPassword.trim()) {
+      toast.error("Password field cannot be empty.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
     if (
       !isFullNameValid ||
       !isEmailValid ||
       !isContactNumberValid ||
       !isPasswordValid
     ) {
-      toast.error("Please correct the invalid fields.");
+      toast.error("Please correct the invalid fields.", {
+        className: "custom-toast",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
 
